@@ -29,11 +29,14 @@
 
 <style lang="stylus">
   .home-swiper
-    height 6.5rem;
+    height 5.3rem;
     margin-top 1px;
     img
       width 100%;
       height 6.5rem
   .mint-swipe-indicators
     left 80%
+  .mint-swipe-indicator.is-active {
+    background red
+  }
 </style>
