@@ -18,6 +18,11 @@ import OrderDetails from "@/pages/OrderDetails"
 import pay from "@/pages/pay/pay"
 import address from "@/pages/address"
 import add_address from "@/pages/add_address"
+import group from "@/pages/groupBuying/group"
+import timeShop from "@/pages/timeShop/timeShop"
+import score from "@/pages/scoreBuy/score"
+import good from "@/pages/good/good"
+import cartindex from "@/pages/Cart/cartindex"
 Vue.use(Router)
 
 export default new Router({
@@ -68,7 +73,34 @@ export default new Router({
       path: '/add_address',
       name:'add_address',
       component:add_address
-    }
+    },
+    {
+      path: '/group',
+      name:'group',
+      component:group
+    },
+      {
+          path: '/timeShop',
+          name:'timeShop',
+          component:timeShop
+      },
+      {
+          path: '/score',
+          name:'score',
+          component:score
+      }
+      ,
+      {
+          path: '/good',
+          name:'good',
+          component:good
+      }
+      ,
+      {
+          path: '/cartindex',
+          name:'cartindex',
+          component:cartindex
+      }
   ],
   //路由切换页面始终回到最顶部
   // scrollBehavior(to, from, savedPosition) {
