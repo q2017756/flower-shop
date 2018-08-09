@@ -1,24 +1,58 @@
 <template>
-   <div class="HomeList">
-    <ul>
-        <li><div @click="xuangou"><img src="/static/img/xuangou.jpg" alt="选购"></div></li>
-        <li><div  @click="parts"><img src="/static/img/peijian.jpg" alt="配件"></div></li>
-        <li><div @click="btn"><img src="/static/img/pingbao.jpg" alt="屏保"></div></li>
-        <li><div @click="btn"><img src="/static/img/dingzhi.jpg" alt="定制"></div></li>
-    </ul>
-    </div>
+   <div class="home-list">
+     <span class="title">{{ title }}</span>
+     
+   </div>
 </template>
+<script>
+  export default {
+    data() {
+      return {
 
+
+      }
+    },
+    props: {
+      title:{
+        type: String,
+        default: '王牌切花'
+      }
+    },
+    methods: {
+    },
+  }
+</script>
 <style lang="stylus" scoped>
-//rem 
-.HomeList
-    width 100%;
-    height 2rem;
-    background white;
-    border-bottom 1px solid #f4f4f4;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+
+  .home-list
+    width 100vw
+    background #fff
+    margin 5px 0
+    text-align center
+    .title
+      position relative
+      display inline-block
+      margin 3vh auto
+      font-size .45rem
+      &:after
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -50%;
+        display: block;
+        width: 8vw;
+        height: 1px;
+        border-bottom: 1px solid #000;
+      &:before
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -50%;
+        display: block;
+        width: 8vw;
+        height: 1px;
+        border-bottom: 1px solid #000;
+
     li
         width: 25%;
         height 100%;
@@ -28,25 +62,11 @@
             width: 1.58rem;
             height: 1.59rem;
             margin: auto;
-        img 
+        img
             display: block;
             width: 100%;
             height: 100%
 </style>
 
-<script>
-export default {
-  methods: {
-      xuangou:function(){
-      this.$router.push({path:"choose"})
-    },
-    parts:function(){
-      this.$router.push({path:"parts"})
-    },
-    btn:function(){
-      MessageBox('提示', 'Vue的第一个项目能给个star么？Thank you');
-    }
-  },
-}
-</script>
+
 
