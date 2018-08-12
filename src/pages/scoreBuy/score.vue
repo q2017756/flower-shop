@@ -1,12 +1,20 @@
 <template>
     <div id="score">
+        <mt-header fixed class="header" title="积分换购">
+            <router-link to="/" slot="left">
+                <mt-button icon="back"></mt-button>
+            </router-link>
+            <!--<mt-button  slot="right">编辑</mt-button>-->
+        </mt-header>
         <div class="score">
             <div>可用积分：400</div>
             <div>签到领积分</div>
         </div>
         <ul>
             <li>
-                <div class="img-d"></div>
+                <div class="img-d">
+                    <img src="../../assets/img/flower.jpg" alt="">
+                </div>
                 <div class="msg-d">
                     <div class="title">向日葵花向日葵花花向日葵花花向日葵花花向日葵花花向日葵花花向日葵花花花</div>
                     <div class="b-d">
@@ -18,9 +26,25 @@
                 </div>
             </li>
             <li>
-                <div class="img-d"></div>
+                <div class="img-d">
+                    <img src="../../assets/img/flower.jpg" alt="">
+                </div>
                 <div class="msg-d">
-                    <div class="title">向日葵花向日葵花花向日葵花花向</div>
+                    <div class="title">向日葵花向日葵花花向日葵花花向日葵花花向日葵花花向日葵花花向日葵花花花</div>
+                    <div class="b-d">
+                        <div class="price">￥0.00+100积分</div>
+                        <del>￥100</del>
+                        <div class="text">562人想买</div>
+                        <div class="button">立即换购</div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="img-d">
+                    <img src="../../assets/img/flower.jpg" alt="">
+                </div>
+                <div class="msg-d">
+                    <div class="title">向日葵花向日葵花花向日葵花花向日葵花花向日葵花花向日葵花花向日葵花花花</div>
                     <div class="b-d">
                         <div class="price">￥0.00+100积分</div>
                         <del>￥100</del>
@@ -34,12 +58,25 @@
 </template>
 
 <script>
+    import { Header } from 'mint-ui';
     export default {
         name: "score"
     }
 </script>
 
 <style scoped>
+
+    #score{
+        padding-top: 45px;
+    }
+    .header{
+        background: white;
+        color: #515151;
+    }
+    .img-d img{
+        width: 100%;
+        height: 100%;
+    }
 .score{
     display: flex;
     background-color: #b2a078;
@@ -110,5 +147,6 @@
         color:#b2a078 ;
         margin-left: 2.7rem;
         font-size: 0.4rem;
+        border-radius: 2px;
     }
 </style>

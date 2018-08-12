@@ -23,8 +23,12 @@ import timeShop from "@/pages/timeShop/timeShop"
 import score from "@/pages/scoreBuy/score"
 import good from "@/pages/good/good"
 import cartindex from "@/pages/Cart/cartindex"
-Vue.use(Router)
+import cardIndex from "@/pages/Card/cardIndex"
+import farmc from "@/pages/farm/farmc"
+import userCenter from "@/pages/userCenter"
+import addressx from "@/pages/address/address"
 
+Vue.use(Router)
 export default new Router({
   routes: [
     { path: '/', name: 'Home', component: Home },
@@ -100,6 +104,28 @@ export default new Router({
           path: '/cartindex',
           name:'cartindex',
           component:cartindex
+      } ,
+    {
+      path: '/cardindex',
+      name:'cardIndex',
+      component:cardIndex
+    }
+      ,
+      {
+          path: '/farmc',
+          name:'farmc',
+          component:farmc
+      } ,
+      {
+          path: '/userCenter',
+          name:'userCenter',
+          component:userCenter
+      },
+      ,
+      {
+          path: '/addressx',
+          name:'addressx',
+          component:addressx
       }
   ],
   //路由切换页面始终回到最顶部
