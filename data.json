@@ -1,573 +1,424 @@
 {
-    "todos":[
-        {
-         "id":0,
-         "img":"/static/img/list1.jpg",
-         "name":"小新 潮7000 14.0英寸轻薄笔记本 花火银 81BM0002CD",
-         "Price":"5999"
-        },
-        {
-            "id":1,
-            "img":"/static/img/list2.jpg",
-            "name":"小新 潮7000 14.0英寸轻薄笔记本 玫瑰金 学生专用办公电脑",
-            "Price":"6999"
-        },
-        {
-            "id":2,
-            "img":"/static/img/sj.jpg",
-            "name":"moto 青柚手机  玫瑰金",
-            "Price":"1599"
-        },
-        {
-         "id":3,
-         "img":"/static/img/sj2.jpg",
-         "name":"moto z 2018手机  鎏金黑",
-         "Price":"3999"
-     }
-
+  "home": {
+    "manufacturer": [
+      {
+        "title": "玫瑰",
+        "pic": "/static/img/rose.png"
+      },
+      {
+        "title": "菊花",
+        "pic": "/static/img/rose.png"
+      },
+      {
+        "title": "绣球",
+        "pic": "/static/img/rose.png"
+      },
+      {
+        "title": "向日葵",
+        "pic": "/static/img/rose.png"
+      }
     ],
-    
-    "articles": [
-        {
-            "id": "1",
-            "name":"白头老",
-            "time":"2017/11/15",
-            "tou":"/static/img/tou.jpg",
-            "title": "谷歌近日上线了Files Go这款APP，一款文件管理器应用",
-            "Pone": "　　谷歌近日上线了Files Go这款APP，一款文件管理器应用。",
-            "Ptwo": "　　File Go是谷歌Android Go计划的“佐菜”之一，后者服务于内存512MB级别内存的手机，目的在于让它们也可以流畅运行安卓系统。",
-            "Pthree": " 　　所以，在我们手中的多数手机上安装,Files Fo的运行速度都是杠杠的,功能方面,底部只分为两个标签,一是存储管理，包括已用/可用容量、缓存清理、APP使用分析、大文件过滤等实用功能，二就是最常见的文件目录，默认划分出了下载/接收/图片/视频/音频/文档六类，与此同时，还加入了蓝牙邻近设备查找和快速共享功能，由于不涉及云服务、网盘等，国区用户也可以正常使用，APP下载（需Android 5.0以上安装，5.86MB）:Play商店、国内商店",
-            "imgone":"/static/img/find_00.jpg",
-            "imgtwo":"/static/img/list_find_01.jpg"
-
-            
-        },
-        {
-            "id": "2",
-            "name":"作者：印度阿三杰",
-            "title": "双11后菜鸟裹裹APP彻底火了：一键查取 2小时送达预测",
-            "time":"2017/11/15",
-            "tou":"/static/img/find_01.jpg",
-            "Pone": "　　双11到来，在买买买超过8亿天量订单后，剁手党们最关心的是快递到哪儿了,由于菜鸟裹裹APP能够查询全网包裹的物流信息,还能方便在菜鸟驿站、自提柜一键领取包裹，即使在双11期间也能预约快递员两小时上门取件,双11后成为剁手党刚需,此外,菜鸟裹裹里别人给我寄了两个神秘的包裹,这种带着好奇的期待,真是时刻挠着我的小心心,近期，有用户在APP里发现了小惊喜。",
-            "Ptwo": "　　File Go是谷歌Android Go计划的“佐菜”之一，后者服务于内存512MB级别内存的手机，目的在于让它们也可以流畅运行安卓系统。",
-            "Pthree": " 　　所以，在我们手中的多数手机上安装,Files Fo的运行速度都是杠杠的,功能方面,底部只分为两个标签,一是存储管理，包括已用/可用容量、缓存清理、APP使用分析、大文件过滤等实用功能，二就是最常见的文件目录，默认划分出了下载/接收/图片/视频/音频/文档六类，与此同时，还加入了蓝牙邻近设备查找和快速共享功能，由于不涉及云服务、网盘等，国区用户也可以正常使用，APP下载（需Android 5.0以上安装，5.86MB）:Play商店、国内商店",
-            "imgone":"/static/img/list_find01_00.jpg",
-            "imgtwo":"/static/img/list_find01_01.jpg"
-        }
+    "hotItems": [
+      {
+        "title": "万卉生态基地",
+        "pic": "/static/img/farm.png",
+        "pId": "p1000001"
+      },
+      {
+        "title": "万卉生态基地2",
+        "pic": "/static/img/farm.png",
+        "pId": "p1000002"
+      },
+      {
+        "title": "万卉生态基地3",
+        "pic": "/static/img/farm.png",
+        "pId": "p1000003"
+      },
+      {
+        "title": "万卉生态基地",
+        "pic": "/static/img/farm.png",
+        "pId": "p1000001"
+      },
+      {
+        "title": "万卉生态基地2",
+        "pic": "/static/img/farm.png",
+        "pId": "p1000002"
+      },
+      {
+        "title": "万卉生态基地3",
+        "pic": "/static/img/farm.png",
+        "pId": "p1000003"
+      }
     ],
-    "chooses":[
+    "bestTopic": {
+      "pic": "/static/img/best.png",
+      "title": "七夕送花攻略",
+      "description": "哄女盆友开心神器",
+      "lowestPrice": "19.9",
+      "topicId": "t101"
+    }
+  },
+  "userInfo": {
+    "uId": "00000001",
+    "name": "m18682145280_1",
+    "avatar": "http://yanxuan.nosdn.127.net/8945ae63d940cc42406c3f67019c5cb6.png",
+    "membership": 0
+  },
+  "productDetail": {
+    "p1000001": {
+      "pId": "p1000001",
+      "title": "玫瑰花",
+      "description": "MUJI代工厂，素雅大气，结实不易蛀",
+      "price": "1699",
+      "commentCount": "0",
+      "pics": ["/static/img/rose.png","/static/img/flower-img.png","/static/img/home-activity-3.png"],
+      "format": [
         {
-            "id":4,
-            "ImageOne":"/static/img/motoz2.jpg",
-            "name":"moto 第二代 青柚手机 玫瑰金",
-            "Price":"1599"
+          "name": "颜色",
+          "options": ["红", "白"]
         },
         {
-            "id":5,
-            "ImageOne":"/static/img/motoplay.jpg",
-            "name":"moto z² play手机 黑色全像素双核•智能AI体验",
-            "Price":"3299"
-        },
-        {
-            "id":6,
-            "ImageOne":"/static/img/sj2.jpg",
-            "name":"moto z 流金黑 标准版",
-            "Price":"2499"
+          "name": "规格",
+          "options": ["99朵", "999朵"]
         }
-    ],
-
-    "motos":[
+      ],
+      "remark": "大家具送货安装及售后服务细则>>",
+      "activity": [
         {
-            "id":4,
-            "ImageOne":"/static/img/motoz2.jpg",
-            "name":"moto 学生 青柚手机 玫瑰金",
-            "Price":"1599"
+          "name": "家居好物免费领 全场每满199减40",
+          "tag": "限时",
+          "activityId": "101"
         }
-    ],
-
-    "MotoZs":[
+      ],
+      "characteristics": [
         {
-            "id":6,
-            "ImageOne":"/static/img/sj2.jpg",
-            "name":"moto z 流金黑 标准版",
-            "Price":"2499"
+          "items": ["简单巧妙", "稳固链接"],
+          "pic": "http://yanxuan.nosdn.127.net/a5e48c2ea5682773008c7b1086fd5ceb.jpg"
+        },
+        {
+          "items": ["圆角打磨", "安全放心"],
+          "pic": "http://yanxuan.nosdn.127.net/6bc0661e1467457197d99b93dc153dbd.jpg"
+        },
+          {
+          "items": ["忠于原木", "自然纹理"],
+          "pic": "http://yanxuan.nosdn.127.net/a5bbe1c9b55266090cf18d8a78ca5a0c.jpg"
         }
-    ],
-
-    
-    "z2s":[
+      ],
+      "tags": [{ "name": "新品", "tId": "1200000"}, { "name": "MUJI制造商", "tId": "1200001" }],
+      "services": ["30天无忧退货", "48小时快速退款", "满88元免邮费", "网易自营品牌", "部分地区无法配送"],
+      "detailPics": ["http://yanxuan.nosdn.127.net/ef53b73ebf9bf482e8424aa5910aae5e.jpg", "http://yanxuan.nosdn.127.net/afe0e6309b07ca1bbf0df252419ce7e3.jpg", "http://yanxuan.nosdn.127.net/23b09c1721979086d4912089ec50e84d.jpg", "http://yanxuan.nosdn.127.net/7969aaff6ae99e8f398f39816f0d2ed6.jpg",
+        "http://yanxuan.nosdn.127.net/4f98bbd05d4640d99c4358e5ab2377dc.jpg", "http://yanxuan.nosdn.127.net/4bfb1ea5ff5ad1739e6c02267e5dffae.jpg", "http://yanxuan.nosdn.127.net/e206c3665131b87ddc61d20b80dced16.jpg", "http://yanxuan.nosdn.127.net/52ca8ccc276f44146bab888a23592102.jpg", "http://yanxuan.nosdn.127.net/b156739dcacca6c477c1daca8f7ef508.jpg",
+        "http://yanxuan.nosdn.127.net/1bc868f11288b92ebd9f4e9fed2584e9.jpg", "http://yanxuan.nosdn.127.net/b5a22b5a710ca36f9836cf6234c19277.jpg", "http://yanxuan.nosdn.127.net/13a28cea55bb6d2efe8a28ad9b1dc698.jpg", "http://yanxuan.nosdn.127.net/63d905fb4b67a4baba668b6e6a93cbb5.jpg",
+        "http://yanxuan.nosdn.127.net/230a388048354582fee4a3f0078cddda.jpg", "http://yanxuan.nosdn.127.net/3f1274c471342480fb516881b5ae21e0.jpg", "http://yanxuan.nosdn.127.net/aaccc31334b6e0e28f647a022c8955eb.jpg", "http://yanxuan.nosdn.127.net/05a4a1aa45fbfdc711b61a92840e30ea.jpg", "http://yanxuan.nosdn.127.net/4f4d77bd030309c6cfcf4b868f87d2e8.jpg",
+        "http://yanxuan.nosdn.127.net/395730ee03d2cd2053269f2ed6c0ee97.jpg", "http://yanxuan.nosdn.127.net/7393c0b0eeafb858a1adbfe7671fa224.jpg", "http://yanxuan.nosdn.127.net/9042956a64e0e3d58ffbc70160281eaa.jpg", "http://yanxuan.nosdn.127.net/46300b11ee09b3c0cac41a8c88203abd.jpg", "http://yanxuan.nosdn.127.net/847b1298aeab62b908f92ddb150bfd46.jpg",
+        "http://yanxuan.nosdn.127.net/ce61d7917509e5a0049a4651f75b4b65.jpg", "http://yanxuan.nosdn.127.net/be36db9971c6cd29b835aab31d2cd46e.jpg", "http://yanxuan.nosdn.127.net/f7f75e099205312371d56267bc385230.jpg", "http://yanxuan.nosdn.127.net/d97e15dc49b6a38add90d7f584c7f86a.jpg", "http://yanxuan.nosdn.127.net/3a9971b50d18d5c2697248fcf86435bd.jpg",
+        "http://yanxuan.nosdn.127.net/f1fcae3fbf18dade10207da8982162ea.jpg", "http://yanxuan.nosdn.127.net/814c95c3376f3d74835c98b42f1b6dc7.jpg", "http://yanxuan.nosdn.127.net/c0238d5f811e2cc1ae0528aef6f8025b.jpg", "http://yanxuan.nosdn.127.net/ea6b9ff611d682c65387d3587b4c7323.jpg", "http://yanxuan.nosdn.127.net/7d354323f8e964ee77edc0daf08d6faa.jpg",
+        "http://yanxuan.nosdn.127.net/460f64576a0d7a5c5fd501574d3a364e.jpg", "http://yanxuan.nosdn.127.net/49e7488a2306830b261c9726ba49ea04.jpg", "http://yanxuan.nosdn.127.net/9e5a809e688942933aa9ad3e810b0311.jpg", "http://yanxuan.nosdn.127.net/05d079ea49fbdafd0aba7427a5b93522.jpg", "http://yanxuan.nosdn.127.net/f550dc7a38f5e4375d55ed2ea56cf838.jpg",
+        "http://yanxuan.nosdn.127.net/928a4db68ef9475871049b601d6d9983.jpg", "http://yanxuan.nosdn.127.net/ccaa67ffee0b4bbfeb0909ac11cfcd33.jpg", "http://yanxuan.nosdn.127.net/8da6bda843f8c67f51d3afec3fbe23e6.jpg", "http://yanxuan.nosdn.127.net/fdfcb93ce9cd6cdbba19d69305d438a5.jpg", "http://yanxuan.nosdn.127.net/dfa5148a0ba266d05ab973f5d2b363d3.jpg",
+        "http://yanxuan.nosdn.127.net/3de8029f1a0fb535adcd41cc79646e80.jpg", "http://yanxuan.nosdn.127.net/32921ce7eb344ee5f3888f38d1a7a072.jpg", "http://yanxuan.nosdn.127.net/0078a36433f89759a8f468bfdb34c0a7.jpg", "http://yanxuan.nosdn.127.net/7c46cd327f1cf94b3f03b55c061418f5.jpg", "http://yanxuan.nosdn.127.net/a6d869d45712f226c7a6ab555e161233.jpg",
+        "http://yanxuan.nosdn.127.net/6b48aa2e873eb47333f018fff1d76630.jpg", "http://yanxuan.nosdn.127.net/7a81e1875799f7da449c87d80b641731.jpg", "http://yanxuan.nosdn.127.net/99f3658a533d25bd07352071a9cbe45f.jpg", "http://yanxuan.nosdn.127.net/182543e58dc5393467883e2e26519728.jpg", "http://yanxuan.nosdn.127.net/b1ea67e24eac8a86f3cb187dcee62d95.jpg",
+        "http://yanxuan.nosdn.127.net/6680a6f42b7f13ac0e98d90557917cc6.jpg", "http://yanxuan.nosdn.127.net/a673f85989f21039bc388944bbdb9d7a.jpg", "http://yanxuan.nosdn.127.net/e2a2419c8c76851a60857c8a033fa1d0.jpg", "http://yanxuan.nosdn.127.net/35938375758355736cf416cad168963e.jpg", ""
+      ],
+      "attrs": [
+        { "name": "材质", "content": "进口白蜡木" },
+        { "name": "涂漆", "content": "环保涂漆" },
+        { "name": "产品尺寸", "content": "1400/1600*820*750mm" },
+        { "name": "安装方式", "content": "需要组装" }
+      ],
+      "stock": 111
+    },
+    "p1000002": {
+      "pId": "p1000002",
+      "title": "日本制造 南部铁器风炒锅30cm",
+      "description": "百年铁器文化，还原品质生活",
+      "price": "359",
+      "commentCount": "1230",
+      "lastestComment": {
+        "avatar": "https://yanxuan.nosdn.127.net/03255f70f38761516d8f1927abafc9bd.jpg",
+        "name": "z****a",
+        "vip": 1,
+        "time": "2017-06-18 16:51:43",
+        "content": "实物比介绍看起来小些，但有点小重。能大点就更好了。说明书上有错字，看到了么？",
+        "pics": ["http://yanxuan.nosdn.127.net/44dca6d6ef517a91199a79452b85b3a3.png", "https://yanxuan.nosdn.127.net/30a597c55a8f2ad2853b7abe14bfa4ee.jpg"],
+        "attrs": ["独家定制 炒锅30cm"]
+      },
+      "pics": ["http://yanxuan.nosdn.127.net/44dca6d6ef517a91199a79452b85b3a3.png", "http://yanxuan.nosdn.127.net/1658e54c3fb6047198162054747a8e59.jpg", "http://yanxuan.nosdn.127.net/83360f817cc2903e59ef4efbf1e99a0f.jpg", "http://yanxuan.nosdn.127.net/79e7460d6f8bf9683300ac5ab2e27285.jpg", "http://yanxuan.nosdn.127.net/cb38a7194325b3cfe340325026d11091.jpg"],
+      "format": [
         {
-            "id":5,
-            "ImageOne":"/static/img/motoplay.jpg",
-            "name":"moto z² play手机 黑色全像素双核•智能AI体验",
-            "Price":"3299"
+          "name": "规格",
+          "options": ["铁锅", "铝锅"]
         }
-    ],
-    "finds":[
+      ],
+      "remark": "大家具送货安装及售后服务细则>>",
+      "activity": [
         {
-            "id":"1",
-            "findImage":"/static/img/tou.jpg",
-            "title":"谷歌近日上线了Files Go这款APP，一款文件管理器应用",
-            "name":"白头老",
-            "time":"2017/11/15"
+          "name": "家居好物免费领 全场每满199减40",
+          "tag": "限时",
+          "activityId": "101"
         },
         {
-            "id":"2",
-            "findImage":"/static/img/find_01.jpg",
-            "title":"双11后菜鸟裹裹APP彻底火了：一键查取 2小时送达预测",
-            "name":"印度阿三杰",
-            "time":"2017/11/15"
-        },
-        {
-            "id":"1",
-            "findImage":"/static/img/tou.jpg",
-            "title":"谷歌近日上线了Files Go这款APP，一款文件管理器应用",
-            "name":"白头老",
-            "time":"2017/11/15"
-        },
-        {
-            "id":"2",
-            "findImage":"/static/img/find_01.jpg",
-            "title":"双11后菜鸟裹裹APP彻底火了：一键查取 2小时送达预测",
-            "name":"印度阿三杰",
-            "time":"2017/11/15"
-        },
-        {
-            "id":"1",
-            "findImage":"/static/img/tou.jpg",
-            "title":"谷歌近日上线了Files Go这款APP，一款文件管理器应用",
-            "name":"白头老",
-            "time":"2017/11/15"
-        },
-        {
-            "id":"2",
-            "findImage":"/static/img/find_01.jpg",
-            "title":"双11后菜鸟裹裹APP彻底火了：一键查取 2小时送达预测",
-            "name":"印度阿三杰",
-            "time":"2017/11/15"
+          "name": "满163元送除菌消臭喷雾",
+          "tag": "满赠",
+          "activityId": "102"
         }
-    ],
-    "goodDetails":[
+      ],
+      "coupon": [
         {
-            "id":0,
-            "name":"小新 潮7000 14.0英寸轻薄笔记本 花火银",
-            "price":"5999",
-            "imgone":"/static/img/list1_00.jpg",
-            "imgtwo":"/static/img/list1_01.jpg",
-            "imgThree":"/static/img/list1_02.jpg",
-            "value":"1",
-            "Peizhis":[
-                {
-                    "left":"颜色",
-                    "right":"黑色"
-                },{
-                    "left":"CPU",
-                    "right":"第七代Kabylake智能英特尔® 酷睿™ i7 处理器"
-                },{
-                    "left":"CPU型号",
-                    "right":"i7-7500U"
-                },{
-                    "left":"CPU主频",
-                    "right":"2.7 GHz"
-                },{
-                    "left":"最高睿频",
-                    "right":"3.5 GHz"
-                },{
-                    "left":"操作系统",
-                    "right":"Windows 10 家庭版"
-                },{
-                    "left":"屏幕尺寸",
-                    "right":"14.0英寸"
-                },{
-                    "left":"物理分辨率",
-                    "right":"1920x1080"
-                },{
-                    "left":"屏幕类型",
-                    "right":"全高清IPS屏幕"
-                },{
-                    "left":"内存容量",
-                    "right":"8GB"
-                },{
-                    "left":"内存类型",
-                    "right":"DDR4"
-                },{
-                    "left":"硬盘类型",
-                    "right":"机械硬盘+固态硬盘"
-                },{
-                    "left":"硬盘容量",
-                    "right":"1TB+128GB SSD"
-                },{
-                    "left":"显卡类型",
-                    "right":"独立显卡"
-                },{
-                    "left":"显示芯片",
-                    "right":" NVIDIA GeForce 940MX"
-                },{
-                    "left":"显存容量",
-                    "right":"2GB"
-                },{
-                    "left":"显存类型",
-                    "right":"GDDR5"
-                },{
-                    "left":"光驱类型",
-                    "right":"无光驱"
-                },{
-                    "left":"USB2.0",
-                    "right":"1个"
-                },{
-                    "left":"USB3.0",
-                    "right":"1个"
-                },{
-                    "left":"音频接口",
-                    "right":"耳机、麦克风二合一接口"
-                },{
-                    "left":"摄像头",
-                    "right":"720p HD 摄像头"
-                },{
-                    "left":"type-c 接口",
-                    "right":"有"
-                },{
-                    "left":"读卡器",
-                    "right":"4合1读卡器"
-                },{
-                    "left":"预装软件",
-                    "right":"正版office家庭和学生版2016"
-                }
-            ],
-            "Images":[
-                { "one":"/static/img/list_details_00.jpg" },
-                { "one":"/static/img/list_details_01.jpg" },
-                { "one":"/static/img/list_details_02.jpg" },
-                { "one":"/static/img/list_details_03.jpg" },
-                { "one":"/static/img/list_details_04.jpg" },
-                { "one":"/static/img/list_details_05.jpg" },
-                { "one":"/static/img/list_details_06.jpg" },
-                { "one":"/static/img/list_details_07.jpg" },
-                { "one":"/static/img/list_details_08.jpg" },
-                { "one":"/static/img/list_details_09.jpg" }
-            ]
-        },
-        {
-            "id":1,
-            "name":"小新 潮7000 14.0英寸轻薄笔记本 玫瑰金 学生专用办公电脑",
-            "price":"6999",
-            "imgone":"/static/img/list2_00.jpg",
-            "imgtwo":"/static/img/list2_01.jpg",
-            "imgThree":"/static/img/list2_02.jpg",
-            "value":"1",
-            "Images":[
-                { "one":"/static/img/list_details.jpg" },
-                { "one":"/static/img/list_details_01.jpg" },
-                { "one":"/static/img/list_details_02.jpg" },
-                { "one":"/static/img/list_details_03.jpg" },
-                { "one":"/static/img/list_details_04.jpg" },
-                { "one":"/static/img/list_details_05.jpg" },
-                { "one":"/static/img/list_details_06.jpg" },
-                { "one":"/static/img/list_details_07.jpg" },
-                { "one":"/static/img/list_details_08.jpg" },
-                { "one":"/static/img/list_details_09.jpg" }
-            ],
-            "Peizhis":[
-                {
-                    "left":"颜色",
-                    "right":"玫瑰金"
-                },{
-                    "left":"CPU",
-                    "right":"第七代Kabylake智能英特尔® 酷睿™ i7 处理器"
-                },{
-                    "left":"CPU型号",
-                    "right":"i7-7500U"
-                },{
-                    "left":"CPU主频",
-                    "right":"2.7 GHz"
-                },{
-                    "left":"最高睿频",
-                    "right":"3.5 GHz"
-                },{
-                    "left":"操作系统",
-                    "right":"Windows 10 家庭版"
-                },{
-                    "left":"屏幕尺寸",
-                    "right":"14.0英寸"
-                },{
-                    "left":"物理分辨率",
-                    "right":"1920x1080"
-                },{
-                    "left":"屏幕类型",
-                    "right":"全高清IPS屏幕"
-                },{
-                    "left":"内存容量",
-                    "right":"8GB"
-                },{
-                    "left":"内存类型",
-                    "right":"DDR4"
-                },{
-                    "left":"硬盘类型",
-                    "right":"机械硬盘+固态硬盘"
-                },{
-                    "left":"硬盘容量",
-                    "right":"1TB+128GB SSD"
-                },{
-                    "left":"显卡类型",
-                    "right":"独立显卡"
-                },{
-                    "left":"显示芯片",
-                    "right":" NVIDIA GeForce 940MX"
-                },{
-                    "left":"显存容量",
-                    "right":"2GB"
-                },{
-                    "left":"显存类型",
-                    "right":"GDDR5"
-                },{
-                    "left":"光驱类型",
-                    "right":"无光驱"
-                },{
-                    "left":"USB2.0",
-                    "right":"1个"
-                },{
-                    "left":"USB3.0",
-                    "right":"1个"
-                },{
-                    "left":"音频接口",
-                    "right":"耳机、麦克风二合一接口"
-                },{
-                    "left":"摄像头",
-                    "right":"720p HD 摄像头"
-                },{
-                    "left":"type-c 接口",
-                    "right":"有"
-                },{
-                    "left":"读卡器",
-                    "right":"4合1读卡器"
-                },{
-                    "left":"预装软件",
-                    "right":"正版office家庭和学生版2016"
-                }
-            ]    
-        },
-        {
-            "id":2,
-            "name":"moto 青柚手机  玫瑰金",
-            "price":"1599",
-            "imgone":"/static/img/sj.jpg",
-            "imgtwo":"/static/img/sj_00.jpg",
-            "imgThree":"/static/img/sj_01.jpg",
-            "value":"1",
-            "Images":[
-                { "one":"/static/img/sj_details_00.jpg" },
-                { "one":"/static/img/sj_details_01.jpg" },
-                { "one":"/static/img/sj_details_02.jpg" },
-                { "one":"/static/img/sj_details_03.jpg" },
-                { "one":"/static/img/sj_details_04.jpg" },
-                { "one":"/static/img/sj_details_05.jpg" },
-                { "one":"/static/img/sj_details_06.jpg" },
-                { "one":"/static/img/sj_details_07.jpg" },
-                { "one":"/static/img/sj_details_08.jpg" },
-                { "one":"/static/img/details.jpg"}
-            ],
-            "Peizhis":[
-                {
-                    "left":"颜色",
-                    "right":"玫瑰金"
-                },{
-                    "left":"型号",
-                    "right":"标准版"
-                },{
-                    "left":"系统",
-                    "right":"基于Android™ 7.1.1开发的ZUI3.1"
-                },{
-                    "left":"CPU型号",
-                    "right":"Qualcomm® 骁龙™ 8937八核处理器，主频1.4GHz"
-                },{
-                    "left":"相机",
-                    "right":"前后1600W像素拍照"
-                },{
-                    "left":"电池",
-                    "right":"大电池涡轮快充"
-                }
-            ]    
-        },
-        {
-            "id":3,
-            "name":"moto z 2018手机  鎏金黑",
-            "price":"3999",
-            "imgone":"/static/img/sj2.jpg",
-            "imgtwo":"/static/img/sj2_00.jpg",
-            "imgThree":"/static/img/sj2_01.jpg",
-            "value":"1",
-            "Images":[
-                { "one":"/static/img/sj2_details_00.jpg" },
-                { "one":"/static/img/sj2_details_01.jpg" },
-                { "one":"/static/img/sj2_details_02.jpg" },
-                { "one":"/static/img/sj2_details_03.jpg" },
-                { "one":"/static/img/sj2_details_04.jpg" },
-                { "one":"/static/img/sj2_details_05.jpg" },
-                { "one":"/static/img/sj2_details_06.jpg" },
-                { "one":"/static/img/sj2_details_07.jpg" },
-                { "one":"/static/img/sj2_details_08.jpg" },
-                { "one":"/static/img/details.jpg"}
-            ],
-            "Peizhis":[
-                {
-                    "left":"颜色",
-                    "right":"鎏金黑"
-                },{
-                    "left":"型号",
-                    "right":"标准版"
-                },{
-                    "left":"系统",
-                    "right":"基于Android™ 7.1.1开发的ZUI3.1"
-                },{
-                    "left":"CPU型号",
-                    "right":"Qualcomm® 骁龙™ 8937八核处理器，主频1.4GHz"
-                },{
-                    "left":"相机",
-                    "right":"前后1600W像素拍照"
-                },{
-                    "left":"电池",
-                    "right":"大电池涡轮快充"
-                }
-            ]
-        },
-
-        {
-            "id":4,
-            "name":"moto 学生 青柚手机  玫瑰金",
-            "price":"1599",
-            "imgone":"/static/img/motoz2.jpg",
-            "imgtwo":"/static/img/motoz2.jpg",
-            "imgThree":"/static/img/motoz2.jpg",
-            "value":"1",
-            "Images":[
-                { "one":"/static/img/sj_details_00.jpg" },
-                { "one":"/static/img/sj_details_01.jpg" },
-                { "one":"/static/img/sj_details_02.jpg" },
-                { "one":"/static/img/sj_details_03.jpg" },
-                { "one":"/static/img/sj_details_04.jpg" },
-                { "one":"/static/img/sj_details_05.jpg" },
-                { "one":"/static/img/sj_details_06.jpg" },
-                { "one":"/static/img/sj_details_07.jpg" },
-                { "one":"/static/img/sj_details_08.jpg" },
-                { "one":"/static/img/details.jpg"}
-            ],
-            "Peizhis":[
-                {
-                    "left":"颜色",
-                    "right":"鎏金黑"
-                },{
-                    "left":"型号",
-                    "right":"标准版"
-                },{
-                    "left":"系统",
-                    "right":"基于Android™ 7.1.1开发的ZUI3.1"
-                },{
-                    "left":"CPU型号",
-                    "right":"Qualcomm® 骁龙™ 8937八核处理器，主频1.4GHz"
-                },{
-                    "left":"相机",
-                    "right":"前后1600W像素拍照"
-                },{
-                    "left":"电池",
-                    "right":"大电池涡轮快充"
-                }
-            ]
-            
-        },
-
-        {
-            "id":5,
-            "name":"moto z2 play手机 黑色全像素双核•智能AI体验",
-            "price":"3299",
-            "imgone":"/static/img/motoplay.jpg",
-            "imgtwo":"/static/img/motoplay00.jpg",
-            "imgThree":"/static/img/motoplay01.jpg",
-            "value":"1",
-            "Images":[
-                { "one":"/static/img/motoplay_00.jpg" },
-                { "one":"/static/img/motoplay_01.jpg" },
-                { "one":"/static/img/motoplay_02.jpg" },
-                { "one":"/static/img/motoplay_03.jpg" },
-                { "one":"/static/img/motoplay_04.jpg" },
-                { "one":"/static/img/motoplay_05.jpg" },
-                { "one":"/static/img/motoplay_06.jpg" },
-                { "one":"/static/img/motoplay_07.jpg" },
-                { "one":"/static/img/motoplay_08.jpg" },
-                { "one":"/static/img/motoplay_09.jpg" },
-                { "one":"/static/img/details.jpg"}
-            ],
-            "Peizhis":[
-                {
-                    "left":"颜色",
-                    "right":"鎏金黑"
-                },{
-                    "left":"型号",
-                    "right":"标准版"
-                },{
-                    "left":"系统",
-                    "right":"基于Android™ 7.1.1开发的ZUI3.1"
-                },{
-                    "left":"CPU型号",
-                    "right":"Qualcomm® 骁龙™ 8937八核处理器，主频1.4GHz"
-                },{
-                    "left":"相机",
-                    "right":"前后1600W像素拍照"
-                },{
-                    "left":"电池",
-                    "right":"大电池涡轮快充"
-                }
-            ]
-        },
-
-        {
-            "id":6,
-            "name":"moto z 流金黑 标准版",
-            "price":"2499",
-            "imgone":"/static/img/sj2.jpg",
-            "imgtwo":"/static/img/sj2_00.jpg",
-            "imgThree":"/static/img/sj2_01.jpg",
-            "value":"1",
-            "Images":[
-                { "one":"/static/img/motoZ_00.jpg" },
-                { "one":"/static/img/motoZ_01.jpg" },
-                { "one":"/static/img/motoZ_02.jpg" },
-                { "one":"/static/img/motoZ_03.jpg" },
-                { "one":"/static/img/motoZ_04.jpg" },
-                { "one":"/static/img/motoZ_05.jpg" },
-                { "one":"/static/img/motoZ_06.jpg" },
-                { "one":"/static/img/motoZ_07.jpg" },
-                { "one":"/static/img/motoZ_08.jpg" },
-                { "one":"/static/img/details.jpg"}
-            ],
-            "Peizhis":[
-                {
-                    "left":"颜色",
-                    "right":"流金黑"
-                },{
-                    "left":"型号",
-                    "right":"标准版"
-                },{
-                    "left":"系统",
-                    "right":"Android 6.0.1 Marshmallow"
-                },{
-                    "left":"CPU型号",
-                    "right":"高通晓龙820 (MSM8996, 64 位，四核)"
-                },{
-                    "left":"相机",
-                    "right":"前后1600W像素拍照"
-                },{
-                    "left":"蜂窝网络",
-                    "right":"UMTS (联通）, TD-SCDMA（移动）, EVDO Rev. A （电信）"
-                }
-            ]
+          "type": "海外制造商8折券",
+          "couponId": "201"
         }
-    ],
-    "vibes":[
+      ],
+      "characteristics": [
         {
-            "id":4,
-            "ImageOne":"/static/img/VIBE .jpg",
-            "name":"55",
-            "Price":"6599"
+          "items": ["安全认证", "安心健康"],
+          "pic": "http://yanxuan.nosdn.127.net/59a3fcca88779e4ecafda76dbd35fe71.jpg"
+        },
+        {
+          "items": ["保留食材", "自然本味"],
+          "pic": "http://yanxuan.nosdn.127.net/edc3d28e337d54b5a65f0d81e8cfb219.jpg"
+        },
+          {
+          "items": ["光滑木柄", "握感舒适"],
+          "pic": "http://yanxuan.nosdn.127.net/7f4d9b48c523bccce239759053a0cf5f.jpg"
         }
+      ],
+      "tags": [{ "name": "日本柳宗理制造商", "tId": "1200001" }],
+      "services": ["30天无忧退货", "48小时快速退款", "满88元免邮费", "网易自营品牌", "部分地区无法配送"],
+      "detailPics": ["http://yanxuan.nosdn.127.net/ef53b73ebf9bf482e8424aa5910aae5e.jpg", "http://yanxuan.nosdn.127.net/afe0e6309b07ca1bbf0df252419ce7e3.jpg", "http://yanxuan.nosdn.127.net/23b09c1721979086d4912089ec50e84d.jpg", "http://yanxuan.nosdn.127.net/7969aaff6ae99e8f398f39816f0d2ed6.jpg",
+        "http://yanxuan.nosdn.127.net/4f98bbd05d4640d99c4358e5ab2377dc.jpg", "http://yanxuan.nosdn.127.net/4bfb1ea5ff5ad1739e6c02267e5dffae.jpg", "http://yanxuan.nosdn.127.net/e206c3665131b87ddc61d20b80dced16.jpg", "http://yanxuan.nosdn.127.net/52ca8ccc276f44146bab888a23592102.jpg", "http://yanxuan.nosdn.127.net/b156739dcacca6c477c1daca8f7ef508.jpg",
+        "http://yanxuan.nosdn.127.net/1bc868f11288b92ebd9f4e9fed2584e9.jpg", "http://yanxuan.nosdn.127.net/b5a22b5a710ca36f9836cf6234c19277.jpg", "http://yanxuan.nosdn.127.net/13a28cea55bb6d2efe8a28ad9b1dc698.jpg", "http://yanxuan.nosdn.127.net/63d905fb4b67a4baba668b6e6a93cbb5.jpg",
+        "http://yanxuan.nosdn.127.net/230a388048354582fee4a3f0078cddda.jpg", "http://yanxuan.nosdn.127.net/3f1274c471342480fb516881b5ae21e0.jpg", "http://yanxuan.nosdn.127.net/aaccc31334b6e0e28f647a022c8955eb.jpg", "http://yanxuan.nosdn.127.net/05a4a1aa45fbfdc711b61a92840e30ea.jpg", "http://yanxuan.nosdn.127.net/4f4d77bd030309c6cfcf4b868f87d2e8.jpg",
+        "http://yanxuan.nosdn.127.net/395730ee03d2cd2053269f2ed6c0ee97.jpg", "http://yanxuan.nosdn.127.net/7393c0b0eeafb858a1adbfe7671fa224.jpg", "http://yanxuan.nosdn.127.net/9042956a64e0e3d58ffbc70160281eaa.jpg", "http://yanxuan.nosdn.127.net/46300b11ee09b3c0cac41a8c88203abd.jpg", "http://yanxuan.nosdn.127.net/847b1298aeab62b908f92ddb150bfd46.jpg",
+        "http://yanxuan.nosdn.127.net/ce61d7917509e5a0049a4651f75b4b65.jpg", "http://yanxuan.nosdn.127.net/be36db9971c6cd29b835aab31d2cd46e.jpg", "http://yanxuan.nosdn.127.net/f7f75e099205312371d56267bc385230.jpg", "http://yanxuan.nosdn.127.net/d97e15dc49b6a38add90d7f584c7f86a.jpg", "http://yanxuan.nosdn.127.net/3a9971b50d18d5c2697248fcf86435bd.jpg",
+        "http://yanxuan.nosdn.127.net/f1fcae3fbf18dade10207da8982162ea.jpg", "http://yanxuan.nosdn.127.net/814c95c3376f3d74835c98b42f1b6dc7.jpg", "http://yanxuan.nosdn.127.net/c0238d5f811e2cc1ae0528aef6f8025b.jpg", "http://yanxuan.nosdn.127.net/ea6b9ff611d682c65387d3587b4c7323.jpg", "http://yanxuan.nosdn.127.net/7d354323f8e964ee77edc0daf08d6faa.jpg",
+        "http://yanxuan.nosdn.127.net/460f64576a0d7a5c5fd501574d3a364e.jpg", "http://yanxuan.nosdn.127.net/49e7488a2306830b261c9726ba49ea04.jpg", "http://yanxuan.nosdn.127.net/9e5a809e688942933aa9ad3e810b0311.jpg", "http://yanxuan.nosdn.127.net/05d079ea49fbdafd0aba7427a5b93522.jpg", "http://yanxuan.nosdn.127.net/f550dc7a38f5e4375d55ed2ea56cf838.jpg",
+        "http://yanxuan.nosdn.127.net/928a4db68ef9475871049b601d6d9983.jpg", "http://yanxuan.nosdn.127.net/ccaa67ffee0b4bbfeb0909ac11cfcd33.jpg", "http://yanxuan.nosdn.127.net/8da6bda843f8c67f51d3afec3fbe23e6.jpg", "http://yanxuan.nosdn.127.net/fdfcb93ce9cd6cdbba19d69305d438a5.jpg", "http://yanxuan.nosdn.127.net/dfa5148a0ba266d05ab973f5d2b363d3.jpg",
+        "http://yanxuan.nosdn.127.net/3de8029f1a0fb535adcd41cc79646e80.jpg", "http://yanxuan.nosdn.127.net/32921ce7eb344ee5f3888f38d1a7a072.jpg", "http://yanxuan.nosdn.127.net/0078a36433f89759a8f468bfdb34c0a7.jpg", "http://yanxuan.nosdn.127.net/7c46cd327f1cf94b3f03b55c061418f5.jpg", "http://yanxuan.nosdn.127.net/a6d869d45712f226c7a6ab555e161233.jpg",
+        "http://yanxuan.nosdn.127.net/6b48aa2e873eb47333f018fff1d76630.jpg", "http://yanxuan.nosdn.127.net/7a81e1875799f7da449c87d80b641731.jpg", "http://yanxuan.nosdn.127.net/99f3658a533d25bd07352071a9cbe45f.jpg", "http://yanxuan.nosdn.127.net/182543e58dc5393467883e2e26519728.jpg", "http://yanxuan.nosdn.127.net/b1ea67e24eac8a86f3cb187dcee62d95.jpg",
+        "http://yanxuan.nosdn.127.net/6680a6f42b7f13ac0e98d90557917cc6.jpg", "http://yanxuan.nosdn.127.net/a673f85989f21039bc388944bbdb9d7a.jpg", "http://yanxuan.nosdn.127.net/e2a2419c8c76851a60857c8a033fa1d0.jpg", "http://yanxuan.nosdn.127.net/35938375758355736cf416cad168963e.jpg", ""
+      ],
+      "attrs": [
+        { "name": "品牌定制款", "content": "独家定制 炒锅30cm" }
+      ],
+      "stock": 999
+    }
+  },
+  "categoryCommodity": {
+    "description": "夏凉床品，舒适一夏",
+    "commodities": [
+      {
+            "title": "100年传世珐琅锅",
+            "description": "特质铸铁，锁热节能",
+            "price": "268",
+            "pic": "http://yanxuan.nosdn.127.net/054b5bc3a4b733a36a6b90ff2270df93.png?imageView&quality=85&thumbnail=330x330",
+            "specification": "4色可选",
+            "activity": [{ "type": 0, "tag": "爆品"}],
+            "pId": "p1000001"
+          },
+          {
+            "title": "Walking Juice破壁料理机套装",
+            "description": "会榨汁的杯子，15秒带走",
+            "price": "239",
+            "pic": "http://yanxuan.nosdn.127.net/569539637653da2c635212847f322e7a.png?imageView&quality=85&thumbnail=330x330",
+            "activity": [{ "type": 0, "tag": "爆品"}],
+            "pId": "p1000001"
+          },
+          {
+            "title": "懒人抹布",
+            "description": "吸水吸油，热销200万卷",
+            "price": "13.99",
+            "pic": "http://yanxuan.nosdn.127.net/22b832ace6eb10c7b0057eb6eae6c3c9.png?imageView&quality=85&thumbnail=330x330",
+            "activity": [{ "type": 0, "tag": "爆品"}],
+            "pId": "p1000001"
+          },
+          {
+            "title": "月牙白新骨瓷餐具",
+            "description": "德化白瓷，耐摔抗高温",
+            "price": "22.9",
+            "pic": "http://yanxuan.nosdn.127.net/6257825bfc4143b5367c99fdd0d7b5e2.png?imageView&quality=85&thumbnail=330x330",
+            "activity": [{ "type": 1, "tag": "618特卖" }],
+            "pId": "p1000001"
+          },
+          {
+            "title": "冰激凌机",
+            "description": "水果也能做冰激凌，告别高热量",
+            "price": "169",
+            "pic": "http://yanxuan.nosdn.127.net/e22178ec1fbbf5d29a4c5f5558595789.png?imageView&quality=85&thumbnail=330x330",
+            "activity": [{ "type": 0, "tag": "618人气款" }, { "type": 1, "tag": "APP专享价" }],
+            "pId": "p1000001"
+          },
+          {
+            "title": "高硼硅玻璃凉水壶",
+            "description": "耐瞬间温差150℃ 冷热两用",
+            "price": "89",
+            "pic": "http://yanxuan.nosdn.127.net/05affdfb69e563b78179811bf0033d1e.png?imageView&quality=85&thumbnail=330x330",
+            "activity": [{ "type": 0, "tag": "618人气款" }],
+            "pId": "p1000001"
+          },
+          {
+            "title": "不滴漏系列方形调味瓶4件套",
+            "description": "防尘防潮，安全多用",
+            "price": "39.91399",
+            "pic": "http://yanxuan.nosdn.127.net/c915b9ce94c6b3812480aa3040fe7c50.png?imageView&quality=85&thumbnail=330x330",
+            "activity": [{ "type": 1, "tag": "618特卖" }],
+            "pId": "p1000001"
+          }
     ]
- }
+  },
+  "commodityFormat": {
+    "title": ""
+
+  },
+  "section": {
+    "1000001": [
+      {
+        "pic": "http://yanxuan.nosdn.127.net/360e6a2b6b2ee28c69f32e616c958ff8.png?imageView&quality=85&thumbnail=144x144",
+        "title": "新品买送",
+        "subCategoryId": "110001"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "满三免一",
+        "subCategoryId": "110002"
+      }
+    ,
+      {
+        "pic": "http://yanxuan.nosdn.127.net/360e6a2b6b2ee28c69f32e616c958ff8.png?imageView&quality=85&thumbnail=144x144",
+        "title": "热卖爆品",
+        "subCategoryId": "110003"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/360e6a2b6b2ee28c69f32e616c958ff8.png?imageView&quality=85&thumbnail=144x144",
+        "title": "新品买送",
+        "subCategoryId": "110001"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "满三免一",
+        "subCategoryId": "110002"
+      }
+    ,
+      {
+        "pic": "http://yanxuan.nosdn.127.net/360e6a2b6b2ee28c69f32e616c958ff8.png?imageView&quality=85&thumbnail=144x144",
+        "title": "热卖爆品",
+        "subCategoryId": "110003"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/360e6a2b6b2ee28c69f32e616c958ff8.png?imageView&quality=85&thumbnail=144x144",
+        "title": "新品买送",
+        "subCategoryId": "110001"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "满三免一",
+        "subCategoryId": "110002"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/360e6a2b6b2ee28c69f32e616c958ff8.png?imageView&quality=85&thumbnail=144x144",
+        "title": "热卖爆品",
+        "subCategoryId": "110003"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "满三免一",
+        "subCategoryId": "110002"
+      }
+    ],
+    "1000002": [
+      {
+        "pic": "http://yanxuan.nosdn.127.net/8c710c70d2503c55e8735314eaec9727.png?imageView&quality=85&thumbnail=144x144",
+        "title": "当季美食",
+        "subCategoryId": "110004"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "凉水杯",
+        "subCategoryId": "110005"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/7a1bc214eb97ce448a7cb2ba5f407e2f.png?imageView&quality=85&thumbnail=144x144",
+        "title": "茶叶冲饮",
+        "subCategoryId": "110006"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/8c710c70d2503c55e8735314eaec9727.png?imageView&quality=85&thumbnail=144x144",
+        "title": "当季美食",
+        "subCategoryId": "110004"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "凉水杯",
+        "subCategoryId": "110005"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/7a1bc214eb97ce448a7cb2ba5f407e2f.png?imageView&quality=85&thumbnail=144x144",
+        "title": "茶叶冲饮",
+        "subCategoryId": "110006"
+      }
+    ],
+    "1000003": [
+      {
+        "pic": "http://yanxuan.nosdn.127.net/8c710c70d2503c55e8735314eaec9727.png?imageView&quality=85&thumbnail=144x144",
+        "title": "当季美食",
+        "subCategoryId": "110004"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "凉水杯",
+        "subCategoryId": "110005"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/7a1bc214eb97ce448a7cb2ba5f407e2f.png?imageView&quality=85&thumbnail=144x144",
+        "title": "茶叶冲饮",
+        "subCategoryId": "110006"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/8c710c70d2503c55e8735314eaec9727.png?imageView&quality=85&thumbnail=144x144",
+        "title": "当季美食",
+        "subCategoryId": "110004"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "凉水杯",
+        "subCategoryId": "110005"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/7a1bc214eb97ce448a7cb2ba5f407e2f.png?imageView&quality=85&thumbnail=144x144",
+        "title": "茶叶冲饮",
+        "subCategoryId": "110006"
+      }
+    ],
+    "1000004": [
+      {
+        "pic": "http://yanxuan.nosdn.127.net/8c710c70d2503c55e8735314eaec9727.png?imageView&quality=85&thumbnail=144x144",
+        "title": "当季美食",
+        "subCategoryId": "110004"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "凉水杯",
+        "subCategoryId": "110005"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/7a1bc214eb97ce448a7cb2ba5f407e2f.png?imageView&quality=85&thumbnail=144x144",
+        "title": "茶叶冲饮",
+        "subCategoryId": "110006"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/8c710c70d2503c55e8735314eaec9727.png?imageView&quality=85&thumbnail=144x144",
+        "title": "当季美食",
+        "subCategoryId": "110004"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/24795ed734bcfcf59e9777a87601764d.png?imageView&quality=85&thumbnail=144x144",
+        "title": "凉水杯",
+        "subCategoryId": "110005"
+      },
+      {
+        "pic": "http://yanxuan.nosdn.127.net/7a1bc214eb97ce448a7cb2ba5f407e2f.png?imageView&quality=85&thumbnail=144x144",
+        "title": "茶叶冲饮",
+        "subCategoryId": "110006"
+      }
+    ]
+  }
+}

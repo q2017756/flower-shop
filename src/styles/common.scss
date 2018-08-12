@@ -1,0 +1,113 @@
+@import "./mixin";
+
+.font-small {
+  font-size: $size_small + px;
+}
+.font_middle {
+  font-size: $size_middle + px;
+}
+.font-default {
+  font-size: $size_default + px;
+}
+.font-big {
+  font-size: $size_big;
+}
+.font-smaller {
+  font-size: $size_small + px;
+  transform: scale(.8);
+}
+.font-smaller-b {
+  font-size: $size_small + px;
+  transform: scale(.8);
+  padding: px2rem(2) px2rem(8);
+  background: #eee;
+  border-radius: 5px;
+  color: #000;
+}
+.text-center {
+  text-align: center;
+}
+
+// 两边带线的title ——xxx——
+.title-line {
+  position: relative;
+  display: inline-block;
+  margin: px2rem(18) auto px2rem(8) auto;
+  font-size: px2rem($size_default);
+  color: #666;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    display: block;
+    width: 8vw;
+    height: 1px;
+    border-bottom: 1px solid $text_color;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -50%;
+    display: block;
+    width: 8vw;
+    height: 1px;
+    border-bottom: 1px solid $text_color;
+  }
+}
+
+.search-input {
+  flex: 1;
+  color: #000;
+  margin: 0 $edge_default;
+  padding: px2rem(8) px2rem(15) px2rem(8) px2rem(40);
+  background-color: #f4f4f4;
+  background-image: url("../../assets/icon/search.png");
+  background-repeat: no-repeat;
+  background-size: px2rem(15);
+  background-position: px2rem(15) px2rem(8);
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  font-size: px2rem($size_middle);
+  outline: none;
+}
+
+.productor-container, .home-farm {
+  background-color: #fff;
+  width: 100%;
+  margin-bottom: $edge_small;
+  .productor-header {
+    width: 100%;
+    height: px2rem(60);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h2 {
+      color: $dark_text_color;
+      font-size: px2rem(16);
+      font-weight: normal;
+      margin-right: $edge_small;
+    }
+    i {
+      width: px2rem(15);
+      height: px2rem(15);
+      background: url('../../assets/icon/arrow.png') no-repeat 0 0;
+      background-size: cover;
+    }
+  }
+  .productor-content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+.home-like {
+  @include flex_default;
+  flex-wrap: wrap;
+  .text-center {
+    flex: 0 0 100vw;
+    background: #fff;
+    padding-bottom: px2rem(15);
+  }
+}

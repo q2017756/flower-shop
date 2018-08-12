@@ -1,34 +1,28 @@
 <template>
-  <div id="app">
-    <router-view/>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
-import rem from './rem/rem.js'
-export default {
-  name: 'app',
-   data(){
-    return{
-      transitionName:''
+  export default {
+    name: 'app',
+    mounted () {
+      this.$store.dispatch('getCartCommodity')
     }
   }
-}
+
+  // 设置html的font-size
+  document.addEventListener('DOMContentLoaded', function () {
+    const ratio = 375 / 10
+    const rem = window.innerWidth / ratio
+    const dpr = window.devicePixelRatio
+    const html = document.querySelector('html')
+    html.classList.add(`env__dpr-${dpr}`)
+    html.style.fontSize = window.innerWidth / 10 + 'px'
+  })
+
 </script>
 
 <style>
- @import 'styles/style.css';
- @import './fon/iconfont.css';
-body{
-  /* padding-bottom:1.56rem; */
-  background: #F4F4F4;
-  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
-}
-.mint-swipe-indicator{
-  background: #000;
-  border: 1px solid black
-}
-.mint-swipe-indicator.is-active{
-  background: #ddd;
-}
+  /* 全局css */
+  @import './styles/global.scss';
 </style>
