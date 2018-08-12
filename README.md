@@ -7,4 +7,6 @@ json-server --watch data.json --port 3300
 npm install
 
 npm start
+
+localhost:8000
 ```

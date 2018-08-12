@@ -51,7 +51,11 @@ export default new Router({
             {
               path: '/productList',
               component: resolve => require(['@/containers/productDetail/productList'], resolve)
-            }
+            },
+            {
+              path: '/cart',
+              component: resolve => require(['@/containers/cart/index'], resolve)
+            },
           ]
         },
         {

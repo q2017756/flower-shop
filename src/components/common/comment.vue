@@ -27,7 +27,7 @@
         vip: 1,
         time: '2017-06-18 16:51',
         content: '鲜花很新鲜，很喜欢。',
-        pics: ['../../assets/img/rose.png'],
+        pics: ['/static/img/rose.png'],
         norm: '玫瑰'
       }
     }

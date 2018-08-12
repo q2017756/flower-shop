@@ -50,7 +50,7 @@
           { name: '康乃馨', categoryId: '1000005', pic: '/static/img/rose.png' },
          ],
         section: {
-          pic: '../../assets/img/rose.png',
+          pic: '/static/img/rose.png',
           name: '618',
           section: {}
         }
