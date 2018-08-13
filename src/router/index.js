@@ -23,6 +23,10 @@ import timeShop from "@/pages/timeShop/timeShop"
 import score from "@/pages/scoreBuy/score"
 import good from "@/pages/good/good"
 import cartindex from "@/pages/Cart/cartindex"
+import userMsg from "@/pages/user/userMsg"
+import history from "@/pages/user/history"
+import goodC from "@/pages/user/goodCollection"
+import myOrder from "@/pages/orderList/myOrder"
 Vue.use(Router)
 
 export default new Router({
@@ -100,6 +104,31 @@ export default new Router({
           path: '/cartindex',
           name:'cartindex',
           component:cartindex
+      },
+      {
+          path: '/userMsg',
+          name:'userMsg',
+          component:userMsg
+      },
+      {
+          path: '/history',
+          name:'history',
+          component:history
+      },
+      {
+          path: '/goodC',
+          name:'goodC',
+          component:goodC
+      },
+      {
+          path: '/history',
+          name:'history',
+          component:history
+      },
+      {
+          path: '/myOrder',
+          name:'myOrder',
+          component:myOrder
       }
   ],
   //路由切换页面始终回到最顶部

@@ -1,17 +1,7 @@
 <template>
-    <div id="cart">
+    <div id="good-collection">
         <ul>
             <li>
-                <div class="title clear">
-                    <div class="check">
-                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
-                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
-                    </div>
-                    <div class="t-text">
-                        <span class="farm-name">花知农场农场</span>
-                        <span class="quan">优惠券</span>
-                    </div>
-                </div>
                 <div class="g-l clear">
                     <div class="check check-l">
                         <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
@@ -23,48 +13,56 @@
                         </div>
                         <div class="g-t">
                             <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
-                            <span class="type">A级</span>
-                            <div class="bot-p"><span class="button-s"><span >-</span><input  type="number"><span >+</span></span><span class="b-pr">￥1547.70</span></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="g-l clear">
-                    <div class="check check-l">
-                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
-                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
-                    </div>
-                    <div class="g-m">
-                        <div class="img-d">
-                            <img src="" alt="">
-                        </div>
-                        <div class="g-t">
-                            <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
-                            <span class="type">A级</span>
-                            <div class="bot-p"><span class="button-s"><span >-</span><input  type="number"><span >+</span></span><span class="b-pr">￥1547.70</span></div>
+                            <!--<span class="type">A级</span>-->
+                            <div class="bot-p">
+                                <span class="price">￥256.00</span>
+                                <div>
+                                    <span class="bt-sam">找相似</span>
+                                    <span class="cart-p">购物</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </li>
-
+            <li>
+                <div class="g-l clear">
+                    <div class="check check-l">
+                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
+                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
+                    </div>
+                    <div class="g-m">
+                        <div class="img-d">
+                            <img src="" alt="">
+                        </div>
+                        <div class="g-t">
+                            <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
+                            <!--<span class="type">A级</span>-->
+                            <div class="bot-p">
+                                <span class="price">￥256.00</span>
+                                <div>
+                                    <span class="bt-sam">找相似</span>
+                                    <span class="cart-p">购物</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
 </template>
 
 <script>
     export default {
-        name: "cartindex",
-        data(){
-            return{
-                qx:false,
-            }
-        }
+        name: "goodCollection"
     }
 </script>
 
 <style scoped>
-#cart{
-    font-size: 0.4rem;
-}
+    #good-collection{
+        font-size: 0.4rem;
+    }
     ul{
         /*background: white;*/
     }
@@ -76,6 +74,8 @@
     .title{
         position: relative;
         padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #dfdfdf;
     }
     .check{
         width: 0.6rem;
@@ -111,6 +111,7 @@
     }
     .g-t{
         padding-left: 0.2rem;
+        position: relative;
     }
     .g-l{
         padding-top: 0.2rem;
@@ -126,33 +127,23 @@
         padding: 0 0.2rem;
     }
     .bot-p{
-        text-align: right;
-    }
-    .button-s{
-        display: inline-block;
-        height:0.5rem ;
-        width: 1.8rem;
-        border: solid 1px #c1c8ca;
-        border-radius: 0.15rem;
-        float: right;
         display: flex;
+        justify-content: space-between;
+        position: absolute;
+        bottom: 0;
+        left: 0.2rem;
+        width: calc(100% - 0.2rem);
     }
-    .b-pr{
-        display: inline-block;
-        height:0.5rem ;
-        float: right;
-        padding-right: 0.3rem;
+    .price{
+        color: #b4272d;
+        font-size: 0.35rem;
     }
-    .button-s span{
-        display: inline-block;
-        text-align: center;
-        line-height: 0.5rem;
-        width: 0.5rem;
-    }
-    .button-s input{
-        text-align: center;
-        width: 0.8rem;
-        border-left: solid 1px #c1c8ca;
-        border-right: solid 1px #c1c8ca;
+    .bt-sam{
+        border: 1px solid #dfdfdf;
+        color: #515151;
+        font-size: 0.35rem;
+        padding: 0.1rem 0.2rem;
+        border-radius: 5px;
+        margin-right: 0.4rem;
     }
 </style>
