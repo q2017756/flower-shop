@@ -1,5 +1,11 @@
 <template>
     <div id="time-shop">
+        <mt-header fixed class="header" title="团购">
+            <router-link to="/" slot="left">
+                <mt-button icon="back"></mt-button>
+            </router-link>
+            <!--<mt-button  slot="right">编辑</mt-button>-->
+        </mt-header>
         <div class="scrool">
             <ul class="s-ul">
                 <li class="s-li">
@@ -32,7 +38,7 @@
         <ul>
             <li class="g-l">
                 <div class="img-d">
-                    <img src="">
+                    <img src="../../assets/img/flower.jpg">
                 </div>
                 <div class="msg-d">
                     <div class="title">
@@ -51,7 +57,7 @@
             </li>
             <li class="g-l">
                 <div class="img-d">
-                    <img src="">
+                    <img src="../../assets/img/flower.jpg">
                 </div>
                 <div class="msg-d">
                     <div class="title">
@@ -70,7 +76,7 @@
             </li>
             <li class="g-l">
                 <div class="img-d">
-                    <img src="">
+                    <img src="../../assets/img/flower.jpg">
                 </div>
                 <div class="msg-d">
                     <div class="title">
@@ -92,6 +98,7 @@
 </template>
 
 <script>
+    import { Header } from 'mint-ui';
     export default {
         name: "timeShop"
     }
@@ -100,7 +107,16 @@
 <style scoped>
 #time-shop{
     font-size: 0.45rem;
+    padding-top: 45px;
     /*background: white;*/
+}
+.img-d img{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    background: white;
+    color: #515151;
 }
     .scrool{
         width: 100%;

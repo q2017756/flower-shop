@@ -23,6 +23,9 @@ import timeShop from "@/pages/timeShop/timeShop"
 import score from "@/pages/scoreBuy/score"
 import good from "@/pages/good/good"
 import cartindex from "@/pages/Cart/cartindex"
+import farmc from "@/pages/farm/farmc"
+import userCenter from "@/pages/userCenter"
+import addressx from "@/pages/address/address"
 import userMsg from "@/pages/user/userMsg"
 import history from "@/pages/user/history"
 import goodC from "@/pages/user/goodCollection"
@@ -104,7 +107,30 @@ export default new Router({
           path: '/cartindex',
           name:'cartindex',
           component:cartindex
+      }
+      ,
+      {
+          path: '/cardindex',
+          name:'cardIndex',
+          component:cardIndex
+      }
+      ,
+      {
+          path: '/farmc',
+          name:'farmc',
+          component:farmc
+      } ,
+      {
+          path: '/userCenter',
+          name:'userCenter',
+          component:userCenter
       },
+      {
+          path: '/addressx',
+          name:'addressx',
+          component:addressx
+      }
+      ,
       {
           path: '/userMsg',
           name:'userMsg',

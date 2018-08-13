@@ -1,10 +1,16 @@
 <template>
     <div id="good">
+        <mt-header fixed class="header" title="人气优选">
+            <router-link to="/" slot="left">
+                <mt-button icon="back"></mt-button>
+            </router-link>
+            <!--<mt-button  slot="right">编辑</mt-button>-->
+        </mt-header>
         <div style="position: fixed;width: 100%;height: 100%;top: 0;left: 0;background: white;z-index: -999"></div>
         <ul>
             <li>
                 <div class="img-d">
-                    <img src="" alt="">
+                    <img src="../../assets/img/flower.jpg" alt="">
                 </div>
                 <div class="msg-d">
                     <div class="title">红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰</div>
@@ -17,7 +23,7 @@
             </li>
             <li>
                 <div class="img-d">
-                    <img src="" alt="">
+                    <img src="../../assets/img/flower.jpg" alt="">
                 </div>
                 <div class="msg-d">
                     <div class="title">红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰</div>
@@ -27,34 +33,44 @@
                         <div class="button">立即购买</div>
                     </div>
                 </div>
-            </li><li>
-            <div class="img-d">
-                <img src="" alt="">
-            </div>
-            <div class="msg-d">
-                <div class="title">红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰</div>
-                <span class="card">红玫瑰</span>
-                <div class="b-d">
-                    <span class="text">好评率：97%</span>
-                    <div class="button">立即购买</div>
+            </li>
+            <li>
+                <div class="img-d">
+                    <img src="../../assets/img/flower.jpg" alt="">
                 </div>
-            </div>
-        </li>
-
+                <div class="msg-d">
+                    <div class="title">红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰红玫瑰</div>
+                    <span class="card">红玫瑰</span>
+                    <div class="b-d">
+                        <span class="text">好评率：97%</span>
+                        <div class="button">立即购买</div>
+                    </div>
+                </div>
+            </li>
         </ul>
     </div>
 </template>
 
 <script>
+    import { Header } from 'mint-ui';
     export default {
         name: "good"
     }
 </script>
 
 <style scoped>
+    .header{
+        background: white;
+        color: #515151;
+    }
 #good{
     font-size: 0.4rem;
     background: white;
+    padding-top: 45px;
+}
+.img-d img{
+    width: 100%;
+    height: 100%;
 }
     ul{
         padding: 0 0.3rem;

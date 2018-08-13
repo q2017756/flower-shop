@@ -1,8 +1,14 @@
 <template>
     <div id="group">
+        <mt-header fixed class="header" title="团购">
+            <router-link to="/" slot="left">
+                <mt-button icon="back"></mt-button>
+            </router-link>
+            <!--<mt-button  slot="right">编辑</mt-button>-->
+        </mt-header>
       <ul>
         <li>
-          <img class="goods-img" src=""/>
+          <img class="goods-img" src="../../assets/img/cflower.jpg"/>
           <div class="goods-msg">
             <div class="goods-title">生日鲜花生日鲜花生日鲜花生日鲜花生日</div>
             <div class="goods-bot">
@@ -21,7 +27,7 @@
           </div>
         </li>
           <li>
-              <img class="goods-img" src=""/>
+              <img class="goods-img" src="../../assets/img/cflower.jpg"/>
               <div class="goods-msg">
                   <div class="goods-title">生日鲜花生日鲜花生日鲜花生日鲜花生日</div>
                   <div class="goods-bot">
@@ -40,7 +46,7 @@
               </div>
           </li>
           <li>
-              <img class="goods-img" src=""/>
+              <img class="goods-img" src="../../assets/img/cflower.jpg"/>
               <div class="goods-msg">
                   <div class="goods-title">生日鲜花生日鲜花生日鲜花生日鲜花生日</div>
                   <div class="goods-bot">
@@ -63,6 +69,7 @@
 </template>
 
 <script>
+    import { Header } from 'mint-ui';
     export default {
         name: "group"
     }
@@ -71,6 +78,11 @@
 <style scoped>
     #group{
         font-size: 0.4rem;
+        padding-top: 45px;
+    }
+    .header{
+        background: white;
+        color: #515151;
     }
 .goods-img{
   width: 10rem;
