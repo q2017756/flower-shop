@@ -41,6 +41,10 @@ export default new Router({
               component: resolve => require(['@/containers/farm/'], resolve)
             },
             {
+              path: '/profile',
+              component: resolve => require(['@/containers/user/userCenter'], resolve)
+            },
+            {
               path: '/farmDetail',
               component: resolve => require(['@/containers/farm/farmDetail'], resolve)
             },
@@ -89,6 +93,51 @@ export default new Router({
         {
           path: '/format/:pId',
           component: resolve => require(['@/containers/productDetail/format'], resolve)
+        },
+        {
+          path: '/goodsCol',
+          component: resolve => require(['@/containers/user/goodCollection'], resolve)
+        },
+        {
+          path: '/history',
+          component: resolve => require(['@/containers/user/history'], resolve)
+        },
+        {
+          path: '/userMsg',
+          component: resolve => require(['@/containers/user/userMsg'], resolve)
+        },
+        {
+          path: '/myOrder',
+          component: resolve => require(['@/containers/user/myOrder'], resolve)
+        },
+        
+        {
+          path: '/myCart',
+          component: resolve => require(['@/containers/user/myCart'], resolve)
+        },
+        {
+          path: '/farmC',
+          component: resolve => require(['@/containers/user/farmC'], resolve)
+        },
+        {
+          path: '/addressX',
+          component: resolve => require(['@/containers/user/address'], resolve)
+        },
+        {
+          path: '/cardIndex',
+          component: resolve => require(['@/containers/user/cardIndex'], resolve)
+        },
+        {
+          path: '/group',
+          component: resolve => require(['@/containers/shoping/group'], resolve)
+        },
+        {
+          path: '/score',
+          component: resolve => require(['@/containers/shoping/score'], resolve)
+        },
+        {
+          path: '/timeShop',
+          component: resolve => require(['@/containers/shoping/timeShop'], resolve)
         },
       ]
     }

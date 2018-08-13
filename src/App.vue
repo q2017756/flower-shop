@@ -25,4 +25,5 @@
 <style>
   /* 全局css */
   @import './styles/global.scss';
+  @import './font/iconfont.css';
 </style>
