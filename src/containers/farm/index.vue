@@ -24,11 +24,11 @@
       <div class="invite-container">
         <img class="invite-img" src="../../assets/img/farm-invite.png" alt="">
         <div class="btn-container">
-          <div class="invite-btn">
+          <div class="invite-btn" @click="handleCall">
             <img src="../../assets/icon/contact.png" alt="">
             <span>在线联系</span>
           </div>
-          <div class="invite-btn">
+          <div class="invite-btn" @click="handleEditFarm">
             <img src="../../assets/icon/write.png" alt="">
             <span>资料填写</span>
           </div>
@@ -65,14 +65,15 @@
       <div class="text-center">
         <span class="title-line">农场故事</span>
       </div>
-      <img class="farm-img" src="../../assets/img/farm-story-small.png" alt="">
-      <div class="more-farm" @click="handleStory">查看更多农场故事</div>
+      <img class="farm-img" src="../../assets/img/farm-story-small.png"  @click="handleStory" alt="">
+      <div class="more-farm" @click="handleStoryList">查看更多农场故事</div>
     </div>
     <bottom-footer />
 
   </div>
 </template>
 <script>
+  import {Toast} from 'mint-ui'
   import { fetchHome } from '@/utils/fetchData'
   import appHeader from '@/components/common/appHeader'
   import productorItem from '@/components/home/productorItem'
@@ -99,6 +100,15 @@
       },
       handleStory() {
         this.$router.push('/farmStory')
+      },
+      handleStoryList() {
+        this.$router.push('/farmStoryList')
+      },
+      handleEditFarm() {
+        this.$router.push('/editFarmInfo')
+      },
+      handleCall() {
+        Toast('打电话')
       }
     },
     mounted () {

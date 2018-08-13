@@ -63,8 +63,20 @@ export default new Router({
           ]
         },
         {
+          path: '/getCoupon',
+          component: resolve => require(['@/containers/home/getCoupon'], resolve)
+        },
+        {
           path: '/farmStory',
           component: resolve => require(['@/containers/farm/farmStory'], resolve)
+        },
+        {
+          path: '/editFarmInfo',
+          component: resolve => require(['@/containers/farm/editFarmInfo'], resolve)
+        },
+        {
+          path: '/farmStoryList',
+          component: resolve => require(['@/containers/farm/farmStoryList'], resolve)
         },
         {
           path: '/message',
@@ -91,6 +103,18 @@ export default new Router({
           component: resolve => require(['@/containers/productDetail/chooseCoupon'], resolve)
         },
         {
+          path: '/pay',
+          component: resolve => require(['@/containers/pay/pay'], resolve)
+        },
+        {
+          path: '/paySuccess',
+          component: resolve => require(['@/containers/pay/paySuccess'], resolve)
+        },
+        {
+          path: '/payFail',
+          component: resolve => require(['@/containers/pay/payFail'], resolve)
+        },
+        {
           path: '/format/:pId',
           component: resolve => require(['@/containers/productDetail/format'], resolve)
         },
@@ -110,7 +134,7 @@ export default new Router({
           path: '/myOrder',
           component: resolve => require(['@/containers/user/myOrder'], resolve)
         },
-        
+
         {
           path: '/myCart',
           component: resolve => require(['@/containers/user/myCart'], resolve)

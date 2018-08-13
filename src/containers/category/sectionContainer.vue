@@ -1,7 +1,7 @@
 <template>
   <div class="section-container">
     <div v-for="(section, index) in sections" v-on:click="handleSelect(index)" >
-      <section-item v-bind:section="section" v-bind:key="section.categoryId + section.name" v-bind:isSelected="selectedIndex === index" />      
+      <section-item v-bind:section="section" v-bind:key="section.categoryId + section.name" v-bind:isSelected="selectedIndex === index" />
     </div>
   </div>
 </template>
@@ -31,5 +31,8 @@
 </script>
 
 <style lang="scss" scoped>
-
+  @import "../../styles/common";
+  .section-container {
+    border-right: px2rem(5) solid #f4f4f4;
+  }
 </style>

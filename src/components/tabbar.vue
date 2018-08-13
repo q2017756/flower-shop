@@ -1,6 +1,6 @@
 <template>
   <div class="tabbar">
-    <div v-bind:class="['tabbar-item', $route.path.indexOf(item.to) >= 0 ? 'selected-item' : '']" v-for="item in items">
+    <div v-bind:class="['tabbar-item', $route.path.indexOf(item.to) >= 0 ? 'selected-item' : '']" v-for="item in items" @click="handleTo(item.to)">
       <router-link v-bind:to="item.to">
         <div class="tabbar-item-icon" :class="$route.path.indexOf(item.to) >= 0 ? item.selectedIcon : item.icon">
           <i v-if="item.badge > 0" class="tabbar-item-badge">{{ item.badge }}</i>
@@ -14,7 +14,12 @@
 <script>
   export default {
     name: 'tabbar',
-    props: ['items']
+    props: ['items'],
+    methods: {
+      handleTo(path) {
+        this.$router.push(path)
+      }
+    }
   }
 </script>
 

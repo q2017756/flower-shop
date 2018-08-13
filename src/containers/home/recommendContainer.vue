@@ -38,16 +38,16 @@
     <best-topic :topic="data.bestTopic"/>
 
     <div class="home-activity">
-      <div class="welfare">
+      <div class="welfare" @click="handleCoupon">
         <p class="font-default">福利社</p>
         <p class="font-small">抢券领福利</p>
       </div>
-      <div class="time-buy">
+      <div class="time-buy" @click="handleTimeShop">
         <p class="font-default">限时购</p>
         <p class="font-small">先到先得,</p>
         <p>好货领不停！</p>
       </div>
-      <div class="group-buy">
+      <div class="group-buy" @click="handleGroup">
         <p class="font-default">花卉一起拼</p>
         <p class="font-small">超值一元团</p>
         <p class="font-smaller">全场包邮</p>
@@ -94,6 +94,15 @@
     methods: {
       handleDetail () {
         this.$router.push('/productDetail/p1000001')
+      },
+      handleCoupon() {
+        this.$router.push('/getCoupon')
+      },
+      handleTimeShop() {
+        this.$router.push('/timeShop')
+      },
+      handleGroup() {
+        this.$router.push('/group')
       },
     },
     // 在该方法中进行网络请求等操作

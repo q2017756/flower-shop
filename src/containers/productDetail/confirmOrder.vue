@@ -2,7 +2,7 @@
   <div class="confirm">
     <app-header title="确认订单"></app-header>
     <div class="confirm-content">
-      <div class="user-info">
+      <div class="user-info" @click="handleAddr">
         <div>
           <p class="name">张晓华</p>
           <p class="default-btn">默认</p>
@@ -22,9 +22,9 @@
             <span>×1</span>
           </div>
         </product-item>
-        <div class="coupon">
+        <div class="coupon" @click="handleCoupon">
           <span>优惠券: 2张可用</span>
-          <img class="more" src="../../assets/icon/more.png" alt="" @click="handleCoupon">
+          <img class="more" src="../../assets/icon/more.png" alt="">
         </div>
       </div>
 
@@ -45,7 +45,7 @@
     </div>
     <div class="confirm-bottom">
       <span class="price-total">应付: ¥ 1000.00</span>
-      <span class="pay-btn">去付款</span>
+      <span class="pay-btn" @click="handlePay">去付款</span>
     </div>
   </div>
 </template>
@@ -66,6 +66,12 @@
     methods: {
       handleCoupon() {
         this.$router.push('chooseCoupon')
+      },
+      handleAddr() {
+        this.$router.push('addressX')
+      },
+      handlePay() {
+        this.$router.push('pay')
       }
     },
   }

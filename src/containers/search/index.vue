@@ -29,7 +29,7 @@
     </div>
     <p class="history-title">历史搜索</p>
     <div class="history">
-      <mt-cell v-for="n in 10" :title="'历史 ' + n" :key="n" @click="handleProdList"/>
+      <mt-cell v-for="n in 10" :title="'历史 ' + n" :key="n" to="/productList"/>
     </div>
     <div class="clear-btn">清空历史记录</div>
 
