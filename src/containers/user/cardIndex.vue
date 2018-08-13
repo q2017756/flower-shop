@@ -1,10 +1,7 @@
 <template>
     <div id="card-index">
       <mt-header fixed class="header" title="我的优惠券">
-        <router-link to="/" slot="left">
-          <mt-button icon="back"></mt-button>
-
-        </router-link>
+        <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
         <!--<mt-button icon="more" slot="right"></mt-button>-->
       </mt-header>
       <mt-navbar class="navbar" v-model="selected">

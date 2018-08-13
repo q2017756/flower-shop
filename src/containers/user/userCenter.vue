@@ -19,22 +19,22 @@
                         会员积分：200分
                     </div>
                 </div>
-                <div class="edit">设置</div>
+                <div class="edit"  @click="goPage('/userMsg')">设置</div>
             </div>
             <div class="gz">
-                <div class="gz-l">
+                <div @click="goPage('/goodsCol')"  class="gz-l">
                     <div>80</div>
                     <div>商品收藏</div>
                 </div>
-                <div class="gz-l">
+                <div @click="goPage('/farmC')" class="gz-l">
                     <div>80</div>
                     <div>关注农场</div>
                 </div>
-                <div class="gz-l">
+                <div @click="goPage('/cardIndex')" class="gz-l">
                     <div>80</div>
                     <div>优惠券</div>
                 </div>
-                <div class="gz-l">
+                <div @click="goPage('/history')" class="gz-l">
                     <div>80</div>
                     <div>足迹</div>
                 </div>
@@ -43,10 +43,10 @@
         <div style="background: white;margin-bottom: 0.3rem">
             <div class="c-h-t">
                 <span class="b-t">我的订单</span>
-                <span class="ltt">查看全部订单</span>
+                <span @click="goPage('/myOrder')" class="ltt">查看全部订单</span>
                 <img class="dp-rights" src="../../../static/imgs/right.png"/>
             </div>
-            <div class="d-d-d">
+            <div @click="goPage('/myOrder')" class="d-d-d">
                 <div class="d-l">
                     <img src="../../../static/imgs/dfk.png" alt=""><br>
                     <span>待付款</span>
@@ -68,7 +68,7 @@
                     <span>退换/售后</span>
                 </div>
             </div>
-            <ul class="l-u">
+            <ul @click="goPage('/myOrder')" class="l-u">
                 <li class="l-l">
                     <div class="img-d-g">
                         <img src="../../../static/imgs/flower.jpg" alt="">
@@ -112,20 +112,20 @@
                 <img class="dp-rights" src="../../../static/imgs/right.png"/>
             </div>
             <div class="d-d-d">
-                <div class="d-l">
-                    <img src="../../../static/imgs/dfk.png" alt=""><br>
+                <div @click="goPage('/addressX')" class="d-l d-l-l">
+                    <img src="../../../static/imgs/address.png" alt=""><br>
                     <span>地址</span>
                 </div>
                 <div class="d-l">
-                    <img src="../../../static/imgs/dfh.png" alt=""><br>
+                    <img src="../../../static/imgs/help.png" alt=""><br>
                     <span>帮助</span>
                 </div>
                 <div class="d-l">
-                    <img src="../../../static/imgs/dsh.png" alt=""><br>
+                    <img src="../../../static/imgs/kf.png" alt=""><br>
                     <span>在线客服</span>
                 </div>
                 <div class="d-l">
-                    <img src="../../../static/imgs/dpj.png" alt=""><br>
+                    <img src="../../../static/imgs/about.png" alt=""><br>
                     <span>关于我们</span>
                 </div>
 
@@ -158,6 +158,11 @@
           ]
           return barItems
         }
+      },
+      methods:{
+          goPage(route){
+            this.$router.push(route)
+          }
       }
     }
 </script>
@@ -351,5 +356,7 @@ color: white;
 .tools .d-d-d:after{
     display: none;
 }
-
+.d-l-l img{
+  margin-bottom: 0;
+}
 </style>

@@ -1,5 +1,9 @@
 <template>
     <div id="user-msg">
+      <mt-header fixed class="headers" title="我的信息">
+        <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
+        <!--<mt-button icon="more" slot="right"></mt-button>-->
+      </mt-header>
         <div class="header">
             <img src="../../../static/imgs/timg.jpg" alt="">
         </div>
@@ -36,19 +40,25 @@
 
 <style scoped>
     #user-msg{
-
+      padding-top: 45px;
+    }
+    .headers{
+      background: white;
+      color: #515151;
     }
     .header{
         height: 3rem;
         text-align: center;
-        line-height: 3rem;
+        /*line-height: 3rem;*/
         background: white;
         margin-bottom: 0.3rem;
+
     }
     .header img{
         width: 2rem;
         height: 2rem;
         border-radius: 50%;
+      margin-top: 0.5rem;
     }
     .cell{
         border-bottom: 1px solid #dfdfdf;

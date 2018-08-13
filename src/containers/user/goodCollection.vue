@@ -1,5 +1,9 @@
 <template>
     <div id="good-collection">
+      <mt-header fixed class="header" title="我的收藏">
+        <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
+        <!--<mt-button icon="more" slot="right"></mt-button>-->
+      </mt-header>
         <ul>
             <li>
                 <div class="g-l clear">
@@ -18,7 +22,7 @@
                                 <span class="price">￥256.00</span>
                                 <div>
                                     <span class="bt-sam">找相似</span>
-                                    <span class="cart-p">购物</span>
+                                    <span class="cart-p"><img src="../../../static/imgs/cart.png" alt=""></span>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +46,7 @@
                                 <span class="price">￥256.00</span>
                                 <div>
                                     <span class="bt-sam">找相似</span>
-                                    <span class="cart-p">购物</span>
+                                    <span class="cart-p"><img src="../../../static/imgs/cart.png" alt=""></span>
                                 </div>
                             </div>
                         </div>
@@ -55,13 +59,23 @@
 
 <script>
     export default {
-        name: "goodCollection"
+        name: "goodCollection",
+      data(){
+          return{
+            qx:''
+          }
+      }
     }
 </script>
 
 <style scoped>
     #good-collection{
         font-size: 0.4rem;
+      padding-top: 45px;
+    }
+    .header{
+      background: white;
+      color: #515151;
     }
     ul{
         /*background: white;*/
@@ -148,6 +162,15 @@
         font-size: 0.35rem;
         padding: 0.1rem 0.2rem;
         border-radius: 5px;
-        margin-right: 0.4rem;
+        /*margin-right: 0.4rem;*/
+      position: absolute;
+      bottom: 0rem;
+      right: 1rem;
+      /*margin-bottom: 0.1rem;*/
     }
+  .cart-p img{
+    width: 0.6rem;
+    height: 0.6rem;
+    /*margin-top: 0.2rem;*/
+  }
 </style>

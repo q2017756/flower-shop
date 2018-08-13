@@ -1,10 +1,7 @@
 <template>
     <div id="history">
       <mt-header fixed class="header" title="我的足迹">
-        <router-link to="/" slot="left">
-          <mt-button icon="back"></mt-button>
-
-        </router-link>
+        <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
         <!--<mt-button icon="more" slot="right"></mt-button>-->
       </mt-header>
         <ul>
@@ -28,13 +25,13 @@
                             <img src="../../../static/imgs/flower.jpg" alt="">
                         </div>
                         <div class="g-t">
-                            <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
+                            <div class="g-title">满天星满天星满天112星满天星满天星满天星</div>
                             <!--<span class="type">A级</span>-->
                             <div class="bot-p">
                                 <span class="price">￥256.00</span>
-                                <div>
+                                <div class="ffl">
                                     <span class="bt-sam">找相似</span>
-                                    <span class="cart-p">购物</span>
+                                  <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -54,10 +51,10 @@
                             <!--<span class="type">A级</span>-->
                             <div class="bot-p">
                                 <span class="price">￥256.00</span>
-                                <div>
-                                    <span class="bt-sam">找相似</span>
-                                    <span class="cart-p">购物</span>
-                                </div>
+                              <div class="ffl">
+                                <span class="bt-sam">找相似</span>
+                                <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -83,14 +80,14 @@
                           <img src="../../../static/imgs/flower.jpg" alt="">
                         </div>
                         <div class="g-t">
-                            <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
+                            <div class="g-title">满天星满天星满天星满天星满天星满天11星</div>
                             <!--<span class="type">A级</span>-->
                             <div class="bot-p">
                                 <span class="price">￥256.00</span>
-                                <div>
-                                    <span class="bt-sam">找相似</span>
-                                    <span class="cart-p">购物</span>
-                                </div>
+                              <div class="ffl">
+                                <span class="bt-sam">找相似</span>
+                                <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -109,10 +106,10 @@
                             <!--<span class="type">A级</span>-->
                             <div class="bot-p">
                                 <span class="price">￥256.00</span>
-                                <div>
-                                    <span class="bt-sam">找相似</span>
-                                    <span class="cart-p">购物</span>
-                                </div>
+                              <div class="ffl">
+                                <span class="bt-sam">找相似</span>
+                                <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -144,6 +141,10 @@
       background: white;
       color: #515151;
     }
+    #cart-img{
+      width: 0.6rem;
+      height: 0.6rem;
+    }
     ul{
         /*background: white;*/
     }
@@ -163,6 +164,9 @@
         float: left;
         /*height: 2.5rem;*/
         /*line-height: 2.5rem;*/
+    }
+    .ffl{
+      display: flex;
     }
     .check-l{
         height: 2rem;

@@ -1,9 +1,9 @@
 <template>
     <div id="address">
         <mt-header fixed class="header" title="编辑地址">
-            <router-link to="/" slot="left">
-                <mt-button icon="back"></mt-button>
-            </router-link>
+            <!--<router-link to="/">-->
+                <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
+            <!--</router-link>-->
             <mt-button  slot="right">保存</mt-button>
         </mt-header>
         <ul>

@@ -1,9 +1,7 @@
 <template>
     <div id="farm-c">
         <mt-header fixed class="header" title="关注农场">
-            <router-link to="/" slot="left">
-                <mt-button icon="back"></mt-button>
-            </router-link>
+          <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
             <mt-button  slot="right">编辑</mt-button>
         </mt-header>
         <ul>
