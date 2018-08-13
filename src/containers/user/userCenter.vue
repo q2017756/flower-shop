@@ -167,9 +167,10 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import '../../styles/common.scss';
     #u-c{
-        font-size: 0.4rem;
+      font-size: px2rem($size_default);
       flex: 1;
       overflow-y: scroll;
     }
@@ -232,7 +233,7 @@ color: white;
     .gz .gz-l{
         width: 25%;
         color: white;
-        font-size: 0.4rem;
+      font-size: px2rem($size_default);
         text-align: center;
         /*font-family: "黑体";*/
     }

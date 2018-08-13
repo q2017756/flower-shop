@@ -48,10 +48,11 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import '../../styles/common.scss';
     #farm-c{
         padding-top: 45px;
-        font-size: 0.4rem;
+      font-size: px2rem($size_default);
     }
     .header{
         background: white;
@@ -97,14 +98,21 @@
         width: 3rem;
         flex-shrink: 0;
     }
-    .bs{
-
+    /*.b-s{*/
+      /*display: flex;*/
+    /*}*/
+    .b-s{
+      height: 0.7rem;
+      position: relative;
     }
     .zxs{
         font-size: 0.35rem;
         border: 1px solid #c1c8ca;
         padding: 0.1rem 0.2rem;
         border-radius: 2px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
     }
     .slh{
         text-align: right;
@@ -112,7 +120,10 @@
    #farm-c .mor{
         width: 0.5rem;
        text-align: right;
-       margin: 0.3rem 0 0 0.7rem;
+     position: absolute;
+     right: 0;
+     bottom: -0.1rem;
+       /*margin: 0.3rem 0 0 0.7rem;*/
        /*position: absolute;*/
        /*bottom: 0;*/
        /*right: 0;*/

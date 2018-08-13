@@ -132,9 +132,10 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import '../../styles/common.scss';
     #history{
-        font-size: 0.4rem;
+      font-size: px2rem($size_default);
       padding-top: 45px;
     }
     .header{
@@ -221,12 +222,12 @@
     }
     .price{
         color: #b4272d;
-        font-size: 0.35rem;
+      font-size: px2rem($size_middle);
     }
     .bt-sam{
         border: 1px solid #dfdfdf;
         color: #515151;
-        font-size: 0.35rem;
+      font-size: px2rem($size_middle);
         padding: 0.1rem 0.2rem;
         border-radius: 5px;
         margin-right: 0.4rem;

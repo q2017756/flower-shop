@@ -92,17 +92,18 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import '../../styles/common.scss';
 .header{
   background: white;
   color: #515151;
 }
 .mint-tab-item-label{
-  font-size: 0.38rem;
+   font-size: px2rem($size_default);
 }
 #card-index{
   padding-top: 45px;
-    font-size: 0.4rem;
+  font-size: px2rem($size_default);
 }
   .navbar{
     /*color: #b4272d;*/
@@ -110,7 +111,7 @@
   }
 .mint-tab-item{
     color: #515151;
-    font-size: 0.4rem;
+  font-size: px2rem($size_default);
 }
 .is-selected{
     color: #b4272d!important;
@@ -150,7 +151,7 @@
         font-size: 1rem;
     }
     .tx{
-        font-size: 0.5rem;
+      font-size: px2rem($size_default);
     }
     .t-d{
         /*display: flex;*/

@@ -68,9 +68,10 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import '../../styles/common.scss';
     #good-collection{
-        font-size: 0.4rem;
+      font-size: px2rem($size_default);
       padding-top: 45px;
     }
     .header{

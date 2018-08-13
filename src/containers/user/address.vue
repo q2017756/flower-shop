@@ -26,7 +26,9 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import '../../styles/common.scss';
+
     .header{
         background: white;
         color: #515151;
@@ -41,6 +43,7 @@
     }
     #address{
         padding-top: 45px;
+      font-size: px2rem($size_default);
     }
     ul{
         background: white;
@@ -48,7 +51,7 @@
     }
     li{
         height: 1.2rem;
-        font-size: 0.4rem;
+      font-size: px2rem($size_default);
         line-height: 1.2rem;
         border-bottom: 1px solid #dfdfdf;
         color: #7f7f7f;
