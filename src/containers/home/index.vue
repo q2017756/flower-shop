@@ -44,7 +44,7 @@
       },
       handleChange(title) {
         console.log('click at ', title)
-        this.$router.push('/category')
+        this.$router.push('/productList')
         // Toast(title);
       }
     }

@@ -1,14 +1,18 @@
 <template>
   <router-link class="farm-item" v-bind:to="toPath">
-    <img src="../../assets/img/flower-img.png"/>
+    <img class="farm-img" src="../../assets/img/flower-img.png"/>
     <div CLASS="text-container">
       <p class="name">向日葵生日花束</p>
-      <div class="price-container">
+      <div v-if="!addrShow" class="price-container">
         <span class="price">￥100</span>
         <span class="old-price">￥200</span>
       </div>
       <div class="info-container font-smaller">
-        <span class="num ">库存: 100件</span>
+        <span  v-if="!addrShow" class="num ">库存: 100件</span>
+        <span  v-else class="address">
+          <img class="addr-icon" src="../../assets/icon/addr.png" alt="">
+          <span class="addr-text">云南省昆明市官渡区</span>
+        </span>
         <span v-if="!cartShow" class="comment">98%好评</span>
         <div v-else>
           <img class="farm-cart" src="../../assets/icon/tabbar-cart.png"  alt="">
@@ -22,6 +26,10 @@
   export default {
     props: {
       cartShow: {
+        type: Boolean,
+        default: false
+      },
+      addrShow: {
         type: Boolean,
         default: false
       }
@@ -50,7 +58,7 @@
     background: #fff;
     border: 1px solid #eee;
     margin-bottom: $edge_small;
-    img {
+    .farm-img {
       flex: 0 0 px2rem(160);
       align-self: center;
       display: inline-block;
@@ -76,6 +84,7 @@
     .info-container {
       @include flex_default;
       justify-content: space-between;
+      width: 110%;
       padding-top: px2rem(3);
       .num {
         margin-left: px2rem(-20);
@@ -84,7 +93,21 @@
         border-radius: 5px;
         color: #000;
       }
+      .address {
+        flex: 0 0 px2rem(140);
+        @include ellipsis;
+        @include flex_default;
+        margin-left: px2rem(-25);
+        .addr-icon {
+          width: px2rem(12);
+        }
+        .addr-text {
+          color: #666;
+          @include ellipsis;
+        }
+      }
       .comment {
+        white-space: nowrap;
         color: #000;
       }
       .farm-cart {

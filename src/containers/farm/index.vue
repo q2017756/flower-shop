@@ -41,7 +41,7 @@
       <div class="text-center">
         <span class="title-line">花枝严选农场</span>
       </div>
-      <farm-item v-for="n in 4" :key="n"></farm-item>
+      <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
       <div class="more-farm">查看更多精选农场</div>
     </div>
 
@@ -49,7 +49,7 @@
       <div class="text-center">
         <span class="title-line">海外农场</span>
       </div>
-      <farm-item v-for="n in 4" :key="n"></farm-item>
+      <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
       <div class="more-farm">查看更多海外农场</div>
     </div>
 
@@ -57,7 +57,7 @@
       <div class="text-center">
         <span class="title-line">新选农场</span>
       </div>
-      <farm-item v-for="n in 4" :key="n"></farm-item>
+      <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
       <div class="more-farm">查看更多新农场</div>
     </div>
 

@@ -23,7 +23,7 @@
       <span @click="handleList">蓝色</span>
       <span @click="handleList">绿色</span>
     </div>
-    <div class="title">{{ section.section.name }}支数</div>
+    <div class="title">支数</div>
     <div class="item-container">
       <span @click="handleList">1支</span>
       <span @click="handleList">2支</span>
@@ -59,7 +59,7 @@
     height: 100%;
     overflow-y: auto;
     /*padding: px2rem(15);*/
-    background: #f4f4f4;
+    background: #fff;
   }
 
   .cic-header-pic {
@@ -109,18 +109,18 @@
   }
   .title {
     font-size: px2rem($size_default);
+    background: #f4f4f4;
     color: #666;
     padding: $edge_default $edge_default $edge_small $edge_default;
   }
   .item-container {
     background: #fff;
-    padding: $edge_default;
+    padding: px2rem(12);
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     span {
-      font-size: px2rem($size_middle);
-      padding: $edge_default;
+      padding: px2rem(8) px2rem(12);
       color: #666;
     }
   }

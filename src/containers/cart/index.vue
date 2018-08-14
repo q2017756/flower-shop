@@ -2,7 +2,7 @@
   <div class="cart-page">
     <div class="cart-content">
       <header class='cart-header'>
-        <img src="../../assets/icon/back-black.png" alt="">
+        <!--<img src="../../assets/icon/back-black.png" alt="">-->
         <h3>购物车</h3>
         <span v-on:click="handleEdit" class="cart-edit">{{ isEdit ? '完成' : '编辑' }}</span>
       </header>

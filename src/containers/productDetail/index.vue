@@ -69,6 +69,26 @@
       </div>
       <common-issue />
     </div>
+    <mt-popup
+      v-model="popupVisible"
+      popup-transition="popup-fade">
+      <slot>
+        <div class="popup">
+          <format-detail
+            v-bind:commodity="commodity"
+            v-bind:selectString="selectString"
+            v-bind:handleCountChange="handleCountChange"
+            v-bind:handleSelectFormat="handleSelectFormat"
+            v-bind:count="count"
+          />
+          <div class="format-btns">
+            <button class="back" v-on:click="handleBack">返回</button>
+            <button class="buyNow" v-on:click="handleNext">立即购买</button>
+            <button class="addToCart" v-on:click="handleAddToCart">加入购物车</button>
+          </div>
+        </div>
+      </slot>
+    </mt-popup>
     <!--底部-->
     <div class="pd-bottom">
       <div class="icon-item">
@@ -86,6 +106,7 @@
       <button v-on:click="handleAddCart" class="cart">加入购物车</button>
       <button v-on:click="handleBuyNow" class="buy">购买</button>
     </div>
+
   </div>
 </template>
 
@@ -96,9 +117,18 @@
   import comment from '@/components/common/comment'
   import attributeContainer from './attributeContainer.vue'
   import commonIssue from '@/components/common/commonIssue'
+  import formatDetail from '@/components/common/formatDetail'
   import { fetchProductDetail } from '@/utils/fetchData'
   import { mapState, mapActions } from 'vuex'
   export default {
+    data () {
+      return {
+        productDetail: {},
+        currentPic: 1,
+        popupVisible: false,
+        count: this.$store.state.selectFormat.count || 1
+      }
+    },
     computed: {
       // ...mapState(['selectFormat'])
       selectFormat () {
@@ -110,6 +140,17 @@
       commentCountString () {
         const count = this.productDetail.commentCount
         return count > 999 ? '999+' : count
+      },
+      ...mapState({
+        commodity: 'showCommodityDetail',
+        selects: function (state) {
+          const selectFormat = state.selectFormat[this.$route.params.pId] || {}
+          console.log('+++++++', selectFormat.format)
+          return selectFormat.format || []
+        }
+      }),
+      selectString () {
+        return this.selects.join(' ')
       }
     },
     components: {
@@ -118,10 +159,12 @@
       descriptionWrapper,
       comment,
       attributeContainer,
-      commonIssue
+      commonIssue,
+      formatDetail
     },
     methods: {
-      ...mapActions(['showCommodityDetail', 'addToCart']),
+      ...mapActions(['showCommodityDetail', 'addToCart', 'changeSelectFormat',
+        'addToCart']),
       pushToComment () {
         this.$router.push('/comment')
       },
@@ -151,6 +194,10 @@
         this.currentPic = current + 1
       },
       handleBuyNow () {
+        this.popupVisible = true
+//        this.$router.push('/confirmOrder')
+      },
+      handleNext () {
         this.$router.push('/confirmOrder')
       },
       handleAddCart () {
@@ -169,16 +216,51 @@
         } else {
           this.handlePickFormat()
         }
+      },
+      handleBack () {
+        this.$router.back()
+      },
+      handleAddToCart () {
+        console.log('add to cart...')
+        if (this.selects.length === this.commodity.formats.length) {
+          this.addToCart({
+            pId: this.commodity.pId,
+            title: this.commodity.title,
+            price: this.commodity.price,
+            pic: this.commodity.pic,
+            selectd: true,
+            count: this.count,
+            formats: this.commodity.formats,
+            selectString: this.selects.join(';')
+          })
+        }
+      },
+      handleSelectFormat (option, index) {
+        console.log(index, option)
+        if (this.selects[index] === option) {
+          this.selects.splice(index, 1)
+          return
+        }
+        this.selects[index] = option
+        // this.selects = Object.assign([], this.selects)
+        // this.$set(this.selects, index, option)
+        this.changeSelectFormat({
+          pId: this.$route.params.pId,
+          format: this.selects,
+          count: this.count
+        })
+      },
+      handleCountChange (currentVal) {
+        this.changeSelectFormat({
+          pId: this.$route.params.pId,
+          format: this.selects,
+          count: currentVal
+        })
+        this.count = currentVal
       }
     },
     mounted () {
       this.fetchData()
-    },
-    data () {
-      return {
-        productDetail: {},
-        currentPic: 1
-      }
     }
   }
 </script>
@@ -454,6 +536,15 @@
       background-color: #b4282d;
       color: #fff;
     }
+  }
+  .mint-popup {
+    top: 35vh;
+    left: 0;
+    bottom: 0;
+    transform: translate3d(0, 0, 0);
+  }
+  .popup {
+    width: 100vw;
   }
 
 </style>
