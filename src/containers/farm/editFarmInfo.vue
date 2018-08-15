@@ -7,7 +7,7 @@
       <input class="common-input" type="text" placeholder="联系电话" v-model="tel">
       <input class="common-input" type="text" placeholder="地址" v-model="addr">
     </div>
-    <div class="btn">确定</div>
+    <div class="common-btn">确定</div>
   </div>
 </template>
 <script>
@@ -47,17 +47,7 @@
         font-size: px2rem($size_middle);
       }
     }
-    .btn {
-      position: absolute;
-      bottom: $edge_default;
-      width: 90vw;
-      margin-left: 5vw;
-      text-align: center;
-      font-size: px2rem($size_default);
-      line-height: px2rem(50);
-      color: #fff;
-      background: $red_default;
-    }
+
   }
 
 

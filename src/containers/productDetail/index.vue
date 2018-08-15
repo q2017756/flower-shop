@@ -232,14 +232,6 @@
       handleShare() {
         console.log('分享')
       },
-      fetchData () {
-        fetchProductDetail()
-          .then(r => {
-            console.log(r)
-            const pId = this.$route.params.id
-            this.productDetail = r[pId]
-          })
-      },
       handlePickFormat () {
         const pId = this.$route.params.id
         this.showCommodityDetail({
@@ -256,7 +248,6 @@
       },
       handleBuyNow () {
         this.popupVisible = true
-//        this.$router.push('/confirmOrder')
       },
       handleNext () {
         this.$router.push('/confirmOrder')
@@ -318,7 +309,15 @@
           count: currentVal
         })
         this.count = currentVal
-      }
+      },
+      fetchData () {
+        fetchProductDetail()
+          .then(r => {
+            console.log(r)
+            const pId = this.$route.params.id
+            this.productDetail = r[pId]
+          })
+      },
     },
     mounted () {
       // this.fetchData()

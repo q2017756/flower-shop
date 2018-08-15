@@ -111,3 +111,16 @@
     padding-bottom: px2rem(15);
   }
 }
+
+.common-btn {
+  position: absolute;
+  left: 0;
+  bottom: $edge_default;
+  width: 90vw;
+  margin-left: 5vw;
+  text-align: center;
+  font-size: px2rem($size_default);
+  line-height: px2rem(50);
+  color: #fff;
+  background: $red_default;
+}
