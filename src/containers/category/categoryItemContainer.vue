@@ -1,6 +1,6 @@
 <template>
   <div class="category-item-container">
-    <div class="cic-header-pic" v-bind:style="{backgroundImage: 'url(' + section.section.pic + ')'}"></div>
+    <div v-if="imgShow" class="cic-header-pic" v-bind:style="{backgroundImage: 'url(' + section.section.pic + ')'}"></div>
     <!--<div class="cic-separator">-->
       <!--<span>{{ section.section.name }}分类</span>-->
     <!--</div>-->
@@ -37,7 +37,7 @@
 <script>
   import categoryItem from '@/components/category/categoryItem'
   export default {
-    props: ['section', 'handleClick'],
+    props: ['section', 'handleClick','imgShow'],
     components: {
       categoryItem
     },

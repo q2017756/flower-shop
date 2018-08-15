@@ -71,7 +71,7 @@
     </div>
     <mt-popup
       v-model="popupVisible"
-      popup-transition="popup-fade">
+      position="bottom">
       <slot>
         <div class="popup">
           <format-detail
@@ -83,8 +83,8 @@
           />
           <div class="format-btns">
             <button class="back" v-on:click="handleBack">返回</button>
-            <button class="buyNow" v-on:click="handleNext">立即购买</button>
-            <button class="addToCart" v-on:click="handleAddToCart">加入购物车</button>
+            <button class="buyNow" v-on:click="handleAddToCart">加入购物车</button>
+            <button class="addToCart" v-on:click="handleNext">立即购买</button>
           </div>
         </div>
       </slot>
@@ -270,7 +270,7 @@
         }
       },
       handleBack () {
-        this.$router.back()
+        this.popupVisible = false
       },
       handleAddToCart () {
         console.log('add to cart...')
@@ -597,14 +597,30 @@
       color: #fff;
     }
   }
-  .mint-popup {
-    top: 35vh;
-    left: 0;
-    bottom: 0;
-    transform: translate3d(0, 0, 0);
-  }
   .popup {
     width: 100vw;
+  }
+  .format-btns {
+    height: px2rem(50);
+    border-top: 1px solid $border_color;
+    background-color: #fff;
+    display: flex;
+    button {
+      outline: none;
+      background: none;
+      height: 100%;
+    }
+    .back {
+      width: px2rem(50);
+      border-right: 1px solid $border_color;
+    }
+    .buyNow, .addToCart {
+      flex: 1;
+    }
+    .addToCart {
+      background-color: #b4282d;
+      color: #fff;
+    }
   }
 
 </style>

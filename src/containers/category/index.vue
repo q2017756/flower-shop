@@ -5,7 +5,7 @@
     </header>
     <div class="category-content">
       <section-container class="content-left" v-bind:sections="sections" v-bind:onChange="handleChangeSection"/>
-      <category-item-container class="content-right" v-bind:section="section" v-bind:handleClick="handlePushToCommodity" />
+      <category-item-container class="content-right" :imgShow="true" v-bind:section="section" v-bind:handleClick="handlePushToCommodity" />
     </div>
   </div>
 </template>
