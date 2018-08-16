@@ -111,10 +111,6 @@ export default new Router({
           component: resolve => require(['@/containers/pay/paySuccess'], resolve)
         },
         {
-          path: '/payFail',
-          component: resolve => require(['@/containers/pay/payFail'], resolve)
-        },
-        {
           path: '/format/:pId',
           component: resolve => require(['@/containers/productDetail/format'], resolve)
         },

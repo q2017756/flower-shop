@@ -5,7 +5,7 @@
     </header>
     <div class="category-content">
       <section-container class="content-left" v-bind:sections="sections" v-bind:onChange="handleChangeSection"/>
-      <category-item-container class="content-right" v-bind:section="section" v-bind:handleClick="handlePushToCommodity" />
+      <category-item-container class="content-right" :imgShow="true" v-bind:section="section" v-bind:handleClick="handlePushToCommodity" />
     </div>
   </div>
 </template>
@@ -26,13 +26,14 @@
       },
       handleChangeSection (section) {
         console.log(section)
+        this.section.section = section
         // 请求分类
-        fecthCategory()
-          .then(r => {
-            console.log(r)
-            this.section.section = section
-            this.section.categories = r[section.categoryId]
-          })
+        // fecthCategory()
+        //   .then(r => {
+        //     console.log(r)
+        //     this.section.section = section
+        //     this.section.categories = r[section.categoryId]
+        //   })
       },
       handlePushToCommodity (section, commodity) {
         console.log(section)

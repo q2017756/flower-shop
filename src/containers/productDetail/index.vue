@@ -71,7 +71,7 @@
     </div>
     <mt-popup
       v-model="popupVisible"
-      popup-transition="popup-fade">
+      position="bottom">
       <slot>
         <div class="popup">
           <format-detail
@@ -83,8 +83,8 @@
           />
           <div class="format-btns">
             <button class="back" v-on:click="handleBack">返回</button>
-            <button class="buyNow" v-on:click="handleNext">立即购买</button>
-            <button class="addToCart" v-on:click="handleAddToCart">加入购物车</button>
+            <button class="buyNow" v-on:click="handleAddToCart">加入购物车</button>
+            <button class="addToCart" v-on:click="handleNext">立即购买</button>
           </div>
         </div>
       </slot>
@@ -123,7 +123,68 @@
   export default {
     data () {
       return {
-        productDetail: {},
+        productDetail: {
+          "pId": "p1000001",
+          "title": "玫瑰花",
+          "description": "MUJI代工厂，素雅大气，结实不易蛀",
+          "price": "1699",
+          "commentCount": "0",
+          "pics": ["/static/img/rose.png","/static/img/flower-img.png","/static/img/home-activity-3.png"],
+          "format": [
+            {
+              "name": "颜色",
+              "options": ["红", "白"]
+            },
+            {
+              "name": "规格",
+              "options": ["99朵", "999朵"]
+            }
+          ],
+          "remark": "大家具送货安装及售后服务细则>>",
+          "activity": [
+            {
+              "name": "家居好物免费领 全场每满199减40",
+              "tag": "限时",
+              "activityId": "101"
+            }
+          ],
+          "characteristics": [
+            {
+              "items": ["简单巧妙", "稳固链接"],
+              "pic": "http://yanxuan.nosdn.127.net/a5e48c2ea5682773008c7b1086fd5ceb.jpg"
+            },
+            {
+              "items": ["圆角打磨", "安全放心"],
+              "pic": "http://yanxuan.nosdn.127.net/6bc0661e1467457197d99b93dc153dbd.jpg"
+            },
+            {
+              "items": ["忠于原木", "自然纹理"],
+              "pic": "http://yanxuan.nosdn.127.net/a5bbe1c9b55266090cf18d8a78ca5a0c.jpg"
+            }
+          ],
+          "tags": [{ "name": "新品", "tId": "1200000"}, { "name": "MUJI制造商", "tId": "1200001" }],
+          "services": ["30天无忧退货", "48小时快速退款", "满88元免邮费", "网易自营品牌", "部分地区无法配送"],
+          "detailPics": ["http://yanxuan.nosdn.127.net/ef53b73ebf9bf482e8424aa5910aae5e.jpg", "http://yanxuan.nosdn.127.net/afe0e6309b07ca1bbf0df252419ce7e3.jpg", "http://yanxuan.nosdn.127.net/23b09c1721979086d4912089ec50e84d.jpg", "http://yanxuan.nosdn.127.net/7969aaff6ae99e8f398f39816f0d2ed6.jpg",
+            "http://yanxuan.nosdn.127.net/4f98bbd05d4640d99c4358e5ab2377dc.jpg", "http://yanxuan.nosdn.127.net/4bfb1ea5ff5ad1739e6c02267e5dffae.jpg", "http://yanxuan.nosdn.127.net/e206c3665131b87ddc61d20b80dced16.jpg", "http://yanxuan.nosdn.127.net/52ca8ccc276f44146bab888a23592102.jpg", "http://yanxuan.nosdn.127.net/b156739dcacca6c477c1daca8f7ef508.jpg",
+            "http://yanxuan.nosdn.127.net/1bc868f11288b92ebd9f4e9fed2584e9.jpg", "http://yanxuan.nosdn.127.net/b5a22b5a710ca36f9836cf6234c19277.jpg", "http://yanxuan.nosdn.127.net/13a28cea55bb6d2efe8a28ad9b1dc698.jpg", "http://yanxuan.nosdn.127.net/63d905fb4b67a4baba668b6e6a93cbb5.jpg",
+            "http://yanxuan.nosdn.127.net/230a388048354582fee4a3f0078cddda.jpg", "http://yanxuan.nosdn.127.net/3f1274c471342480fb516881b5ae21e0.jpg", "http://yanxuan.nosdn.127.net/aaccc31334b6e0e28f647a022c8955eb.jpg", "http://yanxuan.nosdn.127.net/05a4a1aa45fbfdc711b61a92840e30ea.jpg", "http://yanxuan.nosdn.127.net/4f4d77bd030309c6cfcf4b868f87d2e8.jpg",
+            "http://yanxuan.nosdn.127.net/395730ee03d2cd2053269f2ed6c0ee97.jpg", "http://yanxuan.nosdn.127.net/7393c0b0eeafb858a1adbfe7671fa224.jpg", "http://yanxuan.nosdn.127.net/9042956a64e0e3d58ffbc70160281eaa.jpg", "http://yanxuan.nosdn.127.net/46300b11ee09b3c0cac41a8c88203abd.jpg", "http://yanxuan.nosdn.127.net/847b1298aeab62b908f92ddb150bfd46.jpg",
+            "http://yanxuan.nosdn.127.net/ce61d7917509e5a0049a4651f75b4b65.jpg", "http://yanxuan.nosdn.127.net/be36db9971c6cd29b835aab31d2cd46e.jpg", "http://yanxuan.nosdn.127.net/f7f75e099205312371d56267bc385230.jpg", "http://yanxuan.nosdn.127.net/d97e15dc49b6a38add90d7f584c7f86a.jpg", "http://yanxuan.nosdn.127.net/3a9971b50d18d5c2697248fcf86435bd.jpg",
+            "http://yanxuan.nosdn.127.net/f1fcae3fbf18dade10207da8982162ea.jpg", "http://yanxuan.nosdn.127.net/814c95c3376f3d74835c98b42f1b6dc7.jpg", "http://yanxuan.nosdn.127.net/c0238d5f811e2cc1ae0528aef6f8025b.jpg", "http://yanxuan.nosdn.127.net/ea6b9ff611d682c65387d3587b4c7323.jpg", "http://yanxuan.nosdn.127.net/7d354323f8e964ee77edc0daf08d6faa.jpg",
+            "http://yanxuan.nosdn.127.net/460f64576a0d7a5c5fd501574d3a364e.jpg", "http://yanxuan.nosdn.127.net/49e7488a2306830b261c9726ba49ea04.jpg", "http://yanxuan.nosdn.127.net/9e5a809e688942933aa9ad3e810b0311.jpg", "http://yanxuan.nosdn.127.net/05d079ea49fbdafd0aba7427a5b93522.jpg", "http://yanxuan.nosdn.127.net/f550dc7a38f5e4375d55ed2ea56cf838.jpg",
+            "http://yanxuan.nosdn.127.net/928a4db68ef9475871049b601d6d9983.jpg", "http://yanxuan.nosdn.127.net/ccaa67ffee0b4bbfeb0909ac11cfcd33.jpg", "http://yanxuan.nosdn.127.net/8da6bda843f8c67f51d3afec3fbe23e6.jpg", "http://yanxuan.nosdn.127.net/fdfcb93ce9cd6cdbba19d69305d438a5.jpg", "http://yanxuan.nosdn.127.net/dfa5148a0ba266d05ab973f5d2b363d3.jpg",
+            "http://yanxuan.nosdn.127.net/3de8029f1a0fb535adcd41cc79646e80.jpg", "http://yanxuan.nosdn.127.net/32921ce7eb344ee5f3888f38d1a7a072.jpg", "http://yanxuan.nosdn.127.net/0078a36433f89759a8f468bfdb34c0a7.jpg", "http://yanxuan.nosdn.127.net/7c46cd327f1cf94b3f03b55c061418f5.jpg", "http://yanxuan.nosdn.127.net/a6d869d45712f226c7a6ab555e161233.jpg",
+            "http://yanxuan.nosdn.127.net/6b48aa2e873eb47333f018fff1d76630.jpg", "http://yanxuan.nosdn.127.net/7a81e1875799f7da449c87d80b641731.jpg", "http://yanxuan.nosdn.127.net/99f3658a533d25bd07352071a9cbe45f.jpg", "http://yanxuan.nosdn.127.net/182543e58dc5393467883e2e26519728.jpg", "http://yanxuan.nosdn.127.net/b1ea67e24eac8a86f3cb187dcee62d95.jpg",
+            "http://yanxuan.nosdn.127.net/6680a6f42b7f13ac0e98d90557917cc6.jpg", "http://yanxuan.nosdn.127.net/a673f85989f21039bc388944bbdb9d7a.jpg", "http://yanxuan.nosdn.127.net/e2a2419c8c76851a60857c8a033fa1d0.jpg", "http://yanxuan.nosdn.127.net/35938375758355736cf416cad168963e.jpg", ""
+          ],
+          "attrs": [
+            { "name": "材质", "content": "进口白蜡木" },
+            { "name": "涂漆", "content": "环保涂漆" },
+            { "name": "产品尺寸", "content": "1400/1600*820*750mm" },
+            { "name": "安装方式", "content": "需要组装" }
+          ],
+          "stock": 111
+        },
         currentPic: 1,
         popupVisible: false,
         count: this.$store.state.selectFormat.count || 1
@@ -171,14 +232,6 @@
       handleShare() {
         console.log('分享')
       },
-      fetchData () {
-        fetchProductDetail()
-          .then(r => {
-            console.log(r)
-            const pId = this.$route.params.id
-            this.productDetail = r[pId]
-          })
-      },
       handlePickFormat () {
         const pId = this.$route.params.id
         this.showCommodityDetail({
@@ -195,7 +248,6 @@
       },
       handleBuyNow () {
         this.popupVisible = true
-//        this.$router.push('/confirmOrder')
       },
       handleNext () {
         this.$router.push('/confirmOrder')
@@ -218,7 +270,7 @@
         }
       },
       handleBack () {
-        this.$router.back()
+        this.popupVisible = false
       },
       handleAddToCart () {
         console.log('add to cart...')
@@ -257,10 +309,18 @@
           count: currentVal
         })
         this.count = currentVal
-      }
+      },
+      fetchData () {
+        // fetchProductDetail()
+        //   .then(r => {
+        //     console.log(r)
+        //     const pId = this.$route.params.id
+        //     this.productDetail = r[pId]
+        //   })
+      },
     },
     mounted () {
-      this.fetchData()
+      // this.fetchData()
     }
   }
 </script>
@@ -537,14 +597,30 @@
       color: #fff;
     }
   }
-  .mint-popup {
-    top: 35vh;
-    left: 0;
-    bottom: 0;
-    transform: translate3d(0, 0, 0);
-  }
   .popup {
     width: 100vw;
+  }
+  .format-btns {
+    height: px2rem(50);
+    border-top: 1px solid $border_color;
+    background-color: #fff;
+    display: flex;
+    button {
+      outline: none;
+      background: none;
+      height: 100%;
+    }
+    .back {
+      width: px2rem(50);
+      border-right: 1px solid $border_color;
+    }
+    .buyNow, .addToCart {
+      flex: 1;
+    }
+    .addToCart {
+      background-color: #b4282d;
+      color: #fff;
+    }
   }
 
 </style>
