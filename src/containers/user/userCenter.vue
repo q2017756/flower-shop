@@ -108,7 +108,7 @@
         <div class="tools">
             <div class="c-h-t">
                 <span class="b-t">必备工具</span>
-                <span class="ltt">产看全部工具</span>
+                <span style="visibility: hidden" class="ltt">产看全部工具</span>
                 <img class="dp-rights" src="../../../static/imgs/right.png"/>
             </div>
             <div class="d-d-d">
@@ -116,7 +116,7 @@
                     <img src="../../../static/imgs/address.png" alt=""><br>
                     <span>地址</span>
                 </div>
-                <div class="d-l">
+                <div  @click="goPage('/help')" class="d-l">
                     <img src="../../../static/imgs/help.png" alt=""><br>
                     <span>帮助</span>
                 </div>
@@ -124,7 +124,7 @@
                     <img src="../../../static/imgs/kf.png" alt=""><br>
                     <span>在线客服</span>
                 </div>
-                <div class="d-l">
+                <div  @click="goPage('/aboutus')" class="d-l">
                     <img src="../../../static/imgs/about.png" alt=""><br>
                     <span>关于我们</span>
                 </div>

@@ -143,14 +143,34 @@ export default new Router({
           path: '/farmC',
           component: resolve => require(['@/containers/user/farmC'], resolve)
         },
+          {
+              path: '/checkcard',
+              component: resolve => require(['@/containers/user/checkcard'], resolve)
+          },
         {
           path: '/addressX',
-          component: resolve => require(['@/containers/user/address'], resolve)
+          component: resolve => require(['@/containers/tools/address'], resolve)
         },
+          {
+              path: '/aboutus',
+              component: resolve => require(['@/containers/tools/aboutUs'], resolve)
+          },
+          {
+              path: '/help',
+              component: resolve => require(['@/containers/tools/help'], resolve)
+          },
+          {
+              path: '/helpmsg',
+              component: resolve => require(['@/containers/tools/helpmsg'], resolve)
+          },
         {
           path: '/cardIndex',
           component: resolve => require(['@/containers/user/cardIndex'], resolve)
         },
+          {
+              path: '/getCard',
+              component: resolve => require(['@/containers/user/getCard'], resolve)
+          },
         {
           path: '/group',
           component: resolve => require(['@/containers/shoping/group'], resolve)

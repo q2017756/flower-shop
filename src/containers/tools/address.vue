@@ -27,7 +27,7 @@
 </script>
 
 <style lang="scss" scoped>
-  @import '../../styles/common.scss';
+  @import '../../styles/common';
 
     .header{
         background: white;
