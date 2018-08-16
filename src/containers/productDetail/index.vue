@@ -311,12 +311,12 @@
         this.count = currentVal
       },
       fetchData () {
-        fetchProductDetail()
-          .then(r => {
-            console.log(r)
-            const pId = this.$route.params.id
-            this.productDetail = r[pId]
-          })
+        // fetchProductDetail()
+        //   .then(r => {
+        //     console.log(r)
+        //     const pId = this.$route.params.id
+        //     this.productDetail = r[pId]
+        //   })
       },
     },
     mounted () {
