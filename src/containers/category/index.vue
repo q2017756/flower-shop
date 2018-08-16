@@ -26,13 +26,14 @@
       },
       handleChangeSection (section) {
         console.log(section)
+        this.section.section = section
         // 请求分类
-        fecthCategory()
-          .then(r => {
-            console.log(r)
-            this.section.section = section
-            this.section.categories = r[section.categoryId]
-          })
+        // fecthCategory()
+        //   .then(r => {
+        //     console.log(r)
+        //     this.section.section = section
+        //     this.section.categories = r[section.categoryId]
+        //   })
       },
       handlePushToCommodity (section, commodity) {
         console.log(section)

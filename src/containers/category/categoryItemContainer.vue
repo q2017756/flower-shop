@@ -10,18 +10,18 @@
     <div class="title">{{ section.section.name }}品种</div>
     <div class="item-container">
       <span @click="handleList">全部</span>
-      <span @click="handleList">玫瑰1</span>
-      <span @click="handleList">玫瑰2</span>
-      <span @click="handleList">玫瑰3</span>
-      <span @click="handleList">玫瑰3</span>
+      <span @click="handleList">{{ section.section.name }}1</span>
+      <span @click="handleList">{{ section.section.name }}2</span>
+      <span @click="handleList">{{ section.section.name }}3</span>
+      <span @click="handleList">{{ section.section.name }}4</span>
     </div>
     <div class="title">{{ section.section.name }}颜色</div>
     <div class="item-container">
       <span @click="handleList">全部</span>
-      <span @click="handleList">红色</span>
-      <span @click="handleList">黄色</span>
-      <span @click="handleList">蓝色</span>
-      <span @click="handleList">绿色</span>
+      <span @click="handleList">{{ section.section.name }}红色</span>
+      <span @click="handleList">{{ section.section.name }}黄色</span>
+      <span @click="handleList">{{ section.section.name }}蓝色</span>
+      <span @click="handleList">{{ section.section.name }}绿色</span>
     </div>
     <div class="title">支数</div>
     <div class="item-container">

@@ -83,7 +83,59 @@
   export default {
     data() {
       return {
-        data: {}
+        data: {
+          "manufacturer": [
+            {
+              "title": "玫瑰",
+              "pic": "/static/img/rose.png"
+            },
+            {
+              "title": "菊花",
+              "pic": "/static/img/rose.png"
+            },
+            {
+              "title": "绣球",
+              "pic": "/static/img/rose.png"
+            },
+            {
+              "title": "向日葵",
+              "pic": "/static/img/rose.png"
+            }
+          ],
+          "hotItems": [
+            {
+              "title": "万卉生态基地",
+              "pic": "/static/img/farm.png",
+            },
+            {
+              "title": "万卉生态基地2",
+              "pic": "/static/img/farm.png",
+            },
+            {
+              "title": "万卉生态基地3",
+              "pic": "/static/img/farm.png",
+            },
+            {
+              "title": "万卉生态基地",
+              "pic": "/static/img/farm.png",
+            },
+            {
+              "title": "万卉生态基地2",
+              "pic": "/static/img/farm.png",
+            },
+            {
+              "title": "万卉生态基地3",
+              "pic": "/static/img/farm.png",
+            }
+          ],
+          "bestTopic": {
+            "pic": "/static/img/best.png",
+            "title": "七夕送花攻略",
+            "description": "哄女盆友开心神器",
+            "lowestPrice": "19.9",
+            "topicId": "t101"
+          }
+        }
       }
     },
     props: {
@@ -112,11 +164,11 @@
       }
     },
     mounted () {
-      fetchHome()
-        .then(r => {
-          console.log(r)
-          this.data = r
-        })
+      // fetchHome()
+      //   .then(r => {
+      //     console.log(r)
+      //     this.data = r
+      //   })
     }
   }
 </script>

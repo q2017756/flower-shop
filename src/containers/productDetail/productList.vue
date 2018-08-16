@@ -39,7 +39,9 @@
       <div v-show="farmVisible" class="farm-list">
         <span class="farm-item" v-for="n in 6" :key="n">农场{{n}}</span>
       </div>
-      <div class="mask"></div>
+    </transition>
+    <transition name="fade">
+      <div v-show="farmVisible" class="mask"></div>
     </transition>
     <mt-popup
       v-model="popupVisible"
@@ -119,6 +121,7 @@
     margin-top: $edge_small;
     padding: 0 $edge_small;
     background: #fff;
+    z-index: 99;
     span {
       padding: $edge_small $edge_default;
       img {
@@ -193,6 +196,7 @@
     width: 100vw;
     padding: $edge_default;
     background: #fff;
+    z-index: 99;
     .farm-item {
       flex: 0 0 23%;
       display: inline-block;
@@ -203,6 +207,15 @@
       text-align: center;
       color: $red_default;
     }
+  }
+  .mask {
+    position: absolute;
+    top: px2rem(85);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,.7);
+    z-index: 97;
   }
   .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
