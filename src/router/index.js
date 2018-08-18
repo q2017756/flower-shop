@@ -130,7 +130,10 @@ export default new Router({
           path: '/myOrder',
           component: resolve => require(['@/containers/user/myOrder'], resolve)
         },
-
+          {
+              path: '/memberCard',
+              component: resolve => require(['@/containers/user/memberCard'], resolve)
+          },
         {
           path: '/myCart',
           component: resolve => require(['@/containers/user/myCart'], resolve)

@@ -4,12 +4,12 @@
     <home-list title="王牌切花" @handleDetail="handleDetail"></home-list>
 
     <div class="home-member">
-      <img class="item-big" src="../../assets/img/home-member.png" />
-      <div class="item-small">
+      <img class="item-big" @click="handleMember" src="../../assets/img/home-member.png" />
+      <div class="item-small" @click="handleScore">
         <p class="font-small">积分兑换</p>
         <p class="font-smaller">签到领积分享优惠</p>
       </div>
-      <div class="item-small">
+      <div class="item-small" @click="handleMember">
         <p class="font-small">特级优惠</p>
         <p class="font-smaller">全程参与优选历程</p>
       </div>
@@ -152,6 +152,12 @@
       },
       handleTimeShop() {
         this.$router.push('/timeShop')
+      },
+      handleMember() {
+        this.$router.push('/memberCard')
+      },
+        handleScore() {
+        this.$router.push('/score')
       },
       handleGroup() {
         this.$router.push('/group')
