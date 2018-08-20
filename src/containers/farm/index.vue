@@ -42,7 +42,7 @@
         <span class="title-line">花枝严选农场</span>
       </div>
       <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
-      <div class="more-farm">查看更多精选农场</div>
+      <div class="more-farm" @click="handleList">查看更多精选农场</div>
     </div>
 
     <div class="home-like">
@@ -50,7 +50,7 @@
         <span class="title-line">海外农场</span>
       </div>
       <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
-      <div class="more-farm">查看更多海外农场</div>
+      <div class="more-farm" @click="handleList">查看更多海外农场</div>
     </div>
 
     <div class="home-like">
@@ -58,7 +58,7 @@
         <span class="title-line">新选农场</span>
       </div>
       <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
-      <div class="more-farm">查看更多新农场</div>
+      <div class="more-farm" @click="handleList">查看更多新农场</div>
     </div>
 
     <div class="home-like">
@@ -161,7 +161,10 @@
       },
       handleCall() {
         Toast('打电话')
-      }
+      },
+        handleList() {
+            this.$router.push('/productList')
+        }
     },
     mounted () {
       // fetchHome()

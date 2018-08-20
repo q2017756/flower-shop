@@ -31,6 +31,19 @@
       <span @click="handleList">99支</span>
       <span @click="handleList">999支</span>
     </div>
+      <div class="title">价格区间</div>
+      <div class="item-container">
+          <span @click="handleList">100以下</span>
+          <span @click="handleList">100~200</span>
+          <span @click="handleList">200~300</span>
+          <span @click="handleList">300以上</span>
+      </div>
+      <div class="title">鲜花品质</div>
+      <div class="item-container">
+          <span @click="handleList">A级</span>
+          <span @click="handleList">B级</span>
+          <span @click="handleList">C级</span>
+      </div>
   </div>
 </template>
 

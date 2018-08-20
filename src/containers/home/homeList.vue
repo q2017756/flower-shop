@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="more">查看更多{{title}}</div>
+    <div class="more" @click="handleList">查看更多{{title}}</div>
   </div>
 </template>
 <script>
@@ -30,7 +30,11 @@
     methods: {
       handleDetail() {
         this.$emit('handleDetail')
-      }
+      },
+        handleList() {
+          this.$router.push('/productList')
+        }
+
     },
   }
 </script>
