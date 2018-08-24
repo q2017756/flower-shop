@@ -66,6 +66,10 @@ export default new Router({
           path: '/getCoupon',
           component: resolve => require(['@/containers/home/getCoupon'], resolve)
         },
+          {
+              path: '/farmList',
+              component: resolve => require(['@/containers/farm/farmList'], resolve)
+          },
         {
           path: '/farmStory',
           component: resolve => require(['@/containers/farm/farmStory'], resolve)
