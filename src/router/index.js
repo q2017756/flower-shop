@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from '../App'
+import ajax from '../utils/ajax'
 
 Vue.use(Router)
 
@@ -142,6 +143,15 @@ export default new Router({
           path: '/myCart',
           component: resolve => require(['@/containers/user/myCart'], resolve)
         },
+          {
+              path: '/login',
+              component: resolve => require(['@/containers/user/login'], resolve)
+          },
+    
+          {
+              path: '/logup',
+              component: resolve => require(['@/containers/user/logup'], resolve)
+          },
         {
           path: '/farmC',
           component: resolve => require(['@/containers/user/farmC'], resolve)

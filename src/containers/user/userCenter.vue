@@ -137,6 +137,7 @@
 
 <script>
   import tabbar from '@/components/tabbar'
+  import qs from "qs"
     export default {
         name: "userCenter",
       data(){
@@ -148,17 +149,17 @@
         tabbar
       },
       computed: {
-        items () {
-          const barItems = [
-            { title: '首页', icon:`home`, selectedIcon: `home-active`, to: '/home' },
-            { title: '农场', icon: `farm`, selectedIcon: `farm-active`, to: '/farm' },
-            { title: '分类', icon: `category`, selectedIcon: `category-active`, to: '/category' },
-            { title: '购物车', icon: `cart`, selectedIcon: 'cart-active', to: '/cart', badge: this.$store.getters.cartCommodityCount },
-            { title: '我的', icon: `me`, selectedIcon: `me-active`, to: '/profile' }
-          ]
-          return barItems
-        }
+
       },
+        mounted(){
+          this.$ajax.post('openapi.php?act=memberFrontpage',qs.stringify({www:11}))
+              .then((data)=>{
+                  console.log(data)
+              })
+              .catch((data)=>{
+                  console.log(data)
+              })
+        },
       methods:{
           goPage(route){
             this.$router.push(route)
