@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from '../App'
-import ajax from '../utils/ajax'
+import $ajax from "../utils/ajax"
 
 Vue.use(Router)
 

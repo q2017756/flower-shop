@@ -1,13 +1,26 @@
 <template>
-    <div>
-        <mt-field label="手机号" placeholder="请输入手机号" type="tel" v-model="phone"></mt-field>
-        <mt-field label="密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
-        <mt-button @click="login" type="primary">primary</mt-button>
+    <div id="login">
+        <div class="log">
+            <div class="lis">
+                <img src="../../assets/logIn/phone.png" alt="">
+                <input placeholder="请输入手机号" v-model="phone" type="number"/>
+            </div>
+            <div class="lis">
+                <img src="../../assets/logIn/pass.png" alt="">
+                <input placeholder="请输入密码" v-model="password" type="password">
+            </div>
+        </div>
+        <div class="lis ss">
+            <span> </span>
+            <span class="up">注册新号>>></span>
+        </div>
+        <mt-button @click="login" style="width: 9rem;margin: 0.5rem 0.5rem" type="primary">登陆</mt-button>
     </div>
 </template>
 
 <script>
     import { Field } from 'mint-ui';
+    import { Toast } from 'mint-ui';
     import qs from "qs"
     export default {
         name: "login",
@@ -24,7 +37,13 @@
                     pwd: this.password
                 }))
                     .then((data)=>{
-                        console.log(data)
+                        console.log(data);
+                        if(data.data.res=="succ"){
+                            // this.$router.push("/home")
+                        }else{
+                            Toast(data.data.msg);
+                        }
+
                     })
                     .catch((data)=>{
                         console.log(data)
@@ -35,5 +54,51 @@
 </script>
 
 <style scoped>
+body,html{
+    /*background: white;*/
+}
+.phone{
+    /*margin-top: 2rem;*/
+}
+    #login{
+        /*height: 100%;*/
+        padding-top: 0.56rem;
+        /*background: white;*/
+        position: relative;
+    }
+    .log{
+        border-top: 1px solid #dad9d9;
+        border-bottom: 1px solid #dad9d9;
+        padding: 0 0.26rem;
+        background: white;
+    }
+    .lis{
+        height: 1.25rem;
+        display: flex;
+        align-items:center;
 
+    }
+    .log .lis{
+        border-bottom: 1px #d9d9d9 solid;
+    }
+    .log .lis:last-child{
+        border: none;
+    }
+    .lis img{
+        height: 0.6rem;
+        margin-right: 0.3rem;
+    }
+    .lis input{
+        height: 90%;
+        width: 7.5rem;
+        background: white;
+    }
+    .up{
+        font-size: 12px;
+        color: #3fd0e2;
+    }
+    .ss{
+        justify-content: space-between;
+        padding: 0 0.26rem;
+    }
 </style>

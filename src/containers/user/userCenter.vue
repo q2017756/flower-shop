@@ -137,6 +137,7 @@
 
 <script>
   import tabbar from '@/components/tabbar'
+  import { Toast } from 'mint-ui';
   import qs from "qs"
     export default {
         name: "userCenter",
@@ -152,12 +153,18 @@
 
       },
         mounted(){
-          this.$ajax.post('openapi.php?act=memberFrontpage',qs.stringify({www:11}))
+          this.$ajax.post('openapi.php?act=memberFrontpage')
               .then((data)=>{
-                  console.log(data)
+                  console.log(data);
+                  if(data.data.res=="succ"){
+
+                  }else{
+                      Toast(data.data.msg)
+                  }
               })
               .catch((data)=>{
-                  console.log(data)
+                  console.log(data);
+                  Toast("服务器异常")
               })
         },
       methods:{
