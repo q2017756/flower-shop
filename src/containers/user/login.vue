@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="lis ss">
-            <span> </span>
-            <span class="up">注册新号>>></span>
+            <span @click="goRe(0)" class="up">修改密码</span>
+            <span @click="goRe(1)" class="up">注册新号>>></span>
         </div>
         <mt-button @click="login" style="width: 9rem;margin: 0.5rem 0.5rem" type="primary">登陆</mt-button>
     </div>
@@ -48,6 +48,9 @@
                     .catch((data)=>{
                         console.log(data)
                     })
+            },
+            goRe(state){
+                this.$router.push({path:"/logup",query:{state:state}})
             }
         }
     }

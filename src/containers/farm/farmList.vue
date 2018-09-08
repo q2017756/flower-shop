@@ -1,10 +1,10 @@
 <template>
     <div class="farm-list">
         <app-header title="品牌基地"></app-header>
-        <div class="item" v-for="n in 2" :key="n">
-            <img src="../../assets/img/farm.png" alt="">
+        <div class="item" @click="goFarmDetails(item)" v-for="item in farmList" >
+            <img :src="item.img_url" alt="">
             <div class="text">
-                <p class="title">xxxxx农场</p>
+                <p class="title">{{item.farm_name}}</p>
                 <p class="font-small">一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原</p>
             </div>
         </div>
@@ -15,7 +15,9 @@
 
     export default {
         data() {
-            return {}
+            return {
+                farmList:[]
+            }
         },
         props: {
         },
@@ -25,8 +27,23 @@
         methods: {
             handleStory() {
                 this.$router.push('/farmStory')
+            },
+            goFarmDetails(msg){
+                console.log(msg);
+                this.$router.push({path:"/farmDetail",query:{farmId:msg.farm_id,name:msg.farm_name,start:msg.farm_lv_id}})
             }
         },
+        mounted(){
+            console.log("sdfsdfas")
+            this.$ajax.post("openapi.php?act=getFarmList")
+                .then((data)=>{
+                    console.log(data);
+                    if(data.data.res=="succ"){
+                        this.farmList=data.data.result.list
+                    }
+
+                })
+        }
     }
 </script>
 <style lang="scss" scoped>

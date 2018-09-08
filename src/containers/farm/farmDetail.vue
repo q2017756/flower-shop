@@ -11,10 +11,14 @@
     </app-header>
     <div class="search">
       <input slot="center" class="search-input center" type="text" placeholder="玫瑰"/>
-      <div class="fllow">
+      <div v-show="!iscol" class="fllow" @click="colFarm">
         <img src="../../assets/icon/fllow.png" alt="">
         <span>关注农场</span>
       </div>
+        <div v-show="iscol" class="fllow" @click="delFarm">
+            <img src="../../assets/icon/fllow.png" alt="">
+            <span>已关注</span>
+        </div>
     </div>
     <div class="item-container">
       <farm-item v-for="n in 8" :key="n" :cartShow="true"></farm-item>
@@ -24,10 +28,19 @@
 <script>
   import appHeader from '@/components/common/appHeader'
   import farmItem from '@/components/home/farmItem'
+  import qs from "qs"
+  import { Toast } from 'mint-ui';
 
   export default {
     data() {
-      return {}
+      return {
+          name:"",
+          start:0,
+          page:0,
+          count:20,
+          iscol:false,
+          id:0
+      }
     },
     props: {
     },
@@ -36,8 +49,44 @@
       farmItem
     },
     methods: {
-
+        colFarm(){
+            this.$ajax.post("openapi.php?act=doFavFarm",{
+                farm_id:this.id
+            })
+                .then((data)=>{
+                    console.log(data);
+                    if(data.data.res == "succ"){
+                        Toast(data.data.msg)
+                    }
+                })
+        },
+        delFarm(){
+            this.$ajax.post("openapi.php?act=unFavFarm",{
+                farm_id:this.id
+            })
+                .then((data)=>{
+                    console.log(data);
+                    if(data.data.res == "succ"){
+                        Toast(data.data.msg)
+                    }
+                })
+        }
     },
+      mounted(){
+        this.name=this.$route.query.name;
+        this.start=this.$route.query.start;
+        this.id=this.$route.query.farmId;
+        console.log('ssss')
+        // 请求上品
+          this.$ajax.post("openapi.php?act=getFarmGoods",{
+              farm_id:1,
+              start:this.page*this.count,
+              limit:(this.page+1)*this.count
+          })
+              .then((data)=>{
+                  console.log(data)
+              })
+      }
   }
 </script>
 <style lang="scss" scoped>

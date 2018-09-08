@@ -64,7 +64,18 @@
           return{
             qx:''
           }
-      }
+      },
+        methods:{
+            getGood(){
+                this.$ajax.post("openapi.php?act=myFavorites")
+                    .then((data)=>{
+                        console.log(data)
+                    })
+            }
+        },
+        mounted(){
+            this.getGood();
+        }
     }
 </script>
 

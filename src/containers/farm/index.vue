@@ -163,10 +163,14 @@
         Toast('打电话')
       },
         handleList() {
-            this.$router.push('/productList')
+            this.$router.push('/farmlist')
         }
     },
     mounted () {
+        this.$ajax.post("openapi.php?act=getFarmList")
+            .then((data)=>{
+                console.log(data)
+            })
       // fetchHome()
       //   .then(r => {
       //     console.log(r)

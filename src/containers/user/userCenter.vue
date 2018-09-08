@@ -3,39 +3,39 @@
         <div class="head">
             <div class="usm">
                 <div class="img-d">
-                    <img class="h-m" src="../../../static/imgs/timg.jpg" alt="">
+                    <img class="h-m" :src="userMsg.userface" alt="">
                     <img class="vip" src="../../../static/imgs/v1.png" alt="">
                 </div>
                 <div class="jf-d">
                     <div class="name-d">
                         <span class="name">
-                            花枝花卉
+                            {{userMsg.name}}
                         </span>
                             <span class="mob">
-                            182******90
+                            {{userMsg.mobile}}
                         </span>
                     </div>
                     <div class="jf">
-                        会员积分：200分
+                        会员积分：{{score}}分
                     </div>
                 </div>
                 <div class="edit"  @click="goPage('/userMsg')">设置</div>
             </div>
             <div class="gz">
                 <div @click="goPage('/goodsCol')"  class="gz-l">
-                    <div>80</div>
+                    <div>{{goodC}}</div>
                     <div>商品收藏</div>
                 </div>
                 <div @click="goPage('/farmC')" class="gz-l">
-                    <div>80</div>
-                    <div>关注农场</div>
+                    <div>{{farmCount}}</div>
+                    <div>农场收藏</div>
                 </div>
                 <div @click="goPage('/cardIndex')" class="gz-l">
-                    <div>80</div>
+                    <div>{{couponNum}}</div>
                     <div>优惠券</div>
                 </div>
                 <div @click="goPage('/history')" class="gz-l">
-                    <div>80</div>
+                    <div>{{history}}</div>
                     <div>足迹</div>
                 </div>
             </div>
@@ -143,7 +143,12 @@
         name: "userCenter",
       data(){
           return{
-
+              userMsg:{},
+              couponNum:0,
+              score:0,
+              history:0,
+              goodC:0,
+              farmCount:0
           }
       },
       components: {
@@ -157,7 +162,11 @@
               .then((data)=>{
                   console.log(data);
                   if(data.data.res=="succ"){
-
+                      var res = data.data.result
+                      this.userMsg=res.mInfo;
+                      this.couponNum=res.couponNum;
+                      this.score=res.score;
+                      this.farmCount=res.farmCount
                   }else{
                       Toast(data.data.msg)
                   }

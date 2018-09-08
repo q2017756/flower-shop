@@ -8,17 +8,17 @@
             <img src="../../../static/imgs/timg.jpg" alt="">
         </div>
         <div class="div_c" style="background: white;padding: 0 0.2rem">
-            <mt-cell class="cell" title="用户名" is-link>
-                <span></span>
-            </mt-cell>
+            <!--<mt-cell class="cell" title="用户名" is-link>-->
+                <!--<span>111</span>-->
+            <!--</mt-cell>-->
             <mt-cell class="cell"  title="昵称" is-link>
-                <span></span>
+                <span>justPlay</span>
             </mt-cell>
             <mt-cell class="cell"  title="性别" is-link>
-                <span></span>
+                <span>男</span>
             </mt-cell>
             <mt-cell class="cell" title="生日" is-link>
-                <span></span>
+                <span>2018-10-12</span>
             </mt-cell>
             <mt-cell class="cell"  title="积分中心" is-link>
                 <span></span>
@@ -27,14 +27,34 @@
                 <span></span>
             </mt-cell>
         </div>
-        <div class="bust">退出当前登录</div>
+        <div @click="logOut" class="bust">退出当前登录</div>
     </div>
 </template>
 
 <script>
     import { Cell } from 'mint-ui';
+    import { Toast } from 'mint-ui';
     export default {
-        name: "userMsg"
+        name: "userMsg",
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+            logOut(){
+                this.$ajax.post("openapi.php?act=logout")
+                    .then((data)=>{
+                        console.log(data);
+                        if(data.data.res=="succ"){
+                            Toast("退出成功");
+                            this.$router.push("login")
+                        }else{
+                            Toast(data.data.msg)
+                        }
+                    })
+            }
+        }
     }
 </script>
 
