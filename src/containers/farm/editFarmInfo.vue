@@ -7,12 +7,12 @@
       <input class="common-input" type="text" placeholder="联系电话" v-model="tel">
       <input class="common-input" type="text" placeholder="地址" v-model="addr">
     </div>
-    <div class="common-btn">确定</div>
+    <div @click="saveInfo" class="common-btn">确定</div>
   </div>
 </template>
 <script>
   import appHeader from '@/components/common/appHeader'
-
+  import { Toast } from 'mint-ui';
   export default {
     data() {
       return {
@@ -28,7 +28,31 @@
       appHeader
     },
     methods: {
-
+        saveInfo(){
+            console.log("dddd")
+            if(this.shop==""){
+                Toast("请输入基地名称");
+                return
+            }else if(this.who==""){
+                Toast("请输入联系人姓名")
+                return
+            }else if(this.tel==""){
+                Toast("请输入联系电话")
+                return
+            }else if(this.addr==""){
+                Toast("请输入联系地址")
+                return
+            }
+            this.$ajax.post("openapi.php?act=addFarm",{
+                farm_name:this.shop,
+                contact_name:this.who,
+                mobile:this.tel,
+                address:this.addr
+            })
+                .then((data)=>{
+                    console.log(data)
+                })
+        }
     },
   }
 </script>
