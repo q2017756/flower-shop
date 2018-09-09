@@ -6,7 +6,7 @@
         <input class="search-input" type="text" placeholder="玫瑰"   @click="handleSearch">
         <img class="home-msg" src="../../assets/icon/message.png" alt=""  @click="handleMessage">
       </div>
-      <segment :titles="titles" :handleClick="handleChange" :currentTitle="current"/>
+      <segment :titles="segmentArr" :handleClick="handleChange"/>
     </header>
     <router-view></router-view>
   </div>
@@ -16,7 +16,7 @@
   import {fetchHome} from '@/utils/fetchData'
   import segment from '@/components/common/segment'
   import { Toast } from 'mint-ui';
-
+  import qs from 'qs'
   export default {
     name: 'home',
     components: {
@@ -24,18 +24,36 @@
     },
     data() {
       return {
-        titles: ['全部', '牡丹花', '玫瑰', '绣球', '菊花', '洋桔梗', '向日葵', '花', '草', '树'],
-        categoryId: ['', '1000001', '1000002', '1000003', '1000004', '1000005', '1000006', '1000007', '1000008', '1000009'],
+          segmentArr: [],
         data: {}
       }
     },
     computed: {
-      current() {
-        const index = this.categoryId.indexOf(this.$route.params.cId)
-        return this.titles[index]
-      }
     },
     methods: {
+        getData() {
+            this.$ajax.post('openapi.php',qs.stringify({
+                api_type:'common',
+                api_version:'1.0',
+                act:'goodsTagCatList',
+                isEnd:'webroot',
+                page:1,
+                pageLimit:10,
+                type:'tag',
+            }))
+                .then((data)=>{
+                    console.log('tag:',data);
+                    if(data.data.res=="succ"){
+                        this.segmentArr = data.data.result
+                    }else{
+                        Toast(data.data.msg)
+                    }
+                })
+                .catch((data)=>{
+                    console.log(data);
+                    Toast("服务器异常")
+                })
+        },
       handleSearch() {
         this.$router.push('/search')
       },
@@ -43,11 +61,14 @@
         this.$router.push('/message')
       },
       handleChange(title) {
-        console.log('click at ', title)
-        this.$router.push('/productList')
+        console.log('click at ', title.tag_name)
+//        this.$router.push('/productList')
         // Toast(title);
       }
-    }
+    },
+      mounted(){
+        this.getData()
+      }
   }
 </script>
 

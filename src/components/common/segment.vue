@@ -1,8 +1,15 @@
 <template>
   <div class="segment" ref="segment">
-    <div class="segment-inner" ref="itemContainer" :style="dragStyle" @touchmove="onTouchMove" @touchstart="onTouchStart" @touchend="onTouchEnd">
-      <div :class="['segment-item', (currentTitle || select) === title ? 'current-item' : '']" v-for="title in titles" @click="handleItemClick(title)">
-        <span>{{ title }}</span>
+    <div class="segment-inner"
+         ref="itemContainer"
+         :style="dragStyle"
+         @touchmove="onTouchMove"
+         @touchstart="onTouchStart"
+         @touchend="onTouchEnd">
+      <div :class="['segment-item', select === title ? 'current-item' : '']"
+           v-for="title in titles"
+           @click="handleItemClick(title)">
+        <span>{{ title.tag_name }}</span>
       </div>
     </div>
   </div>
@@ -13,7 +20,6 @@
     name: 'segment',
     props: {
       titles: Array,
-      currentTitle: String,
       handleClick: {
         type: Function,
         default: () => {}
@@ -96,8 +102,8 @@
   .segment-item {
     margin-left: $edge_default;
     display: inline-block;
-    &:not:first {
-      margin-left: px2rem(24);
+    &:first-of-type{
+      margin-left: px2rem(8);
     }
   }
    .segment-item span {

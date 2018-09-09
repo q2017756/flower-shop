@@ -2,14 +2,14 @@
   <div class="home-list">
     <span class="title-line">{{ title }}</span>
     <div class="box">
-      <div class="item" v-for="n in 6" :key="n" @click="handleDetail">
+      <div class="item" v-for="(item,index) in list" :key="index" @click="handleDetail(item)">
         <div class="img-container">
-          <img src="../../assets/img/flower-img.png" alt="">
+          <img :src="item.thumbnail_pic" alt="">
         </div>
         <div class="text-container">
-          <p class="name">深情</p>
-          <p class="desc">红玫瑰亩百合混合搭配</p>
-          <p class="price">￥288.00</p>
+          <p class="name">{{ item.store_name }}</p>
+          <p class="desc">{{ item.name }}</p>
+          <p class="price">￥{{ item.price }}</p>
         </div>
       </div>
     </div>
@@ -22,14 +22,15 @@
       return {}
     },
     props: {
+        list: Array,
       title: {
         type: String,
         default: '王牌切花'
       }
     },
     methods: {
-      handleDetail() {
-        this.$emit('handleDetail')
+      handleDetail(item) {
+        this.$emit('handleDetail',item.goods_id)
       },
         handleList() {
           this.$router.push('/productList')
@@ -67,6 +68,7 @@
       border: 1px solid #eee;
       img {
         width: 90%;
+          max-height: 90%;
       }
     }
     .text-container {

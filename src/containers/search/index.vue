@@ -29,7 +29,7 @@
     </div>
     <p class="history-title">历史搜索</p>
     <div class="history">
-      <mt-cell v-for="n in 10" :title="'历史 ' + n" :key="n" to="/productList"/>
+      <mt-cell v-for="item in historyArr" :title="item.name" :key="item.goods_id" to="/productList"/>
     </div>
     <div class="clear-btn">清空历史记录</div>
 
@@ -39,10 +39,12 @@
 
 <script>
   import appHeader from '@/components/common/appHeader'
-
+  import { Toast } from 'mint-ui';
+  import qs from 'qs'
   export default {
     data() {
       return {
+          historyArr: [],
         hotSearchs: [
           {title: '玫瑰', highlight: true},
           {title: '菊花', highlight: true},
@@ -59,10 +61,36 @@
       appHeader
     },
     methods: {
+        getData() {
+            this.$ajax.post('openapi.php',qs.stringify({
+                api_type:'common',
+                api_version:'1.0',
+                act:'getGoodsLSList',
+                isEnd:'webroot',
+                page:1,
+                pageLimit:10,
+                memberid:1
+            }))
+                .then((data)=>{
+                    console.log('tag:',data);
+                    if(data.data.res=="succ"){
+                        this.historyArr = data.data.result.list
+                    }else{
+                        Toast(data.data.msg)
+                    }
+                })
+                .catch((data)=>{
+                    console.log(data);
+                    Toast("服务器异常")
+                })
+        },
       handleProdList() {
         this.$router.push('productList');
       }
-    }
+    },
+      mounted(){
+          this.getData()
+      }
   }
 </script>
 
