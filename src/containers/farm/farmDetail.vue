@@ -50,9 +50,9 @@
     },
     methods: {
         colFarm(){
-            this.$ajax.post("openapi.php?act=doFavFarm",{
+            this.$ajax.post("openapi.php?act=doFavFarm",qs.stringify({
                 farm_id:this.id
-            })
+            }))
                 .then((data)=>{
                     console.log(data);
                     if(data.data.res == "succ"){

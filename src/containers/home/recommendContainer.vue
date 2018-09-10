@@ -203,7 +203,7 @@
                 this.$router.push(`/productDetail/${id}`)
             },
             handleCoupon() {
-                this.$router.push('/getCoupon')
+                this.$router.push('/getCard')
             },
             handleTimeShop() {
                 this.$router.push('/timeShop')

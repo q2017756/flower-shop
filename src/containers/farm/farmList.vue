@@ -5,7 +5,7 @@
             <img :src="item.img_url" alt="">
             <div class="text">
                 <p class="title">{{item.farm_name}}</p>
-                <p class="font-small">一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原一望无际大草原</p>
+                <p class="font-small">{{item.memo}}</p>
             </div>
         </div>
     </div>
@@ -35,6 +35,7 @@
         },
         mounted(){
             console.log("sdfsdfas")
+            // 接口对接错误
             this.$ajax.post("openapi.php?act=getFarmList")
                 .then((data)=>{
                     console.log(data);

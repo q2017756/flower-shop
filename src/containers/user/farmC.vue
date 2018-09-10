@@ -2,32 +2,24 @@
     <div id="farm-c">
         <mt-header fixed class="header" title="关注农场">
           <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
-            <mt-button  slot="right">编辑</mt-button>
+            <mt-button v-show="!isedit" @click="edit"  slot="right">编辑</mt-button>
+            <mt-button  v-show="isedit" @click="cancle" slot="right">删除</mt-button>
         </mt-header>
         <ul>
-            <li class="l-l">
+            <li v-for="(item,index) in list" class="l-l">
+                <div v-show="isedit" class="check check-l">
+                    <!--{{barr[index]}}-->
+                    <i class="iconfont icon-xuanzekuangmoren" @click="check(index)" v-show="!barr[index]"></i>
+                    <i class="iconfont icon-xuanzekuangxuanzhong" @click="check(index)" v-show="barr[index]" style="color:#25b5fe"></i>
+                </div>
                 <div class="img-d">
-                    <img src="../../../static/imgs/timg.jpg" alt="">
+                    <img :src="item.img_url" alt="">
                 </div>
                 <div class="msg">
-                    <div class="xxd"><img class="xx" src="../../../static/imgs/xing.png" alt=""><img class="xx" src="../../../static/imgs/xing.png" alt=""><img class="xx" src="../../../static/imgs/xing.png" alt=""></div>
-                    <div class="name">花枝花卉农场</div>
-                </div>
-                <div class="btn">
-                    <div class="s-x">2 <br> 上新</div>
-                    <div class="b-s">
-                        <span class="zxs">找相似</span>
-                        <span class="slh"><img class="mor" src="../../../static/imgs/mor.png" alt=""></span>
-                    </div>
-                </div>
-            </li>
-            <li class="l-l">
-                <div class="img-d">
-                    <img src="../../../static/imgs/timg.jpg" alt="">
-                </div>
-                <div class="msg">
-                    <div class="xxd"><img class="xx" src="../../../static/imgs/xing.png" alt=""><img class="xx" src="../../../static/imgs/xing.png" alt=""><img class="xx" src="../../../static/imgs/xing.png" alt=""></div>
-                    <div class="name">花枝花卉农场</div>
+                    <div v-show="item.farm_lv_id==2" class="xxd"><img class="xx" src="../../../static/imgs/xing.png" alt=""><img class="xx" src="../../../static/imgs/xing.png" alt=""><img class="xx" src="../../../static/imgs/xing.png" alt=""></div>
+                    <div v-show="item.farm_lv_id==1" class="xxd"><img class="xx" src="../../../static/imgs/xing.png" alt=""></div>
+                    <div v-show="item.farm_lv_id!=2&&item.farm_lv_id!=1" class="xxd"></div>
+                    <div class="name">{{item.farm_name}}</div>
                 </div>
                 <div class="btn">
                     <div class="s-x">2 <br> 上新</div>
@@ -43,8 +35,77 @@
 
 <script>
     import { Header } from 'mint-ui';
+    import { Toast } from 'mint-ui';
     export default {
-        name: "farmC"
+        name: "farmC",
+        data(){
+            return{
+                list:[],
+                barr:[],
+                isedit:false
+            }
+        },
+        methods:{
+            // 选取要取消的
+            check(index){
+                if(this.barr[index]){
+                    // this.barr[index]=false;
+                    this.$set(this.barr,index,0)
+                }else{
+                    // this.barr[index]=true;
+                    this.$set(this.barr,index,1)
+                }
+                console.log(this.barr)
+            },
+            // 编辑
+            edit(){
+                this.isedit=true;
+            },
+            // 取消收藏
+            cancle(){
+                let length=this.barr.length;
+                let farmArr=[];
+                for(let i =0;i<length;i++){
+                    if(this.barr[i]){
+                        farmArr.push(this.list[i].farm_id)
+                    }
+                };
+                this.$ajax.post("openapi.php?act=unFavFarm",{
+                    farm_id:farmArr.join(',')
+                })
+                    .then((data)=>{
+                        console.log(data);
+                        if(data.data.res == "succ"){
+                            Toast(data.data.msg);
+                            this.getList();
+                        }
+                    })
+            },
+            // 获取收藏农场
+            getList(){
+                this.$ajax.get("openapi.php?act=myFavFarms")
+                    .then((data)=>{
+                        console.log(data);
+                        if(data.data.res=="succ"){
+                            this.list=data.data.result.list;
+                            let length = data.data.result.list.length;
+                            let barr=[]
+                            for(let i=0;i<length;i++){
+                                barr.push(0)
+                            };
+                            this.barr=barr;
+                        }else {
+                            Toast(data.data.msg)
+                        }
+                    })
+                    .catch((data)=>{
+                        console.log(data)
+                    })
+            }
+        },
+        mounted(){
+            this.getList();
+        }
     }
 </script>
 
@@ -58,6 +119,14 @@
         background: white;
         color: #515151;
     }
+    .check{
+        display: flex;
+        align-items: center;
+        padding-right: 3px;
+    }
+    /*.icon-xuanzekuangxuanzhong{*/
+        /*color: red;*/
+    /*}*/
     #farm-c img{
         width: 100%;
         height: 100%;
