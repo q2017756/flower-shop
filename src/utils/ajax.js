@@ -6,6 +6,9 @@ var api = window.location.origin;
 // alert(api)
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL ='http://nwww.florinsight.com/';
+axios.defaults.headers = {
+    "Content-Type": "application/x-www-form-urlencoded"
+}
 axios.interceptors.request.use(function (config) {
     return config;
 }, function (error) {

@@ -1,7 +1,7 @@
 <template>
   <router-link class="productor-item" v-bind:to="toPath">
-    <img v-bind:src="productor.pic" />
-    <p>{{ productor.title }}</p>
+    <img v-bind:src="productor.thumbnail_pic" />
+    <p>{{ productor.name }}</p>
   </router-link>
 </template>
 
