@@ -41,7 +41,7 @@
       <div class="text-center">
         <span class="title-line">花枝严选农场</span>
       </div>
-      <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
+      <farm-item :addrShow="true" v-for="item,index in farmList" :farmInfo="item" :key="index"></farm-item>
       <div class="more-farm" @click="handleList">查看更多精选农场</div>
     </div>
 
@@ -49,7 +49,7 @@
       <div class="text-center">
         <span class="title-line">海外农场</span>
       </div>
-      <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
+      <farm-item :addrShow="true" v-for="item,index in farmList" :farmInfo="item" :key="index"></farm-item>
       <div class="more-farm" @click="handleList">查看更多海外农场</div>
     </div>
 
@@ -57,7 +57,7 @@
       <div class="text-center">
         <span class="title-line">新选农场</span>
       </div>
-      <farm-item :addrShow="true" v-for="n in 4" :key="n"></farm-item>
+      <farm-item :addrShow="true" v-for="item,index in farmList" :farmInfo="item" :key="index"></farm-item>
       <div class="more-farm" @click="handleList">查看更多新农场</div>
     </div>
 
@@ -83,58 +83,27 @@
   export default {
     data() {
       return {
-        data: {
-          "manufacturer": [
+          farmList: [],
+
+          data: {
+          manufacturer: [
             {
-              "title": "玫瑰",
-              "pic": "/static/img/rose.png"
+              "name": "玫瑰农场",
+              "thumbnail_pic": "/static/img/rose.png"
             },
             {
-              "title": "菊花",
-              "pic": "/static/img/rose.png"
+              "name": "花枝农场",
+              "thumbnail_pic": "/static/img/rose.png"
             },
             {
-              "title": "绣球",
-              "pic": "/static/img/rose.png"
+              "name": "xx农场",
+              "thumbnail_pic": "/static/img/rose.png"
             },
             {
-              "title": "向日葵",
-              "pic": "/static/img/rose.png"
+              "name": "xx农场",
+              "thumbnail_pic": "/static/img/rose.png"
             }
-          ],
-          "hotItems": [
-            {
-              "title": "万卉生态基地",
-              "pic": "/static/img/farm.png",
-            },
-            {
-              "title": "万卉生态基地2",
-              "pic": "/static/img/farm.png",
-            },
-            {
-              "title": "万卉生态基地3",
-              "pic": "/static/img/farm.png",
-            },
-            {
-              "title": "万卉生态基地",
-              "pic": "/static/img/farm.png",
-            },
-            {
-              "title": "万卉生态基地2",
-              "pic": "/static/img/farm.png",
-            },
-            {
-              "title": "万卉生态基地3",
-              "pic": "/static/img/farm.png",
-            }
-          ],
-          "bestTopic": {
-            "pic": "/static/img/best.png",
-            "title": "七夕送花攻略",
-            "description": "哄女盆友开心神器",
-            "lowestPrice": "19.9",
-            "topicId": "t101"
-          }
+          ]
         }
       }
     },
@@ -147,6 +116,17 @@
       bottomFooter
     },
     methods: {
+        getData() {
+            this.$ajax.post("openapi.php?act=getFarmList")
+                .then((data)=>{
+                    console.log(data)
+                    this.farmList = data.data.result.list.slice(0,4)
+                })
+                .catch((data)=>{
+                    console.log(data);
+                    Toast("服务器异常")
+                })
+        },
       handleDetail() {
         this.$router.push('/farmDetail')
       },
@@ -167,10 +147,7 @@
         }
     },
     mounted () {
-        this.$ajax.post("openapi.php?act=getFarmList")
-            .then((data)=>{
-                console.log(data)
-            })
+        this.getData()
       // fetchHome()
       //   .then(r => {
       //     console.log(r)

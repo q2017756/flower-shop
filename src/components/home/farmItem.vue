@@ -1,8 +1,8 @@
 <template>
   <router-link class="farm-item" v-bind:to="toPath">
-    <img class="farm-img" src="../../assets/img/flower-img.png"/>
+    <img class="farm-img" :src="farmInfo.img_url"/>
     <div CLASS="text-container">
-      <p class="name">向日葵生日花束</p>
+      <p class="name">{{farmInfo.farm_name}}</p>
       <div v-if="!addrShow" class="price-container">
         <span class="price">￥100</span>
         <span class="old-price">￥200</span>
@@ -25,6 +25,10 @@
 <script>
   export default {
     props: {
+        farmInfo: {
+            type: Object,
+            default: {}
+        },
       cartShow: {
         type: Boolean,
         default: false

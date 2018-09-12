@@ -142,12 +142,12 @@
                     isEnd:'webroot',
                     page:1,
                     pageLimit:10,
-//                    tag_id: 146672
+                    tag_id: 146672
                 }))
                     .then((data)=>{
                         console.log('list1:',data);
                         if(data.data.res=="succ"){
-                            this.wangpaiList = data.data.result.list
+                            this.wangpaiList = data.data.result.list.slice(0,6)
                         }else{
                             Toast(data.data.msg)
                         }
@@ -163,12 +163,12 @@
                     isEnd:'webroot',
                     page:1,
                     pageLimit:10,
-//                    tag_id: 146666
+                    tag_id: 146666
                 }))
                     .then((data)=>{
                         console.log('list2:',data);
                         if(data.data.res=="succ"){
-                            this.newGoodsList = data.data.result.list
+                            this.newGoodsList = data.data.result.list.slice(0,6)
                         }else{
                             Toast(data.data.msg)
                         }
@@ -184,12 +184,12 @@
                     isEnd:'webroot',
                     page:1,
                     pageLimit:10,
-//                    tag_id: 146664
+                    tag_id: 146664
                 }))
                     .then((data)=>{
                         console.log('list3:',data);
                         if(data.data.res=="succ"){
-                            this.hotGoodsList = data.data.result.list
+                            this.hotGoodsList = data.data.result.list.slice(0,6)
                         }else{
                             Toast(data.data.msg)
                         }
