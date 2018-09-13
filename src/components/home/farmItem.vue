@@ -11,9 +11,9 @@
         <span  v-if="!addrShow" class="num ">库存: 100件</span>
         <span  v-else class="address">
           <img class="addr-icon" src="../../assets/icon/addr.png" alt="">
-          <span class="addr-text">云南省昆明市官渡区</span>
+          <span class="addr-text">{{farmInfo.province}}{{farmInfo.area}}</span>
         </span>
-        <span v-if="!cartShow" class="comment">98%好评</span>
+        <span v-if="!cartShow" class="comment">{{farmInfo.score}}%好评</span>
         <div v-else>
           <img class="farm-cart" src="../../assets/icon/tabbar-cart.png"  alt="">
         </div>
@@ -27,7 +27,16 @@
     props: {
         farmInfo: {
             type: Object,
-            default: {}
+            default: () => {
+                return {
+                    farm_name: 'test11',
+                    img_url: 'test',
+                    province: '上海',
+                    area: '徐家汇',
+                    score: 100,
+                }
+
+            }
         },
       cartShow: {
         type: Boolean,
