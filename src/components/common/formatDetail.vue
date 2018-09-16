@@ -2,7 +2,7 @@
   <div class="format-container">
         <div class="commodity-info">
           <div class="img-wrapper">
-            <img v-bind:src="commodity.pic" />          
+            <img v-bind:src="commodity.pic" />
           </div>
           <div class="commodity-info-content">
             <p class="price">价格：¥{{ commodity.price }}</p>
@@ -19,14 +19,14 @@
                 v-on:click="handleSelectFormat(option, index)"
               >
                 {{ option }}
-              </span>            
+              </span>
             </div>
           </div>
         </div>
         <div class="number">
           <step
             v-bind:handleChange="handleCountChange"
-            v-bind:current="count"  
+            v-bind:current="count"
           />
         </div>
       </div>

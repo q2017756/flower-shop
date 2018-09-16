@@ -59,7 +59,7 @@
             <div class="text-center">
                 <span class="title-line">猜你喜欢</span>
             </div>
-            <farm-item v-for="n in 4" :key="n"></farm-item>
+            <farm-item v-for="item,index in historyList" :farmInfo="item" :key="index"></farm-item>
         </div>
 
         <bottom-footer/>
@@ -95,6 +95,7 @@
                 wangpaiList: [],
                 newGoodsList: [],
                 hotGoodsList: [],
+                historyList: [],
                 imgs: ['/static/img/best.png', '/static/img/farm.png', '/static/img/farm-header.png', '/static/img/farm-invite.png', '/static/img/home-member.png',],
                 data: {
                     "hotItems": [
@@ -125,8 +126,8 @@
                     ],
                     "bestTopic": {
                         "pic": "/static/img/best.png",
-                        "title": "七夕送花攻略",
-                        "description": "哄女盆友开心神器",
+                        "title": "无接口",
+                        "description": "无接口",
                         "lowestPrice": "19.9",
                         "topicId": "t101"
                     }
@@ -198,6 +199,31 @@
                         console.log(data);
                         Toast("服务器异常")
                     })
+                this.$ajax.post('openapi.php',qs.stringify({
+                    api_type:'common',
+                    api_version:'1.0',
+                    act:'getGoodsLSList',
+                    isEnd:'webroot',
+                    page:1,
+                    pageLimit:10,
+                    memberid:1
+                }))
+                    .then((data)=>{
+                        console.log('history:',data);
+                        if(data.data.res=="succ"){
+                            this.historyList = data.data.result.list
+                            this.historyList.map(item => {
+                                item.farm_name = item.name
+                                item.img_url = item.thumbnail_pic
+                            })
+                        }else{
+                            Toast(data.data.msg)
+                        }
+                    })
+                    .catch((data)=>{
+                        console.log(data);
+                        Toast("服务器异常")
+                    })
             },
             handleDetail(id) {
                 this.$router.push(`/productDetail/${id}`)
@@ -232,7 +258,10 @@
 
 <style lang="scss" scpoed>
     @import '../../styles/common.scss';
-
+    .home-content {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
     .home-member {
         display: flex;
         flex-wrap: wrap;
