@@ -77,7 +77,7 @@
             <slot>
                 <div class="popup">
                     <format-detail
-                        v-bind:commodity="commodity"
+                        v-bind:commodity="productDetail"
                         v-bind:selectString="selectString"
                         v-bind:handleCountChange="handleCountChange"
                         v-bind:handleSelectFormat="handleSelectFormat"
@@ -123,7 +123,7 @@
     import {fetchProductDetail} from '@/utils/fetchData'
     import {mapState, mapActions} from 'vuex'
     import qs from 'qs'
-    import {Toast} from 'mint-ui';
+    import {Toast} from 'mint-ui'
 
     export default {
         data() {
@@ -139,11 +139,11 @@
                     "format": [
                         {
                             "name": "颜色",
-                            "options": ["无颜色", "无颜色"]
+                            "options": ["无颜色", "无颜色1"]
                         },
                         {
                             "name": "规格",
-                            "options": ["无规格", "无规格"]
+                            "options": ["无规格", "无规格1"]
                         }
                     ]
                 },
@@ -189,6 +189,7 @@
             ...mapActions(['showCommodityDetail', 'addToCart', 'changeSelectFormat',
                 'addToCart']),
             getData() {
+                // 商品信息
                 this.$ajax.post('openapi.php', qs.stringify({
                     api_type: 'common',
                     api_version: '1.0',
@@ -197,7 +198,7 @@
                     g: this.$route.params.id
                 }))
                     .then((data) => {
-                        console.log('detail:', data);
+                        console.log('detail:', data)
                         if (data.data.res == "succ") {
                             this.detail = data.data.result[this.$route.params.id]
                             this.detail.pics = this.detail.thumbnail_pic.split(',')
@@ -206,7 +207,28 @@
                         }
                     })
                     .catch((data) => {
-                        console.log(data);
+                        console.log(data)
+                        Toast("服务器异常")
+                    })
+                // 商品规格
+                this.$ajax.post('openapi.php', qs.stringify({
+                    api_type: 'common',
+                    api_version: '1.0',
+                    isEnd: 'webroot',
+                    act: 'getGoodsInfos',
+                    goods_id: this.$route.params.id
+                }))
+                    .then((data) => {
+                        console.log('guige:', data)
+                        if (data.data.res == "succ") {
+                            // this.detail = data.data.result[this.$route.params.id]
+                            // this.detail.pics = this.detail.thumbnail_pic.split(',')
+                        } else {
+                            Toast(data.data.msg)
+                        }
+                    })
+                    .catch((data) => {
+                        console.log(data)
                         Toast("服务器异常")
                     })
             },

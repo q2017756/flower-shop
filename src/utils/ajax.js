@@ -9,6 +9,7 @@ axios.defaults.baseURL ='http://nwww.florinsight.com/';
 axios.defaults.headers = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
+// axios.defaults.withCredentials = true
 axios.interceptors.request.use(function (config) {
     return config;
 }, function (error) {
