@@ -165,6 +165,10 @@ export default new Router({
           component: resolve => require(['@/containers/tools/address'], resolve)
         },
           {
+              path: '/addressList',
+              component: resolve => require(['@/containers/tools/addressList'], resolve)
+          },
+          {
               path: '/aboutus',
               component: resolve => require(['@/containers/tools/aboutUs'], resolve)
           },

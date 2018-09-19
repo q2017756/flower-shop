@@ -112,7 +112,7 @@
                 <img class="dp-rights" src="../../../static/imgs/right.png"/>
             </div>
             <div class="d-d-d">
-                <div @click="goPage('/addressX')" class="d-l d-l-l">
+                <div @click="goPage('/addressList')" class="d-l d-l-l">
                     <img src="../../../static/imgs/address.png" alt=""><br>
                     <span>地址</span>
                 </div>

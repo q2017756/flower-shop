@@ -18,23 +18,27 @@
             infinite-scroll-distance="0">
             <li v-for="item in  listData" @click="goDetails(item)" class="list-li">
                 <div class="title">
-                    <span>订单编号：5622456</span>
+                    <span>订单编号：{{item.order_id}}</span>
                     <span>订单生成</span>
                 </div>
-                <div class="content">
+                <div v-for="sonItem in item.goods_info" class="content">
                     <div class="img-d">
-                        <img src="../../../static/imgs/flower.jpg" alt="">
+                        <img :src="sonItem.thumbnail_pic" alt="">
                     </div>
-                    <p class="tp">的发送到发发大发房贷安抚阿士大夫大发啊打发啊打发啊打发啊打发大发大发啊</p>
+                    <p class="tp">{{sonItem.name}}</p>
                 </div>
                 <div class="bot-d">
-                    <span class="money">应付：￥251.00</span>
+                    <span class="money">应付：{{item.total_amount}}</span>
                     <div class="btn-d">
-                        <span class="qx btn">取消订单</span>
-                        <span class="fk btn">去付款</span>
+                        <span @click="cancle_order(item.order_id)" class="qx btn">取消订单</span>
+                        <span @click="pay(item.order_id)" class="fk btn">去付款</span>
                     </div>
                 </div>
             </li>
+            <div v-show="listData.length==0" style="text-align: center;padding-top: 3rem">
+                <img style="width: 3rem" src="../../assets/icon/no_order.png"/><br/>
+                <span style="color: #d9d9d9;padding-top: 0.3rem;display: inline-block;font-size: 13px" class="">暂无数据</span>
+            </div>
             <mt-spinner color="rgb(16, 187, 230)" v-show="loading" type="triple-bounce"></mt-spinner>
             <div v-show="finalPage" style="width: 100%;font-size: 0.7rem;color: #999999;padding-bottom: 0.5rem;text-align: center;background: white;">没有更多数据</div>
         </ul>
@@ -46,6 +50,7 @@
     import { Header } from 'mint-ui';
     import { MessageBox } from 'mint-ui';
     import { Indicator } from 'mint-ui';
+    import { Toast } from 'mint-ui';
     import qs from "qs"
     export default {
         name: "myOrder",
@@ -66,12 +71,31 @@
                     state:this.selected
                 }))
                     .then((data)=>{
-                        console.log(data)
+                        console.log(data);
+                        if(data.data.res == "succ"){
+                            this.listData=data.data.result.data
+                        }
                     })
                     .catch((data)=>{
                         console.log(data)
                     })
-            }
+            },
+            cancle_order(id){
+                this.$ajax.post("/openapi.php?act=closeOrder",{
+                    order_id:id
+                })
+                    .then((data)=>{
+                        console.log(data);
+                        if(data.data.res == "succ"){
+
+                        }else{
+                            Toast(data.data.msg)
+                        }
+                    })
+            },
+            pay(){
+
+            },
         },
         watch:{
             selected(n,o){

@@ -107,7 +107,6 @@
 </script>
 <style lang="scss" scoped>
   @import '../../styles/common';
-
   .product-list {
     display: flex;
     flex-direction: column;

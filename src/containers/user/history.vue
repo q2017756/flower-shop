@@ -121,6 +121,7 @@
 
 <script>
   import { Header } from 'mint-ui';
+  import urls from "../../utils/url"
     export default {
         name: "history",
         data(){
@@ -128,6 +129,15 @@
                 qx:false
             }
 
+        },
+        mounted(){
+            console.log(this.$ajax)
+            this.$ajax.post(urls.baseUrl,{
+
+            })
+                .then((data)=>{
+                    console.log(data)
+                })
         }
     }
 </script>

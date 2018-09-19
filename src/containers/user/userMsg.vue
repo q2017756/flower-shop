@@ -11,21 +11,28 @@
             <!--<mt-cell class="cell" title="用户名" is-link>-->
                 <!--<span>111</span>-->
             <!--</mt-cell>-->
-            <mt-cell class="cell"  title="昵称" is-link>
-                <span>justPlay</span>
-            </mt-cell>
+            <div @click="editName">
+                <mt-cell class="cell"  title="昵称" is-link>
+                    <span>justPlay</span>
+                </mt-cell>
+            </div>
             <mt-cell class="cell"  title="性别" is-link>
                 <span>男</span>
             </mt-cell>
             <mt-cell class="cell" title="生日" is-link>
                 <span>2018-10-12</span>
             </mt-cell>
-            <mt-cell class="cell"  title="积分中心" is-link>
-                <span></span>
-            </mt-cell>
-            <mt-cell  title="地址管理" is-link>
-                <span></span>
-            </mt-cell>
+            <div @click="goScore">
+                <mt-cell  class="cell"  title="积分中心" is-link>
+                    <span></span>
+                </mt-cell>
+            </div>
+            <div @click="goAddress">
+                <mt-cell  title="地址管理" is-link>
+                    <span></span>
+                </mt-cell>
+            </div>
+
         </div>
         <div @click="logOut" class="bust">退出当前登录</div>
     </div>
@@ -34,8 +41,11 @@
 <script>
     import { Cell } from 'mint-ui';
     import { Toast } from 'mint-ui';
+    import { MessageBox } from 'mint-ui';
+    import RouterLink from "vant/es/mixins/router-link";
     export default {
         name: "userMsg",
+        components: {RouterLink},
         data(){
             return{
 
@@ -53,7 +63,36 @@
                             Toast(data.data.msg)
                         }
                     })
+            },
+            editName(){
+                MessageBox.prompt('请输入要修改的姓名').then(({ value, action }) => {
+                    if(action){
+                        this.$ajax.post("/openapi.php?act=saveName",{
+                            name:value
+                        })
+                            .then((data)=>{
+                                console.log(data);
+                                if(data.data.res=="succ"){
+                                    Toast(data.data.msg)
+                                }else {
+                                    Toast(data.data.msg?data.data.msg:"保存失败")
+                                }
+                            })
+                    }
+                });
+            },
+            goScore(){
+                this.$router.push("/score")
+            },
+            goAddress(){
+                this.$router.push("/addressList")
             }
+        },
+        mounted(){
+            this.$ajax.post("openapi.php?act=editMember")
+                .then((data)=>{
+                    console.log(data)
+                })
         }
     }
 </script>

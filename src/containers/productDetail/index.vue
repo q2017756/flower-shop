@@ -99,7 +99,7 @@
         <img src="../../assets/icon/tabbar-farm.png" alt="">
         <span>农场</span>
       </div>
-      <div class="icon-item">
+      <div @click="colGoods" class="icon-item">
         <img src="../../assets/icon/star.png" alt="">
         <span>收藏</span>
       </div>
@@ -120,6 +120,7 @@
   import formatDetail from '@/components/common/formatDetail'
   import { fetchProductDetail } from '@/utils/fetchData'
   import { mapState, mapActions } from 'vuex'
+  import { Toast } from 'mint-ui';
   export default {
     data () {
       return {
@@ -318,6 +319,18 @@
         //     this.productDetail = r[pId]
         //   })
       },
+        // 商品收藏
+        colGoods(){
+          this.$ajax.post("openapi.php?act=doFavorite",{
+              goods_id:this.$route.params.id
+          })
+              .then((data)=>{
+                  console.log(data);
+                  if(data.data.res=="succ"){
+                      Toast(data.data.msg)
+                  }
+              })
+        }
     },
     mounted () {
       // this.fetchData()

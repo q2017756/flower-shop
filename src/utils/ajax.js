@@ -1,7 +1,7 @@
 // 简易的axios
 import Vue from "vue";
 import axios from "axios";
-Vue.prototype.$ajax = axios;
+Vue.prototype.ajax = axios;
 var api = window.location.origin;
 // alert(api)
 axios.defaults.timeout = 5000;

@@ -78,11 +78,11 @@
         this.id=this.$route.query.farmId;
         console.log('ssss')
         // 请求上品
-          this.$ajax.post("openapi.php?act=getFarmGoods",{
-              farm_id:1,
+          this.$ajax.post("openapi.php?act=getFarmGoods",qs.stringify({
+              farm_id:11,
               start:this.page*this.count,
               limit:(this.page+1)*this.count
-          })
+          }))
               .then((data)=>{
                   console.log(data)
               })
