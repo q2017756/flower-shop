@@ -39,7 +39,7 @@
                 isEnd:'webroot',
                 page:1,
                 pageLimit:10,
-                type:'tag',
+                // type:'tag',
             }))
                 .then((data)=>{
                     console.log('tag:',data);

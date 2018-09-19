@@ -1,19 +1,19 @@
 <template>
   <router-link class="farm-item" v-bind:to="toPath">
-    <img class="farm-img" src="../../assets/img/flower-img.png"/>
+    <img class="farm-img" :src="farmInfo.img_url"/>
     <div CLASS="text-container">
-      <p class="name">向日葵生日花束</p>
+      <p class="name">{{farmInfo.farm_name}}</p>
       <div v-if="!addrShow" class="price-container">
-        <span class="price">￥100</span>
-        <span class="old-price">￥200</span>
+        <span class="price">￥{{farmInfo.price}}</span>
+        <span class="old-price">￥{{farmInfo.gprice}}</span>
       </div>
       <div class="info-container font-smaller">
         <span  v-if="!addrShow" class="num ">库存: 100件</span>
         <span  v-else class="address">
           <img class="addr-icon" src="../../assets/icon/addr.png" alt="">
-          <span class="addr-text">云南省昆明市官渡区</span>
+          <span class="addr-text">{{farmInfo.province}}{{farmInfo.area}}</span>
         </span>
-        <span v-if="!cartShow" class="comment">98%好评</span>
+        <span v-if="!cartShow" class="comment">{{farmInfo.score ? farmInfo.score : 100}}%好评</span>
         <div v-else>
           <img class="farm-cart" src="../../assets/icon/tabbar-cart.png"  alt="">
         </div>
@@ -25,6 +25,19 @@
 <script>
   export default {
     props: {
+        farmInfo: {
+            type: Object,
+            default: () => {
+                return {
+                    farm_name: 'test11',
+                    img_url: 'test',
+                    province: '上海',
+                    area: '徐家汇',
+                    score: 100,
+                }
+
+            }
+        },
       cartShow: {
         type: Boolean,
         default: false
@@ -63,6 +76,7 @@
       align-self: center;
       display: inline-block;
       width: 90%;
+        height: 60%;
     }
     .text-container {
       width: 100%;

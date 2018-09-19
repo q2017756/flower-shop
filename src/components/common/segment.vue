@@ -9,7 +9,7 @@
       <div :class="['segment-item', select === title ? 'current-item' : '']"
            v-for="title in titles"
            @click="handleItemClick(title)">
-        <span>{{ title.tag_name }}</span>
+        <span>{{ title.cat_name }}</span>
       </div>
     </div>
   </div>

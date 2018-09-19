@@ -2,7 +2,7 @@
   <div class="format-container">
         <div class="commodity-info">
           <div class="img-wrapper">
-            <img v-bind:src="commodity.pic" />          
+            <img v-bind:src="commodity.pics[0]" />
           </div>
           <div class="commodity-info-content">
             <p class="price">价格：¥{{ commodity.price }}</p>
@@ -10,7 +10,7 @@
           </div>
         </div>
         <div class="format-content">
-          <div v-for="(format, index) in commodity.formats" class="format-content-item">
+          <div v-for="(format, index) in commodity.format" class="format-content-item">
             <h4>{{ format.name }}</h4>
             <div class="format-item-container">
               <span
@@ -19,14 +19,14 @@
                 v-on:click="handleSelectFormat(option, index)"
               >
                 {{ option }}
-              </span>            
+              </span>
             </div>
           </div>
         </div>
         <div class="number">
           <step
             v-bind:handleChange="handleCountChange"
-            v-bind:current="count"  
+            v-bind:current="count"
           />
         </div>
       </div>
@@ -36,12 +36,6 @@
   import step from '@/components/common/step'
   export default {
     components: { step },
-    // props: ['commodity', 'selects', 'handleSelectFormat', 'handleCountChange', 'count'],
-    // computed: {
-    //   selectString () {
-    //     return this.selects ? this.selects.join(' ') : ''
-    //   }
-    // },
     props: ['commodity', 'selectString', 'handleSelectFormat', 'handleCountChange', 'count'],
     computed: {
       selects () {
@@ -51,15 +45,6 @@
         return this.selectString.split(' ')
       }
     },
-    // watch: {
-    //   selects: {
-    //     handler: function (val, oldVal) {
-    //       console.log('selects...')
-    //       console.log(val)
-    //     },
-    //     deep: true
-    //   }
-    // }
   }
 </script>
 
