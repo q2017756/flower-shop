@@ -1,11 +1,13 @@
 // 简易的axios
 import Vue from "vue";
 import axios from "axios";
+import { Toast } from 'mint-ui';
+import qs from 'qs'
 Vue.prototype.$ajax = axios;
 var api = window.location.origin;
 // alert(api)
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL ='http://nwww.florinsight.com/';
+axios.defaults.baseURL ='http://static.florinsight.com/service';
 axios.defaults.headers = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
@@ -38,4 +40,39 @@ var $ajax={
     }
 };
 Vue.prototype.$ajax = $ajax;
+
+Vue.prototype.$axios = (url,data,cb,type) => {
+    if(type === 'get') {
+        $ajax.get(url)
+            .then((res)=>{
+                cb(res)
+            })
+            .catch((error)=>{
+                console.log(error);
+                Toast("服务器异常")
+            })
+    }else {
+        $ajax.post(url,qs.stringify({
+            api_type:'common',
+            api_version:'1.0',
+            isEnd:'webroot',
+            ...data
+        }))
+            .then((res)=>{
+                cb(res)
+            })
+            .catch((error)=>{
+                console.log(error);
+                Toast("服务器异常")
+            })
+    }
+}
+
+// demo
+// this.$axios('', {
+//
+// }, (data) => {
+//
+// })
+
 export default $ajax;

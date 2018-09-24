@@ -24,10 +24,10 @@
                     </p>
                     <h3 class="title">{{ detail.name }}</h3>
                     <div class="tag-wrapper">
-                        <span class="font-smaller-b">A级</span>
-                        <span class="font-smaller-b">库存100件</span>
-                        <span class="font-smaller-b">花知农场</span>
-                        <span class="font-smaller-b">好评率:97%</span>
+                        <span class="font-smaller-b">？？级</span>
+                        <span class="font-smaller-b">库存{{detail.goods_store}}件</span>
+                        <span class="font-smaller-b">？？农场</span>
+                        <span class="font-smaller-b">好评率:？？%</span>
                     </div>
                     <span class="sales">月销: 100件</span>
                 </div>
@@ -190,47 +190,46 @@
                 'addToCart']),
             getData() {
                 // 商品信息
-                this.$ajax.post('openapi.php', qs.stringify({
-                    api_type: 'common',
-                    api_version: '1.0',
+                this.$axios('', {
                     act: 'getGoodsAttr',
-                    isEnd: 'webroot',
                     g: this.$route.params.id
-                }))
-                    .then((data) => {
-                        console.log('detail:', data)
-                        if (data.data.res == "succ") {
-                            this.detail = data.data.result[this.$route.params.id]
-                            this.detail.pics = this.detail.thumbnail_pic.split(',')
-                        } else {
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data) => {
-                        console.log(data)
-                        Toast("服务器异常")
-                    })
+                }, (data) => {
+                    console.log('detail:', data)
+                    if (data.data.res == "succ") {
+                        this.detail = data.data.result[this.$route.params.id]
+                        this.detail.pics = this.detail.thumbnail_pic.split(',')
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
+
                 // 商品规格
-                this.$ajax.post('openapi.php', qs.stringify({
-                    api_type: 'common',
-                    api_version: '1.0',
-                    isEnd: 'webroot',
+                this.$axios('', {
                     act: 'getGoodsInfos',
                     goods_id: this.$route.params.id
-                }))
-                    .then((data) => {
-                        console.log('guige:', data)
-                        if (data.data.res == "succ") {
-                            // this.detail = data.data.result[this.$route.params.id]
-                            // this.detail.pics = this.detail.thumbnail_pic.split(',')
-                        } else {
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data) => {
-                        console.log(data)
-                        Toast("服务器异常")
-                    })
+                }, (data) => {
+                    console.log('guige:', data)
+                    if (data.data.res == "succ") {
+                        // this.detail = data.data.result[this.$route.params.id]
+                        // this.detail.pics = this.detail.thumbnail_pic.split(',')
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
+                // 商品详情
+                this.$axios('', {
+                    act: 'getGoodsIntro',
+                    goods_id: this.$route.params.id
+                }, (data) => {
+                    console.log('xiangqing:', data)
+                    if (data.data.res == "succ") {
+                        // this.detail = data.data.result[this.$route.params.id]
+                        // this.detail.pics = this.detail.thumbnail_pic.split(',')
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
+
             },
             pushToComment() {
                 this.$router.push('/comment')
