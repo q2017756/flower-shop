@@ -25,11 +25,11 @@
                     <h3 class="title">{{ detail.name }}</h3>
                     <div class="tag-wrapper">
                         <span class="font-smaller-b">？？级</span>
-                        <span class="font-smaller-b">库存{{detail.goods_store}}件</span>
+                        <span class="font-smaller-b">库存{{format.goods_store}}件</span>
                         <span class="font-smaller-b">？？农场</span>
                         <span class="font-smaller-b">好评率:？？%</span>
                     </div>
-                    <span class="sales">月销: 100件</span>
+                    <span class="sales">月销: ??件</span>
                 </div>
             </div>
 
@@ -41,8 +41,8 @@
                 <div class="coupon-content">
                     <span>优惠券</span>
                     <div class="item-container">
-                        <span class="coupon-item">满299减100</span>
-                        <span class="coupon-item">满199减100</span>
+                        <span class="coupon-item">满??减??</span>
+                        <span class="coupon-item">满??减??</span>
                     </div>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <!--<attribute-container />-->
             <div class="product-detail">
                 <div class="title">商品详情</div>
-                <div>xxxxx</div>
+                <div class="content" v-html="format.intro"></div>
                 <!--<p v-for="detailPic in productDetail.detailPics">-->
                 <!--<img v-bind:src="detailPic" />-->
                 <!--</p>-->
@@ -77,7 +77,8 @@
             <slot>
                 <div class="popup">
                     <format-detail
-                        v-bind:commodity="productDetail"
+                        v-bind:commodity="detail"
+                        :format="format"
                         v-bind:selectString="selectString"
                         v-bind:handleCountChange="handleCountChange"
                         v-bind:handleSelectFormat="handleSelectFormat"
@@ -129,6 +130,7 @@
         data() {
             return {
                 detail: {},
+                format: {},
                 productDetail: {
                     "pId": "p1000001",
                     "title": "玫瑰花",
@@ -155,7 +157,7 @@
         computed: {
             // ...mapState(['selectFormat'])
             selectFormat() {
-                console.log('------')
+                console.log('11111')
                 console.log(this.$store.state.selectFormat)
                 const selectFormat = this.$store.state.selectFormat
                 return selectFormat[this.$route.params.id] || {}
@@ -210,7 +212,7 @@
                 }, (data) => {
                     console.log('guige:', data)
                     if (data.data.res == "succ") {
-                        // this.detail = data.data.result[this.$route.params.id]
+                         this.format = data.data.result
                         // this.detail.pics = this.detail.thumbnail_pic.split(',')
                     } else {
                         Toast(data.data.msg)
@@ -477,6 +479,7 @@
         .coupon-content {
             padding-top: px2rem(8);
             .item-container {
+                width: 75%;
                 display: flex;
                 flex-wrap: wrap;
             }
@@ -566,6 +569,9 @@
             padding: px2rem(10) px2rem(15);
             font-size: px2rem($size_default);
             color: #000;
+        }
+        .content {
+            padding: 0 px2rem(15) px2rem(10) px2rem(15);
         }
         p {
             font-size: 0;
