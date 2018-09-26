@@ -1,6 +1,6 @@
 <template>
   <div class="c-container">
-    <carousel v-bind:pics="imgs" />
+    <carousel v-bind:pics="imgs" :imgsDetail="imgsDetail" />
     <ul class="cc-bottom">
       <li><i/><span>基地直供</span></li>
       <li><i/><span>精选优品</span></li>
@@ -12,7 +12,7 @@
 <script>
     import carousel from '@/components/common/carousel'
     export default {
-      props: ['imgs'],
+      props: ['imgs','imgsDetail'],
       components: { carousel }
     }
 </script>

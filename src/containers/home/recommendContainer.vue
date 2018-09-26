@@ -1,6 +1,6 @@
 <template>
     <div class="home-content">
-        <carousel-container :imgs="imgs"/>
+        <carousel-container :imgs="imgs" :imgsDetail="imgsDetail"/>
         <home-list title="王牌切花" :list="wangpaiList" @handleDetail="handleDetail"></home-list>
 
         <div class="home-member">
@@ -96,6 +96,7 @@
                 newGoodsList: [],
                 hotGoodsList: [],
                 historyList: [],
+                imgsDetail:[],
                 imgs: ['/static/img/best.png', '/static/img/farm.png', '/static/img/farm-header.png', '/static/img/farm-invite.png', '/static/img/home-member.png',],
                 data: {
                     "hotItems": [
@@ -136,94 +137,77 @@
         },
         methods: {
             getData() {
-                this.$ajax.post('openapi.php',qs.stringify({
-                    api_type:'common',
-                    api_version:'1.0',
+                this.$axios('', {
                     act:'getGoodsList',
-                    isEnd:'webroot',
                     page:1,
                     pageLimit:10,
                     tag_id: 146672
-                }))
-                    .then((data)=>{
-                        console.log('list1:',data);
-                        if(data.data.res=="succ"){
-                            this.wangpaiList = data.data.result.list.slice(0,6)
-                        }else{
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data)=>{
-                        console.log(data);
-                        Toast("服务器异常")
-                    })
-                this.$ajax.post('openapi.php',qs.stringify({
-                    api_type:'common',
-                    api_version:'1.0',
+                }, (data) => {
+                    console.log('list1:',data);
+                    if(data.data.res=="succ"){
+                        this.wangpaiList = data.data.result.list.slice(0,6)
+                    }else{
+                        Toast(data.data.msg)
+                    }
+                })
+                this.$axios('', {
                     act:'getGoodsList',
-                    isEnd:'webroot',
                     page:1,
                     pageLimit:10,
                     tag_id: 146666
-                }))
-                    .then((data)=>{
-                        console.log('list2:',data);
-                        if(data.data.res=="succ"){
-                            this.newGoodsList = data.data.result.list.slice(0,6)
-                        }else{
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data)=>{
-                        console.log(data);
-                        Toast("服务器异常")
-                    })
-                this.$ajax.post('openapi.php',qs.stringify({
-                    api_type:'common',
-                    api_version:'1.0',
+                }, (data) => {
+                    console.log('list2:',data);
+                    if(data.data.res=="succ"){
+                        this.newGoodsList = data.data.result.list.slice(0,6)
+                    }else{
+                        Toast(data.data.msg)
+                    }
+                })
+                this.$axios('', {
                     act:'getGoodsList',
-                    isEnd:'webroot',
                     page:1,
                     pageLimit:10,
                     tag_id: 146664
-                }))
-                    .then((data)=>{
-                        console.log('list3:',data);
-                        if(data.data.res=="succ"){
-                            this.hotGoodsList = data.data.result.list.slice(0,6)
-                        }else{
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data)=>{
-                        console.log(data);
-                        Toast("服务器异常")
-                    })
-                this.$ajax.post('openapi.php',qs.stringify({
-                    api_type:'common',
-                    api_version:'1.0',
+                }, (data) => {
+                    console.log('list3:',data);
+                    if(data.data.res=="succ"){
+                        this.hotGoodsList = data.data.result.list.slice(0,6)
+                    }else{
+                        Toast(data.data.msg)
+                    }
+                })
+
+                this.$axios('', {
                     act:'getGoodsLSList',
-                    isEnd:'webroot',
                     page:1,
                     pageLimit:10,
                     memberid:1
-                }))
-                    .then((data)=>{
-                        console.log('history:',data);
-                        if(data.data.res=="succ"){
-                            this.historyList = data.data.result.list
-                            this.historyList.map(item => {
-                                item.farm_name = item.name
-                                item.img_url = item.thumbnail_pic
-                            })
-                        }else{
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data)=>{
-                        console.log(data);
-                        Toast("服务器异常")
-                    })
+                }, (data) => {
+                    console.log('history:',data);
+                    if(data.data.res=="succ"){
+                        this.historyList = data.data.result.list
+                        this.historyList.map(item => {
+                            item.farm_name = item.name
+                            item.img_url = item.thumbnail_pic
+                        })
+                    }else{
+                        Toast(data.data.msg)
+                    }
+                })
+                this.$axios('', {
+                    act:'getSlideshow',
+                }, (data) => {
+                    console.log('history:',data);
+                    if(data.data.res=="succ"){
+                        this.imgsDetail = data.data.result
+                        this.imgs = []
+                        this.imgsDetail.map((item) => {
+                            this.imgs.push(item.url)
+                        })
+                    }else{
+                        Toast(data.data.msg)
+                    }
+                })
             },
             handleDetail(id) {
                 this.$router.push(`/productDetail/${id}`)

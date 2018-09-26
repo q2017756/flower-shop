@@ -14,6 +14,7 @@
 <script>
   export default {
     props: {
+        imgsDetail: Array,
       pics: Array,
       hideIndicator: {
         default: false,
@@ -23,12 +24,14 @@
         type: Function,
         default: () => {}
       },
-      onPicClick: {
-        type: Function,
-        default: (index) => {
-          console.log('click pic at index: ', index)
-        }
-      }
+//      onPicClick: {
+//        type: Function,
+//        default: (index) => {
+//            this.$router.push(`/productDetail/${item[index].goods_id}`)
+//          console.log('click pic at index: ', index)
+////            this.$router.push(`/productDetail/${imgsDetail.id}`)
+//        }
+//      }
     },
     data () {
       return {
@@ -57,6 +60,10 @@
       clearTimeout(this.timeId)
     },
     methods: {
+        onPicClick(index) {
+            this.$router.push(`/productDetail/${this.imgsDetail[index].id}`)
+            console.log('click pic at index: ', index)
+        },
       handleEnd (e) {
         const width = this.$el.clientWidth
         // 大于是左
@@ -83,7 +90,7 @@
         this.dragDelta = delta
         if (Math.abs(delta) >= width) {
           this.dragDelta = width
-          return 
+          return
         }
         this.$refs.swiper && (this.$refs.swiper.style = `transition-duration: 0ms; transform: translate(${delta - width}px, 0px) translateZ(0px);`)
       },
@@ -106,7 +113,7 @@
           // 这里的复制顺序要注意。 preIndex要在currentIndex之后
           this.currentIndex = this.preIndex
           this.nextIndex = this.currentIndex
-          this.preIndex = this.preIndex === 0 ? this.pics.length - 1 : this.preIndex - 1          
+          this.preIndex = this.preIndex === 0 ? this.pics.length - 1 : this.preIndex - 1
         }, duration)
       },
       rightAnimate (delta) {
@@ -181,4 +188,3 @@
     opacity: 1.0;
   }
 </style>
- 

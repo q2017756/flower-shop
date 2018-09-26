@@ -25,7 +25,7 @@
     },
     methods: {
       handleBack() {
-        this.$router.go(-1)
+        this.$router.back()
       }
     }
   }

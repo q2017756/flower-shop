@@ -13,7 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="more" @click="handleList">查看更多{{title}}</div>
+    <div class="more" @click="handleList(title)">查看更多{{title}}</div>
   </div>
 </template>
 <script>
@@ -32,7 +32,12 @@
       handleDetail(item) {
         this.$emit('handleDetail',item.goods_id)
       },
-        handleList() {
+        handleList(name) {
+            localStorage.setItem('productList',JSON.stringify({
+                catId: '',
+                tagId: '',
+                keywords: name
+            }))
           this.$router.push('/productList')
         }
 
