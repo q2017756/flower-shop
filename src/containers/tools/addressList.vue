@@ -16,25 +16,16 @@
 <script>
     import { AddressList } from 'vant';
     import { Toast } from 'mint-ui';
+    import urls from "../../utils/url"
+    import qs from "qs"
     export default {
         name: "addressList",
         data(){
             return{
                 chosenAddressId: '1',
                 list: [
-                    {
-                        id: '1',
-                        name: '张三',
-                        tel: '13000000000',
-                        address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室'
-                    },
-                    {
-                        id: '2',
-                        name: '李四',
-                        tel: '1310000000',
-                        address: '浙江省杭州市拱墅区莫干山路 50 号'
-                    }
                 ],
+                CustList:[]
             }
         },
         components:{
@@ -48,9 +39,37 @@
             },
 
             onEdit(item, index) {
-                Toast('编辑地址:' + index);
-
+                // Toast('编辑地址:' + index);
+                console.log(this.CustList[index]);
+                let address = this.CustList[index]
+                this.$router.push({ name:"address", params:address})
             }
+        },
+        mounted(){
+            this.$ajax.post("",qs.stringify({
+                api_type:"wechat",
+                api_version:"1.0",
+                act:"address_list",
+                isEnd:"webroot",
+                open_id:"15601606633"
+            }))
+                .then((data)=>{
+                    console.log(data);
+                    if(data.data.res=="success"){
+                        let dataArr=[];
+                        let arr = data.data.errMsg.data
+                        for(let i=0;i<arr.length;i++){
+                            dataArr.push({
+                                id:arr[i].id,
+                                name:arr[i].ship_name,
+                                address:arr[i].province+arr[i].city+arr[i].region+arr[i].address,
+                                tel:arr[i].ship_mobile,
+                            })
+                        };
+                        this.list = dataArr;
+                        this.CustList = arr;
+                    }
+                })
         }
     }
 </script>

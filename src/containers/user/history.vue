@@ -121,6 +121,7 @@
 
 <script>
   import { Header } from 'mint-ui';
+  import qs from "qs"
   import urls from "../../utils/url"
     export default {
         name: "history",
@@ -132,9 +133,15 @@
         },
         mounted(){
             console.log(this.$ajax)
-            this.$ajax.post(urls.baseUrl,{
-
-            })
+            this.$ajax.post("",qs.stringify({
+                api_type:"common",
+                api_version:"1.0",
+                act:"getGoodsLSList",
+                isEnd:"webroot",
+                page:1,
+                pageLimit:10,
+                memberid:1
+            }))
                 .then((data)=>{
                     console.log(data)
                 })

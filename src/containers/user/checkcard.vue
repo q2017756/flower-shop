@@ -61,12 +61,18 @@
 
 <script>
     import { Header } from 'mint-ui';
+    import qs from "qs"
     export default {
         name: "cardIndex",
         data(){
             return{
                 selected:'1'
             }
+        },
+        methods:{
+
+        },
+        mounted(){
         }
     }
 </script>

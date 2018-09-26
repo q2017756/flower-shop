@@ -82,12 +82,32 @@
 
 <script>
   import { Header } from 'mint-ui';
+  import qs from "qs"
     export default {
         name: "cardIndex",
         data(){
             return{
                 selected:'1'
             }
+        },
+        methods:{
+            getCard(){
+                this.$ajax.post("",qs.stringify({
+                    api_type:"wechat",
+                    api_version:"1.0",
+                    act:"coupon_list",
+                    isEnd:"webroot",
+                    open_id:"15601606633",
+                    page:1,
+                    pageSize:10
+                }))
+                    .then((data)=>{
+                        console.log(data)
+                    })
+            }
+        },
+        mounted(){
+            this.getCard()
         }
     }
 </script>

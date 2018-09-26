@@ -245,7 +245,7 @@
                 Toast('农场')
             },
             handleCollection() {
-                Toast('收藏')
+                // Toast('收藏')
             },
 
             handlePickFormat() {

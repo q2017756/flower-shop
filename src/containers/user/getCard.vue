@@ -30,8 +30,29 @@
 </template>
 
 <script>
+    import {Toast} from "mint-ui"
+    import qs from "qs"
     export default {
-        name: "getCard"
+        name: "getCard",
+        data(){
+            return{
+
+            }
+        },
+        methods:{
+
+        },
+        mounted(){
+            this.$ajax.post("",qs.stringify({
+                api_type:"common",
+                api_version:"1.0",
+                act:"coupon_list",
+                isEnd:"webroot"
+            }))
+                .then((data)=>{
+                    console.log(data)
+                })
+        }
     }
 </script>
 

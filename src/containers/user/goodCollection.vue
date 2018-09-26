@@ -5,7 +5,7 @@
         <!--<mt-button icon="more" slot="right"></mt-button>-->
       </mt-header>
         <ul>
-            <li>
+            <li v-for="item in list">
                 <div class="g-l clear">
                     <div class="check check-l">
                         <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
@@ -13,15 +13,15 @@
                     </div>
                     <div class="g-m">
                         <div class="img-d">
-                            <img src="../../../static/imgs/flower.jpg" alt="">
+                            <img :src="item.pic_url" alt="">
                         </div>
                         <div class="g-t">
-                            <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
+                            <div class="g-title">{{item.name}}</div>
                             <!--<span class="type">A级</span>-->
                             <div class="bot-p">
-                                <span class="price">￥256.00</span>
+                                <span class="price">￥{{item.price}}</span>
                                 <div>
-                                    <span class="bt-sam">找相似</span>
+                                    <!--<span class="bt-sam">找相似</span>-->
                                     <span class="cart-p"><img src="../../../static/imgs/cart.png" alt=""></span>
                                 </div>
                             </div>
@@ -29,30 +29,30 @@
                     </div>
                 </div>
             </li>
-            <li>
-                <div class="g-l clear">
-                    <div class="check check-l">
-                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
-                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
-                    </div>
-                    <div class="g-m">
-                        <div class="img-d">
-                            <img src="../../../static/imgs/flower.jpg" alt="">
-                        </div>
-                        <div class="g-t">
-                            <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
-                            <!--<span class="type">A级</span>-->
-                            <div class="bot-p">
-                                <span class="price">￥256.00</span>
-                                <div>
-                                    <span class="bt-sam">找相似</span>
-                                    <span class="cart-p"><img src="../../../static/imgs/cart.png" alt=""></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
+            <!--<li>-->
+                <!--<div class="g-l clear">-->
+                    <!--<div class="check check-l">-->
+                        <!--<i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>-->
+                        <!--<i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>-->
+                    <!--</div>-->
+                    <!--<div class="g-m">-->
+                        <!--<div class="img-d">-->
+                            <!--<img src="../../../static/imgs/flower.jpg" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="g-t">-->
+                            <!--<div class="g-title">满天星满天星满天星满天星满天星满天星</div>-->
+                            <!--&lt;!&ndash;<span class="type">A级</span>&ndash;&gt;-->
+                            <!--<div class="bot-p">-->
+                                <!--<span class="price">￥256.00</span>-->
+                                <!--<div>-->
+                                    <!--<span class="bt-sam">找相似</span>-->
+                                    <!--<span class="cart-p"><img src="../../../static/imgs/cart.png" alt=""></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</li>-->
         </ul>
     </div>
 </template>
@@ -62,14 +62,18 @@
         name: "goodCollection",
       data(){
           return{
-            qx:''
+            qx:'',
+              list:[],
           }
       },
         methods:{
             getGood(){
                 this.$ajax.post("openapi.php?act=myFavorites")
                     .then((data)=>{
-                        console.log(data)
+                        console.log(data);
+                        if(data.data.res == "succ"){
+                            this.list = data.data.result.favorites.data;
+                        }
                     })
             }
         },
@@ -141,6 +145,7 @@
     }
     .g-t{
         padding-left: 0.2rem;
+        width: 8rem;
         position: relative;
     }
     .g-l{

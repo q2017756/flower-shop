@@ -162,7 +162,8 @@ export default new Router({
           },
         {
           path: '/addressX',
-          component: resolve => require(['@/containers/tools/address'], resolve)
+          component: resolve => require(['@/containers/tools/address'], resolve),
+            name:"address"
         },
           {
               path: '/addressList',

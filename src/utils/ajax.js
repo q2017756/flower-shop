@@ -5,7 +5,7 @@ Vue.prototype.ajax = axios;
 var api = window.location.origin;
 // alert(api)
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL ='http://nwww.florinsight.com/';
+axios.defaults.baseURL ='http://static.florinsight.com/service';
 axios.defaults.headers = {
     "Content-Type": "application/x-www-form-urlencoded"
 }
