@@ -131,24 +131,7 @@
             return {
                 detail: {},
                 format: {},
-                productDetail: {
-                    "pId": "p1000001",
-                    "title": "玫瑰花",
-                    "description": "MUJI代工厂，素雅大气，结实不易蛀",
-                    "price": "1699111",
-                    "commentCount": "0",
-                    "pics": ["/static/img/rose.png", "/static/img/flower-img.png", "/static/img/home-activity-3.png"],
-                    "format": [
-                        {
-                            "name": "颜色",
-                            "options": ["无颜色", "无颜色1"]
-                        },
-                        {
-                            "name": "规格",
-                            "options": ["无规格", "无规格1"]
-                        }
-                    ]
-                },
+                commentList: [],
                 currentPic: 1,
                 popupVisible: false,
                 count: this.$store.state.selectFormat.count || 1
@@ -211,22 +194,20 @@
                     goods_id: this.$route.params.id
                 }, (data) => {
                     console.log('guige:', data)
-                    if (data.data.res == "succ") {
-                         this.format = data.data.result
-                        // this.detail.pics = this.detail.thumbnail_pic.split(',')
+                    if (data.data.res === "succ") {
+                        this.format = data.data.result
                     } else {
                         Toast(data.data.msg)
                     }
                 })
-                // 商品详情
+                // 商品评价
                 this.$axios('', {
-                    act: 'getGoodsIntro',
+                    act: 'getComment',
                     goods_id: this.$route.params.id
                 }, (data) => {
-                    console.log('xiangqing:', data)
-                    if (data.data.res == "succ") {
-                        // this.detail = data.data.result[this.$route.params.id]
-                        // this.detail.pics = this.detail.thumbnail_pic.split(',')
+                    console.log('评价:', data)
+                    if (data.data.res === "succ") {
+                        this.commentList = data.data.result
                     } else {
                         Toast(data.data.msg)
                     }
@@ -337,7 +318,79 @@
                     count: currentVal
                 })
                 this.count = currentVal
-            }
+            },
+
+            handleAddCart() {
+                // const format = this.selectFormat.format
+                // this.addToCart({
+                //     id: this.detail.goods_id,
+                //     title: this.detail.name,
+                //     price: this.detail.price,
+                //     pic: this.detail.thumbnail_pic,
+                //     selectd: true,
+                //     count: this.count,
+                //     formats: format,
+                //     selectString: this.selectFormat.format.join(';')
+                // })
+                const pid = JSON.stringify(this.selectFormat) === "{}" ? this.format.product[0].pid : this.format.product.filter(item => item.text === this.selectFormat.format[0])[0].pid
+                this.$axios('', {
+                    act: 'carts_add',
+                    product_id: pid,
+                    open_id: '15601606633',
+                    product_num: this.count
+                }, (data) => {
+                    console.log('add:', data)
+                    if (data.data.res === "succ") {
+                        Toast('添加购物车成功')
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
+            },
+            handleAddToCart() {
+                console.log('add to cart...')
+                if (this.selects.length === this.commodity.formats.length) {
+                    this.addToCart({
+                        id: this.commodity.id,
+                        title: this.commodity.title,
+                        price: this.commodity.price,
+                        pic: this.commodity.pic,
+                        selectd: true,
+                        count: this.count,
+                        formats: this.commodity.formats,
+                        selectString: this.selects.join(';')
+                    })
+                }
+            },
+
+            handleBack() {
+                this.popupVisible = false
+            },
+            pushToComment() {
+                this.$router.push('/comment')
+            },
+            handleShare() {
+                Toast('分享')
+            },
+            handleCall() {
+                Toast('客服')
+            },
+            toFarm() {
+                Toast('农场')
+            },
+            handleCollection() {
+                Toast('收藏')
+            },
+            handleCarouselChange(current) {
+                this.currentPic = current + 1
+            },
+            handleBuyNow() {
+                this.popupVisible = true
+            },
+            handleNext() {
+                Toast('无规格，无法进行下一步')
+//        this.$router.push('/confirmOrder')
+            },
         },
         mounted() {
             this.getData();
@@ -581,6 +634,10 @@
             display: flex;
             align-items: center;
             font-size: px2rem($size_middle);
+        }
+        .comment-no {
+            text-align: center;
+            padding: px2rem(15);
         }
     }
 

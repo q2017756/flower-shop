@@ -2,7 +2,7 @@
   <div class="step-container">
     <i class="minus" v-on:click="handleMinus">-</i>
     <div class="input-container">
-      <input type="number" v-model="count" />      
+      <input type="number" v-model="count" @change="handleInput" />
     </div>
     <i class="add" v-on:click="handleAdd">+</i>
   </div>
@@ -29,7 +29,8 @@
     },
     methods: {
       handleAdd () {
-        if (this.count === this.max) {
+          console.log(1)
+          if (this.count === this.max) {
           console.log('max...')
           return
         }
@@ -43,7 +44,11 @@
         }
         this.count -= 1
         this.handleChange(this.count)
-      }
+      },
+        handleInput () {
+
+            this.handleChange(this.count)
+        }
     }
   }
 </script>
@@ -79,7 +84,7 @@
     width: 40%;
     float: left;
   }
-  
+
   .step-container .input-container input {
     width: 100%;
     height: 100%;
@@ -91,10 +96,10 @@
   }
 
   .minus {
-    border-right: 1px solid #e7e7e7;    
+    border-right: 1px solid #e7e7e7;
   }
 
   .add {
-    border-left: 1px solid #e7e7e7;    
+    border-left: 1px solid #e7e7e7;
   }
 </style>
