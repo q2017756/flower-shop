@@ -12,7 +12,7 @@
     </div>
     <transition name="slide" class="transition-slide">
       <div v-if="showMenu" class="menu" >
-        <tabbar v-bind:items="items" class="menu-tab" />        
+        <tabbar v-bind:items="items" class="menu-tab" />
       </div>
     </transition>
   </div>
@@ -66,14 +66,14 @@
     padding: 0 px2rem(8) 0 px2rem(12);
     position: relative;
   }
-  
+
   .bar-left-item, .bar-right-item i {
     display: inline-block;
     width: px2rem(32);
     height: px2rem(32);
     display: inline-block;
     background-repeat: no-repeat;
-    background-size: px2rem(86) px2rem(348);    
+    background-size: px2rem(86) px2rem(348);
   }
 
   .bar-left-item {

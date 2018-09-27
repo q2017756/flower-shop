@@ -133,13 +133,6 @@
                 detail: {},
                 format: {},
                 commentList: [],
-                productDetail: {
-                    "id": "p1000001",
-                    "title": "玫瑰花",
-                    "description": "MUJI代工厂，素雅大气，结实不易蛀",
-                    "price": "1699111",
-                    "commentCount": "0",
-                },
                 currentPic: 1,
                 popupVisible: false,
                 count: this.$store.state.selectFormat.count || 1
@@ -265,15 +258,16 @@
                 //     formats: format,
                 //     selectString: this.selectFormat.format.join(';')
                 // })
+                const pid = JSON.stringify(this.selectFormat) === "{}" ? this.format.product[0].pid : this.format.product.filter(item => item.text === this.selectFormat.format[0])[0].pid
                 this.$axios('', {
                     act: 'carts_add',
-                    product_id: this.$route.params.id,
+                    product_id: pid,
                     open_id: '15601606633',
                     product_num: this.count
                 }, (data) => {
                     console.log('add:', data)
                     if (data.data.res === "succ") {
-
+                        Toast('添加购物车成功')
                     } else {
                         Toast(data.data.msg)
                     }

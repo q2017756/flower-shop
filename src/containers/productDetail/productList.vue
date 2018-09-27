@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="item-container">
+        <div v-if="productList" class="item-container">
             <product-item
                 v-for="(item,index) in productList"
                 :key="index"
@@ -40,6 +40,7 @@
                 </div>
             </product-item>
         </div>
+        <div class="null-data" v-else>暂无数据</div>
         <transition name="fade">
             <div v-show="farmVisible" class="farm-list">
                 <span class="farm-item" v-for="n in 6" :key="n">农场{{n}}</span>
@@ -103,7 +104,8 @@
                 this.$axios('', {
                     act: 'getGoodsList',
                     page: 1,
-                    pageLimit: 10,
+                    // 暂时未做分页
+                    pageLimit: 99999,
                     tag_id: param.catId,
                     cat_id: param.tagId,
                     search_keywords: param.keywords,
