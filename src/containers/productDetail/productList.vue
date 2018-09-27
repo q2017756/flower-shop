@@ -65,7 +65,7 @@
     import appHeader from '@/components/common/appHeader'
     import productItem from '@/components/productDetail/productItem'
     import categoryItemContainer from '@/containers/category/categoryItemContainer'
-    import {Toast} from 'mint-ui';
+    import {Toast} from 'mint-ui'
     import qs from 'qs'
 
     export default {
@@ -96,9 +96,9 @@
         },
         methods: {
             getData() {
-                console.log(1, JSON.parse(localStorage.getItem('productList')).catId);
-                console.log(2, JSON.parse(localStorage.getItem('productList')).tagId);
-                console.log(3, JSON.parse(localStorage.getItem('productList')).keywords);
+                console.log(1, JSON.parse(localStorage.getItem('productList')).catId)
+                console.log(2, JSON.parse(localStorage.getItem('productList')).tagId)
+                console.log(3, JSON.parse(localStorage.getItem('productList')).keywords)
                 const param = JSON.parse(localStorage.getItem('productList'))
                 this.$axios('', {
                     act: 'getGoodsList',
@@ -108,8 +108,8 @@
                     cat_id: param.tagId,
                     search_keywords: param.keywords,
                 }, (data) => {
-                    console.log('list:', data);
-                    if (data.data.res == "succ") {
+                    console.log('list:', data)
+                    if (data.data.res === "succ") {
                         this.productList = data.data.result.list
                     } else {
                         Toast(data.data.msg)

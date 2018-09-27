@@ -74,7 +74,7 @@
                     memberid: 1
                 }, (data) => {
                     console.log('history:', data);
-                    if (data.data.res == "succ") {
+                    if (data.data.res === "succ") {
                         this.historyArr = data.data.result.list
                     } else {
                         Toast(data.data.msg)

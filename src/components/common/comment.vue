@@ -30,7 +30,10 @@
         pics: ['/static/img/rose.png'],
         norm: '玫瑰'
       }
-    }
+    },
+      props: {
+          commentList: Array
+      }
   }
 </script>
 

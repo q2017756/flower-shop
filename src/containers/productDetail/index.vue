@@ -24,8 +24,8 @@
                     </p>
                     <h3 class="title">{{ detail.name }}</h3>
                     <div class="tag-wrapper">
-                        <span class="font-smaller-b">？？级</span>
-                        <span class="font-smaller-b">库存{{format.goods_store}}件</span>
+                        <span class="font-smaller-b">？级</span>
+                        <span class="font-smaller-b">库存{{format.goods_store> 999 ? '999+' : format.goods_store}}件</span>
                         <span class="font-smaller-b">？？农场</span>
                         <span class="font-smaller-b">好评率:？？%</span>
                     </div>
@@ -56,10 +56,11 @@
             </div>
             <div class="comment-wrapper">
                 <div class="header" v-on:click="pushToComment">
-                    <span>宝贝评价({{ commentCountString }})</span>
-                    <div class="comment-more">查看全部<i class="more"/></div>
+                    <span>宝贝评价({{ commentList.length > 999 ? '999+' : commentList.length }})</span>
+                    <div v-if="commentList.length > 2" class="comment-more">查看全部<i class="more"/></div>
                 </div>
-                <comment style="border: none;"/>
+                <p v-if="commentList.length === 0" class="comment-no">暂无评价</p>
+                <comment v-else style="border: none;"/>
             </div>
             <!--<attribute-container />-->
             <div class="product-detail">
@@ -82,7 +83,7 @@
                         v-bind:selectString="selectString"
                         v-bind:handleCountChange="handleCountChange"
                         v-bind:handleSelectFormat="handleSelectFormat"
-                        v-bind:count="count"
+                        v-bind:count="Number(count)"
                     />
                     <div class="format-btns">
                         <button class="back" v-on:click="handleBack">返回</button>
@@ -106,7 +107,7 @@
                 <img src="../../assets/icon/star.png" alt="">
                 <span>收藏</span>
             </div>
-            <button v-on:click="handleBuyNow" class="cart">加入购物车</button>
+            <button v-on:click="handleAddCart" class="cart">加入购物车</button>
             <button v-on:click="handleBuyNow" class="buy">购买</button>
         </div>
 
@@ -131,51 +132,17 @@
             return {
                 detail: {},
                 format: {},
+                commentList: [],
                 productDetail: {
-                    "pId": "p1000001",
+                    "id": "p1000001",
                     "title": "玫瑰花",
                     "description": "MUJI代工厂，素雅大气，结实不易蛀",
                     "price": "1699111",
                     "commentCount": "0",
-                    "pics": ["/static/img/rose.png", "/static/img/flower-img.png", "/static/img/home-activity-3.png"],
-                    "format": [
-                        {
-                            "name": "颜色",
-                            "options": ["无颜色", "无颜色1"]
-                        },
-                        {
-                            "name": "规格",
-                            "options": ["无规格", "无规格1"]
-                        }
-                    ]
                 },
                 currentPic: 1,
                 popupVisible: false,
                 count: this.$store.state.selectFormat.count || 1
-            }
-        },
-        computed: {
-            // ...mapState(['selectFormat'])
-            selectFormat() {
-                console.log('11111')
-                console.log(this.$store.state.selectFormat)
-                const selectFormat = this.$store.state.selectFormat
-                return selectFormat[this.$route.params.id] || {}
-            },
-            commentCountString() {
-                const count = this.productDetail.commentCount
-                return count > 999 ? '999+' : count
-            },
-            ...mapState({
-                commodity: 'showCommodityDetail',
-                selects: function (state) {
-                    const selectFormat = state.selectFormat[this.$route.params.pId] || {}
-                    console.log('+++++++', selectFormat.format)
-                    return selectFormat.format || []
-                }
-            }),
-            selectString() {
-                return this.selects.join(' ')
             }
         },
         components: {
@@ -187,6 +154,26 @@
             commonIssue,
             formatDetail
         },
+        computed: {
+            // ...mapState(['selectFormat'])
+            selectFormat() {
+                console.log('selectFormat', this.$store.state.selectFormat)
+                const selectFormat = this.$store.state.selectFormat
+                return selectFormat[this.$route.params.id] || {}
+            },
+            ...mapState({
+                commodity: 'showCommodityDetail',
+                selects: function (state) {
+                    const selectFormat = state.selectFormat[this.$route.params.id] || {}
+                    console.log('+++++++', selectFormat.format)
+                    return selectFormat.format || []
+                }
+            }),
+            selectString() {
+                return this.selects.join(' ')
+            }
+        },
+
         methods: {
             ...mapActions(['showCommodityDetail', 'addToCart', 'changeSelectFormat',
                 'addToCart']),
@@ -197,7 +184,7 @@
                     g: this.$route.params.id
                 }, (data) => {
                     console.log('detail:', data)
-                    if (data.data.res == "succ") {
+                    if (data.data.res === "succ") {
                         this.detail = data.data.result[this.$route.params.id]
                         this.detail.pics = this.detail.thumbnail_pic.split(',')
                     } else {
@@ -211,27 +198,105 @@
                     goods_id: this.$route.params.id
                 }, (data) => {
                     console.log('guige:', data)
-                    if (data.data.res == "succ") {
-                         this.format = data.data.result
-                        // this.detail.pics = this.detail.thumbnail_pic.split(',')
+                    if (data.data.res === "succ") {
+                        this.format = data.data.result
                     } else {
                         Toast(data.data.msg)
                     }
                 })
-                // 商品详情
+                // 商品评价
                 this.$axios('', {
-                    act: 'getGoodsIntro',
+                    act: 'getComment',
                     goods_id: this.$route.params.id
                 }, (data) => {
-                    console.log('xiangqing:', data)
-                    if (data.data.res == "succ") {
-                        // this.detail = data.data.result[this.$route.params.id]
-                        // this.detail.pics = this.detail.thumbnail_pic.split(',')
+                    console.log('评价:', data)
+                    if (data.data.res === "succ") {
+                        this.commentList = data.data.result
                     } else {
                         Toast(data.data.msg)
                     }
                 })
 
+            },
+            handlePickFormat() {
+                const id = this.$route.params.id
+                this.showCommodityDetail({
+                    id: id,
+                    title: this.productDetail.name,
+                    price: this.productDetail.price,
+                    pic: this.productDetail.pics[0],
+                    formats: this.productDetail.format
+                })
+                this.$router.push(`/format/${id}`)
+            },
+            handleSelectFormat(option, index) {
+                if (this.selects[index] === option) {
+                    this.selects.splice(index, 1)
+                    return
+                }
+                this.selects[index] = option
+
+                // this.selects = Object.assign([], this.selects)
+                // this.$set(this.selects, index, option)
+                this.changeSelectFormat({
+                    id: this.$route.params.id,
+                    format: this.selects,
+                    count: this.count
+                })
+            },
+            handleCountChange(currentVal) {
+                this.changeSelectFormat({
+                    id: this.$route.params.id,
+                    format: this.selects,
+                    count: currentVal
+                })
+                this.count = currentVal
+            },
+
+            handleAddCart() {
+                // const format = this.selectFormat.format
+                // this.addToCart({
+                //     id: this.detail.goods_id,
+                //     title: this.detail.name,
+                //     price: this.detail.price,
+                //     pic: this.detail.thumbnail_pic,
+                //     selectd: true,
+                //     count: this.count,
+                //     formats: format,
+                //     selectString: this.selectFormat.format.join(';')
+                // })
+                this.$axios('', {
+                    act: 'carts_add',
+                    product_id: this.$route.params.id,
+                    open_id: '15601606633',
+                    product_num: this.count
+                }, (data) => {
+                    console.log('add:', data)
+                    if (data.data.res === "succ") {
+
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
+            },
+            handleAddToCart() {
+                console.log('add to cart...')
+                if (this.selects.length === this.commodity.formats.length) {
+                    this.addToCart({
+                        id: this.commodity.id,
+                        title: this.commodity.title,
+                        price: this.commodity.price,
+                        pic: this.commodity.pic,
+                        selectd: true,
+                        count: this.count,
+                        formats: this.commodity.formats,
+                        selectString: this.selects.join(';')
+                    })
+                }
+            },
+
+            handleBack() {
+                this.popupVisible = false
             },
             pushToComment() {
                 this.$router.push('/comment')
@@ -248,18 +313,6 @@
             handleCollection() {
                 Toast('收藏')
             },
-
-            handlePickFormat() {
-                const pId = this.$route.params.id
-                this.showCommodityDetail({
-                    pId: pId,
-                    title: this.productDetail.name,
-                    price: this.productDetail.price,
-                    pic: this.productDetail.pics[0],
-                    formats: this.productDetail.format
-                })
-                this.$router.push(`/format/${pId}`)
-            },
             handleCarouselChange(current) {
                 this.currentPic = current + 1
             },
@@ -270,64 +323,6 @@
                 Toast('无规格，无法进行下一步')
 //        this.$router.push('/confirmOrder')
             },
-            handleAddCart() {
-                const format = this.selectFormat.format
-                if (format && format.length) {
-                    this.addToCart({
-                        pId: this.productDetail.pId,
-                        title: this.productDetail.title,
-                        price: this.productDetail.price,
-                        pic: this.productDetail.pics[0],
-                        selectd: true,
-                        count: this.selectFoproductDetailrmat.count,
-                        formats: this.productDetail.formats,
-                        selectString: this.selectFormat.format.join(';')
-                    })
-                } else {
-                    this.handlePickFormat()
-                }
-            },
-            handleBack() {
-                this.popupVisible = false
-            },
-            handleAddToCart() {
-                console.log('add to cart...')
-                if (this.selects.length === this.commodity.formats.length) {
-                    this.addToCart({
-                        pId: this.commodity.pId,
-                        title: this.commodity.title,
-                        price: this.commodity.price,
-                        pic: this.commodity.pic,
-                        selectd: true,
-                        count: this.count,
-                        formats: this.commodity.formats,
-                        selectString: this.selects.join(';')
-                    })
-                }
-            },
-            handleSelectFormat(option, index) {
-                console.log(index, option)
-                if (this.selects[index] === option) {
-                    this.selects.splice(index, 1)
-                    return
-                }
-                this.selects[index] = option
-                // this.selects = Object.assign([], this.selects)
-                // this.$set(this.selects, index, option)
-                this.changeSelectFormat({
-                    pId: this.$route.params.pId,
-                    format: this.selects,
-                    count: this.count
-                })
-            },
-            handleCountChange(currentVal) {
-                this.changeSelectFormat({
-                    pId: this.$route.params.pId,
-                    format: this.selects,
-                    count: currentVal
-                })
-                this.count = currentVal
-            }
         },
         mounted() {
             this.getData()
@@ -559,6 +554,10 @@
             display: flex;
             align-items: center;
             font-size: px2rem($size_middle);
+        }
+        .comment-no {
+            text-align: center;
+            padding: px2rem(15);
         }
     }
 

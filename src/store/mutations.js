@@ -39,7 +39,7 @@ export default {
     // 以新对象替换老对象使用使用前一种方法无效
     // state.selectFormat[data.pId] = data.format
     state.selectFormat = Object.assign({}, state.selectFormat, {
-      [data.pId]: { format: data.format, count: data.count }
+      [data.id]: { format: data.format, count: data.count }
     })// { ...state.selectFormat, [data.pId]: { format: data.format, count: data.count } }
   },
   [TYPES.SHOWCOMMODITYDETAIL] (state, commodity) {

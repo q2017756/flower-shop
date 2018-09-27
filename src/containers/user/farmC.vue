@@ -75,7 +75,7 @@
                 })
                     .then((data)=>{
                         console.log(data);
-                        if(data.data.res == "succ"){
+                        if(data.data.res === "succ"){
                             Toast(data.data.msg);
                             this.getList();
                         }

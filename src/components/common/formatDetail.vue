@@ -27,7 +27,7 @@
         <div class="number">
           <step
             v-bind:handleChange="handleCountChange"
-            v-bind:current="count"
+            v-bind:current="Number(count)"
           />
         </div>
       </div>
@@ -36,6 +36,11 @@
 <script>
   import step from '@/components/common/step'
   export default {
+      data() {
+          return {
+              price: ''
+          }
+      },
     components: { step },
     props: ['commodity','format', 'selectString', 'handleSelectFormat', 'handleCountChange', 'count'],
     computed: {
