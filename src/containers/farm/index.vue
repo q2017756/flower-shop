@@ -13,7 +13,7 @@
           v-for="manufacturer in data.manufacturer"
           :key="manufacturer.mId"
           :productor="manufacturer"
-          @handleDetail="handleDetail"/>
+          @handleDetail="handleDetail(manufacturer.farm_id)"/>
       </div>
     </div>
 
@@ -127,7 +127,7 @@
                     Toast("服务器异常")
                 })
         },
-      handleDetail() {
+      handleDetail(id) {
         this.$router.push('/farmDetail')
       },
       handleStory() {

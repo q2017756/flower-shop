@@ -14,7 +14,7 @@
             <li>
                 <input v-model="reTel" type="tel" placeholder="请输入手机号" maxlength="11"/>
             </li>
-            <li @click="showSel" v-bind:class="{have:areaData}">{{areaData}}</li>
+            <li @click="showSel" v-bind:class="{have:areaData}">{{areaData?areaData:"请选择省市区"}}</li>
             <li>
                 <input v-model="reAddress" placeholder="请输入地址" type="text"/>
             </li>
@@ -191,7 +191,11 @@
                 }))
                     .then((data)=>{
                         console.log(data);
-                        console.log(this.cityValue)
+                        console.log(this.cityValue);
+                        if(data.data.res =="success"){
+                            Toast("保存成功")
+                            this.$router.push("/addressList")
+                        }
                     })
             }
         },

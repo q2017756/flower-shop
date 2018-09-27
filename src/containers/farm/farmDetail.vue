@@ -21,13 +21,13 @@
         </div>
     </div>
     <div class="item-container">
-      <farm-item v-for="n in 8" :key="n" :cartShow="true"></farm-item>
+      <farm-good :farmInfo="n" v-for="n in list" :key="n" :cartShow="false"></farm-good>
     </div>
   </div>
 </template>
 <script>
   import appHeader from '@/components/common/appHeader'
-  import farmItem from '@/components/home/farmItem'
+  import farmGood from '@/components/home/farmGood'
   import qs from "qs"
   import { Toast } from 'mint-ui';
 
@@ -37,16 +37,17 @@
           name:"",
           start:0,
           page:0,
-          count:20,
+          count:999,
           iscol:false,
-          id:0
+          id:0,
+          list:[]
       }
     },
     props: {
     },
     components: {
       appHeader,
-      farmItem
+      farmGood
     },
     methods: {
         colFarm(){
@@ -79,12 +80,19 @@
         console.log('ssss')
         // 请求上品
           this.$ajax.post("openapi.php?act=getFarmGoods",qs.stringify({
+              // farm_id:this.$route.query.farm_id,
               farm_id:11,
               start:this.page*this.count,
               limit:(this.page+1)*this.count
           }))
               .then((data)=>{
-                  console.log(data)
+                  console.log(data);
+                  if(data.data.res == "succ"){
+                      for (let i =0;i<data.data.result.list.length;i++){
+                          this.list.push(data.data.result.list[i]);
+                          // console.log(this.list)
+                      }
+                  }
               })
       }
   }

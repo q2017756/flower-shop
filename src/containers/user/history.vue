@@ -4,31 +4,34 @@
         <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
         <!--<mt-button icon="more" slot="right"></mt-button>-->
       </mt-header>
-        <ul>
-            <li>
-                <div class="title clear">
-                    <div class="check">
-                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
-                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
-                    </div>
-                    <div class="t-text">
-                        <span class="farm-name">今天</span>
-                    </div>
-                </div>
-                <div class="g-l clear">
+        <ul v-infinite-scroll="loadMore"
+            infinite-scroll-disabled="loading"
+            infinite-scroll-immediate-check="false"
+            infinite-scroll-distance="10">
+            <li v-for="item in list">
+                <!--<div class="title clear">-->
+                    <!--<div class="check">-->
+                        <!--<i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>-->
+                        <!--<i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>-->
+                    <!--</div>-->
+                    <!--<div class="t-text">-->
+                        <!--<span class="farm-name">今天</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <div  class="g-l clear">
                     <div class="check check-l">
                         <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
                         <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
                     </div>
                     <div class="g-m">
                         <div class="img-d">
-                            <img src="../../../static/imgs/flower.jpg" alt="">
+                            <img :src="item.thumbnail_pic" alt="">
                         </div>
                         <div class="g-t">
-                            <div class="g-title">满天星满天星满天112星满天星满天星满天星</div>
+                            <div class="g-title">{{item.name}}</div>
                             <!--<span class="type">A级</span>-->
                             <div class="bot-p">
-                                <span class="price">￥256.00</span>
+                                <span class="price">￥{{item.gprice}}</span>
                                 <div class="ffl">
                                     <span class="bt-sam">找相似</span>
                                   <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
@@ -37,84 +40,84 @@
                         </div>
                     </div>
                 </div>
-                <div class="g-l clear">
-                    <div class="check check-l">
-                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
-                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
-                    </div>
-                    <div class="g-m">
-                        <div class="img-d">
-                          <img src="../../../static/imgs/flower.jpg" alt="">
-                        </div>
-                        <div class="g-t">
-                            <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
-                            <!--<span class="type">A级</span>-->
-                            <div class="bot-p">
-                                <span class="price">￥256.00</span>
-                              <div class="ffl">
-                                <span class="bt-sam">找相似</span>
-                                <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="g-l clear">-->
+                    <!--<div class="check check-l">-->
+                        <!--<i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>-->
+                        <!--<i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>-->
+                    <!--</div>-->
+                    <!--<div class="g-m">-->
+                        <!--<div class="img-d">-->
+                          <!--<img src="../../../static/imgs/flower.jpg" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="g-t">-->
+                            <!--<div class="g-title">满天星满天星满天星满天星满天星满天星</div>-->
+                            <!--&lt;!&ndash;<span class="type">A级</span>&ndash;&gt;-->
+                            <!--<div class="bot-p">-->
+                                <!--<span class="price">￥256.00</span>-->
+                              <!--<div class="ffl">-->
+                                <!--<span class="bt-sam">找相似</span>-->
+                                <!--<img id="cart-img" src="../../../static/imgs/cart.png" alt="">-->
+                              <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </li>
-            <li>
-                <div class="title clear">
-                    <div class="check">
-                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
-                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
-                    </div>
-                    <div class="t-text">
-                        <span class="farm-name">2018/05/02</span>
-                    </div>
-                </div>
-                <div class="g-l clear">
-                    <div class="check check-l">
-                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
-                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
-                    </div>
-                    <div class="g-m">
-                        <div class="img-d">
-                          <img src="../../../static/imgs/flower.jpg" alt="">
-                        </div>
-                        <div class="g-t">
-                            <div class="g-title">满天星满天星满天星满天星满天星满天11星</div>
-                            <!--<span class="type">A级</span>-->
-                            <div class="bot-p">
-                                <span class="price">￥256.00</span>
-                              <div class="ffl">
-                                <span class="bt-sam">找相似</span>
-                                <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="g-l clear">
-                    <div class="check check-l">
-                        <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
-                        <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
-                    </div>
-                    <div class="g-m">
-                        <div class="img-d">
-                          <img src="../../../static/imgs/flower.jpg" alt="">
-                        </div>
-                        <div class="g-t">
-                            <div class="g-title">满天星满天星满天星满天星满天星满天星</div>
-                            <!--<span class="type">A级</span>-->
-                            <div class="bot-p">
-                                <span class="price">￥256.00</span>
-                              <div class="ffl">
-                                <span class="bt-sam">找相似</span>
-                                <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
-                              </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
+            <!--<li>-->
+                <!--<div class="title clear">-->
+                    <!--<div class="check">-->
+                        <!--<i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>-->
+                        <!--<i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>-->
+                    <!--</div>-->
+                    <!--<div class="t-text">-->
+                        <!--<span class="farm-name">2018/05/02</span>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="g-l clear">-->
+                    <!--<div class="check check-l">-->
+                        <!--<i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>-->
+                        <!--<i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>-->
+                    <!--</div>-->
+                    <!--<div class="g-m">-->
+                        <!--<div class="img-d">-->
+                          <!--<img src="../../../static/imgs/flower.jpg" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="g-t">-->
+                            <!--<div class="g-title">满天星满天星满天星满天星满天星满天11星</div>-->
+                            <!--&lt;!&ndash;<span class="type">A级</span>&ndash;&gt;-->
+                            <!--<div class="bot-p">-->
+                                <!--<span class="price">￥256.00</span>-->
+                              <!--<div class="ffl">-->
+                                <!--<span class="bt-sam">找相似</span>-->
+                                <!--<img id="cart-img" src="../../../static/imgs/cart.png" alt="">-->
+                              <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="g-l clear">-->
+                    <!--<div class="check check-l">-->
+                        <!--<i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>-->
+                        <!--<i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>-->
+                    <!--</div>-->
+                    <!--<div class="g-m">-->
+                        <!--<div class="img-d">-->
+                          <!--<img src="../../../static/imgs/flower.jpg" alt="">-->
+                        <!--</div>-->
+                        <!--<div class="g-t">-->
+                            <!--<div class="g-title">满天星满天星满天星满天星满天星满天星</div>-->
+                            <!--&lt;!&ndash;<span class="type">A级</span>&ndash;&gt;-->
+                            <!--<div class="bot-p">-->
+                                <!--<span class="price">￥256.00</span>-->
+                              <!--<div class="ffl">-->
+                                <!--<span class="bt-sam">找相似</span>-->
+                                <!--<img id="cart-img" src="../../../static/imgs/cart.png" alt="">-->
+                              <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</li>-->
         </ul>
     </div>
 </template>
@@ -123,28 +126,53 @@
   import { Header } from 'mint-ui';
   import qs from "qs"
   import urls from "../../utils/url"
+  import { InfiniteScroll } from 'mint-ui';
     export default {
         name: "history",
         data(){
             return{
-                qx:false
+                qx:false,
+                list:[],
+                page:1,
+                loading:false
             }
 
         },
+        methods:{
+          loadMore(){
+              console.log("cd...........")
+              this.loading=true;
+              this.$ajax.post("",qs.stringify({
+                  api_type:"common",
+                  api_version:"1.0",
+                  act:"getGoodsLSList",
+                  isEnd:"webroot",
+                  page:this.page,
+                  pageLimit:10,
+                  memberid:1
+              }))
+                  .then((data)=>{
+
+                      console.log(data);
+                      if(data.data.res == "succ"){
+                          if(this.page<data.data.result.pageCount){
+                              this.page++;
+                              this.loading=false;
+                          }else {
+
+                          }
+                          for(let i=0;i<data.data.result.list.length;i++){
+                              this.list.push(data.data.result.list[i]);
+                          }
+
+                      }
+
+                  })
+          }
+        },
         mounted(){
             console.log(this.$ajax)
-            this.$ajax.post("",qs.stringify({
-                api_type:"common",
-                api_version:"1.0",
-                act:"getGoodsLSList",
-                isEnd:"webroot",
-                page:1,
-                pageLimit:10,
-                memberid:1
-            }))
-                .then((data)=>{
-                    console.log(data)
-                })
+            this.loadMore();
         }
     }
 </script>
@@ -215,6 +243,7 @@
     .g-t{
         padding-left: 0.2rem;
         position: relative;
+        width: 9rem;
     }
     .g-l{
         padding-top: 0.2rem;

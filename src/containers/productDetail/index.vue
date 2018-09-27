@@ -247,6 +247,16 @@
             },
             handleCollection() {
                 // Toast('收藏')
+                this.$ajax.post("",qs.stringify({
+                    api_type: "common",
+                    api_version: "1.0",
+                    act:"doFavorite",
+                    isEnd:"webroot",
+                    goods_id:this.$route.params.id
+                }))
+                    .then((data)=>{
+                        console.log(data);
+                    })
             },
 
             handlePickFormat() {
@@ -330,7 +340,19 @@
             }
         },
         mounted() {
-            this.getData()
+            this.getData();
+            // 添加浏览记录
+            this.$ajax.post("",qs.stringify({
+                api_type:"common",
+                api_version:"1.0",
+                act:"AddHistory",
+                isEnd:"webroot",
+                memberid:"1",
+                goodsid:this.$route.params.id
+            }))
+                .then((data)=>{
+                    console.log(data)
+                })
         }
     }
 </script>

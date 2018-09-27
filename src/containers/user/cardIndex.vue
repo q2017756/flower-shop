@@ -10,7 +10,7 @@
         <mt-tab-item id="3">已过期</mt-tab-item>
       </mt-navbar>
         <ul class="l-u">
-            <li v-show="selected == 1" class="l-l">
+            <li v-for="item in listData" class="l-l">
                 <div class="content">
                     <div class="money">
                         <span class="num">23</span>
@@ -19,63 +19,63 @@
                     <div class="t-d">
                         <div class="flx">
                             <div>
-                                <div  class="card-type">现金券</div>
+                                <div  class="card-type">{{item.coupon_title}}</div>
 
-                                <div class="card-c">有效期至2018年9月1日</div>
+                                <div class="card-c">有效期至{{item.begin_time.split(" ")[0]}}</div>
 
-                                <div class="txt">最高满减20元</div>
+                                <div class="txt">满{{item.total_num}}使用</div>
                                 <!--<br>-->
                             </div>
                         </div>
-                        <div class="bts">使用</div>
+                        <div v-show="item.getTag" class="bts">使用</div>
                     </div>
                 </div>
-                <div class="bot-text">全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用</div>
+                <div class="bot-text">每人可领{{item.ip_send_num}}张</div>
             </li>
-            <li v-show="selected == 2" class="l-l ed">
-                <div class="content">
-                    <div class="money edt">
-                        <span class="num">23</span>
-                        <span class="tx">元</span>
-                    </div>
-                    <div class="t-d">
-                        <div class="flx">
-                            <div>
-                                <div  class="card-type">现金券</div>
+            <!--<li v-show="selected == 2" class="l-l ed">-->
+                <!--<div class="content">-->
+                    <!--<div class="money edt">-->
+                        <!--<span class="num">23</span>-->
+                        <!--<span class="tx">元</span>-->
+                    <!--</div>-->
+                    <!--<div class="t-d">-->
+                        <!--<div class="flx">-->
+                            <!--<div>-->
+                                <!--<div  class="card-type">现金券</div>-->
 
-                                <div class="card-c">有效期至2018年9月1日</div>
+                                <!--<div class="card-c">有效期至2018年9月1日</div>-->
 
-                                <div class="txt">最高满减20元</div>
-                                <!--<br>-->
-                            </div>
-                        </div>
-                        <!--<div class="bts">使用</div>-->
-                    </div>
-                </div>
-                <div class="bot-text">全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用</div>
-            </li>
-            <li v-show="selected == 3" class="l-l ed">
-                <div class="content">
-                    <div class="money edt">
-                        <span class="num">23</span>
-                        <span class="tx">元</span>
-                    </div>
-                    <div class="t-d">
-                        <div class="flx">
-                            <div>
-                                <div  class="card-type">现金券</div>
+                                <!--<div class="txt">最高满减20元</div>-->
+                                <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;<div class="bts">使用</div>&ndash;&gt;-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="bot-text">全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用</div>-->
+            <!--</li>-->
+            <!--<li v-show="selected == 3" class="l-l ed">-->
+                <!--<div class="content">-->
+                    <!--<div class="money edt">-->
+                        <!--<span class="num">23</span>-->
+                        <!--<span class="tx">元</span>-->
+                    <!--</div>-->
+                    <!--<div class="t-d">-->
+                        <!--<div class="flx">-->
+                            <!--<div>-->
+                                <!--<div  class="card-type">现金券</div>-->
 
-                                <div class="card-c">有效期至2018年9月1日</div>
+                                <!--<div class="card-c">有效期至2018年9月1日</div>-->
 
-                                <div class="txt">最高满减20元</div>
-                                <!--<br>-->
-                            </div>
-                        </div>
-                        <!--<div class="bts">使用</div>-->
-                    </div>
-                </div>
-                <div class="bot-text">全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用</div>
-            </li>
+                                <!--<div class="txt">最高满减20元</div>-->
+                                <!--&lt;!&ndash;<br>&ndash;&gt;-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash;<div class="bts">使用</div>&ndash;&gt;-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="bot-text">全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用全场通用</div>-->
+            <!--</li>-->
         </ul>
     </div>
 </template>
@@ -87,7 +87,8 @@
         name: "cardIndex",
         data(){
             return{
-                selected:'1'
+                selected:'1',
+                listData:[]
             }
         },
         methods:{
@@ -98,16 +99,35 @@
                     act:"coupon_list",
                     isEnd:"webroot",
                     open_id:"15601606633",
+                    status:this.selected,
                     page:1,
                     pageSize:10
                 }))
                     .then((data)=>{
-                        console.log(data)
+                        console.log(data);
+                        if(data.data.res == "success"){
+                            var arr = data.data.errMsg.data;
+                            if(!arr){
+                                return;
+                            }
+                            console.log(arr);
+                            for(let i =0;i<arr.length;i++){
+                                this.listData.push(arr[i]);
+                            }
+
+                        }
                     })
             }
         },
         mounted(){
             this.getCard()
+        },
+        watch:{
+            selected(){
+                this.getCard();
+                this.listData=[];
+                this.page=0;
+            }
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <router-link class="farm-item" v-bind:to="toPath">
+  <router-link class="farm-item" :to="{ path: '/farmDetail', query: { farm_id: farmInfo.farm_id }}">
     <img class="farm-img" :src="farmInfo.img_url"/>
     <div CLASS="text-container">
       <p class="name">{{farmInfo.farm_name}}</p>
