@@ -24,8 +24,8 @@
                     </p>
                     <h3 class="title">{{ detail.name }}</h3>
                     <div class="tag-wrapper">
-                        <span class="font-smaller-b">？？级</span>
-                        <span class="font-smaller-b">库存{{format.goods_store}}件</span>
+                        <span class="font-smaller-b">？级</span>
+                        <span class="font-smaller-b">库存{{format.goods_store> 999 ? '999+' : format.goods_store}}件</span>
                         <span class="font-smaller-b">？？农场</span>
                         <span class="font-smaller-b">好评率:？？%</span>
                     </div>
@@ -56,10 +56,11 @@
             </div>
             <div class="comment-wrapper">
                 <div class="header" v-on:click="pushToComment">
-                    <span>宝贝评价({{ commentCountString }})</span>
-                    <div class="comment-more">查看全部<i class="more"/></div>
+                    <span>宝贝评价({{ commentList.length > 999 ? '999+' : commentList.length }})</span>
+                    <div v-if="commentList.length > 2" class="comment-more">查看全部<i class="more"/></div>
                 </div>
-                <comment style="border: none;"/>
+                <p v-if="commentList.length === 0" class="comment-no">暂无评价</p>
+                <comment v-else style="border: none;"/>
             </div>
             <!--<attribute-container />-->
             <div class="product-detail">
@@ -82,7 +83,7 @@
                         v-bind:selectString="selectString"
                         v-bind:handleCountChange="handleCountChange"
                         v-bind:handleSelectFormat="handleSelectFormat"
-                        v-bind:count="count"
+                        v-bind:count="Number(count)"
                     />
                     <div class="format-btns">
                         <button class="back" v-on:click="handleBack">返回</button>
@@ -106,7 +107,7 @@
                 <img src="../../assets/icon/star.png" alt="">
                 <span>收藏</span>
             </div>
-            <button v-on:click="handleBuyNow" class="cart">加入购物车</button>
+            <button v-on:click="handleAddCart" class="cart">加入购物车</button>
             <button v-on:click="handleBuyNow" class="buy">购买</button>
         </div>
 
@@ -137,30 +138,6 @@
                 count: this.$store.state.selectFormat.count || 1
             }
         },
-        computed: {
-            // ...mapState(['selectFormat'])
-            selectFormat() {
-                console.log('11111')
-                console.log(this.$store.state.selectFormat)
-                const selectFormat = this.$store.state.selectFormat
-                return selectFormat[this.$route.params.id] || {}
-            },
-            commentCountString() {
-                const count = this.productDetail.commentCount
-                return count > 999 ? '999+' : count
-            },
-            ...mapState({
-                commodity: 'showCommodityDetail',
-                selects: function (state) {
-                    const selectFormat = state.selectFormat[this.$route.params.pId] || {}
-                    console.log('+++++++', selectFormat.format)
-                    return selectFormat.format || []
-                }
-            }),
-            selectString() {
-                return this.selects.join(' ')
-            }
-        },
         components: {
             appHeader,
             carousel,
@@ -170,6 +147,26 @@
             commonIssue,
             formatDetail
         },
+        computed: {
+            // ...mapState(['selectFormat'])
+            selectFormat() {
+                console.log('selectFormat', this.$store.state.selectFormat)
+                const selectFormat = this.$store.state.selectFormat
+                return selectFormat[this.$route.params.id] || {}
+            },
+            ...mapState({
+                commodity: 'showCommodityDetail',
+                selects: function (state) {
+                    const selectFormat = state.selectFormat[this.$route.params.id] || {}
+                    console.log('+++++++', selectFormat.format)
+                    return selectFormat.format || []
+                }
+            }),
+            selectString() {
+                return this.selects.join(' ')
+            }
+        },
+
         methods: {
             ...mapActions(['showCommodityDetail', 'addToCart', 'changeSelectFormat',
                 'addToCart']),
@@ -180,7 +177,7 @@
                     g: this.$route.params.id
                 }, (data) => {
                     console.log('detail:', data)
-                    if (data.data.res == "succ") {
+                    if (data.data.res === "succ") {
                         this.detail = data.data.result[this.$route.params.id]
                         this.detail.pics = this.detail.thumbnail_pic.split(',')
                     } else {
@@ -214,106 +211,35 @@
                 })
 
             },
-            pushToComment() {
-                this.$router.push('/comment')
-            },
-            handleShare() {
-                Toast('分享')
-            },
-            handleCall() {
-                Toast('客服')
-            },
-            toFarm() {
-                Toast('农场')
-            },
-            handleCollection() {
-                // Toast('收藏')
-                this.$ajax.post("",qs.stringify({
-                    api_type: "common",
-                    api_version: "1.0",
-                    act:"doFavorite",
-                    isEnd:"webroot",
-                    goods_id:this.$route.params.id
-                }))
-                    .then((data)=>{
-                        console.log(data);
-                    })
-            },
-
             handlePickFormat() {
-                const pId = this.$route.params.id
+                const id = this.$route.params.id
                 this.showCommodityDetail({
-                    pId: pId,
+                    id: id,
                     title: this.productDetail.name,
                     price: this.productDetail.price,
                     pic: this.productDetail.pics[0],
                     formats: this.productDetail.format
                 })
-                this.$router.push(`/format/${pId}`)
-            },
-            handleCarouselChange(current) {
-                this.currentPic = current + 1
-            },
-            handleBuyNow() {
-                this.popupVisible = true
-            },
-            handleNext() {
-                Toast('无规格，无法进行下一步')
-//        this.$router.push('/confirmOrder')
-            },
-            handleAddCart() {
-                const format = this.selectFormat.format
-                if (format && format.length) {
-                    this.addToCart({
-                        pId: this.productDetail.pId,
-                        title: this.productDetail.title,
-                        price: this.productDetail.price,
-                        pic: this.productDetail.pics[0],
-                        selectd: true,
-                        count: this.selectFoproductDetailrmat.count,
-                        formats: this.productDetail.formats,
-                        selectString: this.selectFormat.format.join(';')
-                    })
-                } else {
-                    this.handlePickFormat()
-                }
-            },
-            handleBack() {
-                this.popupVisible = false
-            },
-            handleAddToCart() {
-                console.log('add to cart...')
-                if (this.selects.length === this.commodity.formats.length) {
-                    this.addToCart({
-                        pId: this.commodity.pId,
-                        title: this.commodity.title,
-                        price: this.commodity.price,
-                        pic: this.commodity.pic,
-                        selectd: true,
-                        count: this.count,
-                        formats: this.commodity.formats,
-                        selectString: this.selects.join(';')
-                    })
-                }
+                this.$router.push(`/format/${id}`)
             },
             handleSelectFormat(option, index) {
-                console.log(index, option)
                 if (this.selects[index] === option) {
                     this.selects.splice(index, 1)
                     return
                 }
                 this.selects[index] = option
+
                 // this.selects = Object.assign([], this.selects)
                 // this.$set(this.selects, index, option)
                 this.changeSelectFormat({
-                    pId: this.$route.params.pId,
+                    id: this.$route.params.id,
                     format: this.selects,
                     count: this.count
                 })
             },
             handleCountChange(currentVal) {
                 this.changeSelectFormat({
-                    pId: this.$route.params.pId,
+                    id: this.$route.params.id,
                     format: this.selects,
                     count: currentVal
                 })
@@ -379,7 +305,20 @@
                 Toast('农场')
             },
             handleCollection() {
-                Toast('收藏')
+                // Toast('收藏')
+                this.$ajax.post("",qs.stringify({
+                    api_type: "common",
+                    api_version: "1.0",
+                    act:"doFavorite",
+                    isEnd:"webroot",
+                    goods_id:this.$route.params.id
+                }))
+                    .then((data)=>{
+                        console.log(data);
+                        if(data.data.res == "succ"){
+                            Toast("收藏成功")
+                        }
+                    })
             },
             handleCarouselChange(current) {
                 this.currentPic = current + 1
@@ -393,6 +332,7 @@
             },
         },
         mounted() {
+            this.getData();
             this.getData();
             // 添加浏览记录
             this.$ajax.post("",qs.stringify({

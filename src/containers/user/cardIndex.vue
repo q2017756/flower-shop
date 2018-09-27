@@ -13,7 +13,7 @@
             <li v-for="item in listData" class="l-l">
                 <div class="content">
                     <div class="money">
-                        <span class="num">23</span>
+                        <span class="num">{{parseInt(item.price)}}</span>
                         <span class="tx">元</span>
                     </div>
                     <div class="t-d">
@@ -21,7 +21,7 @@
                             <div>
                                 <div  class="card-type">{{item.coupon_title}}</div>
 
-                                <div class="card-c">有效期至{{item.begin_time.split(" ")[0]}}</div>
+                                <div class="card-c">有效期至{{item.end_time.split(" ")[0]}}</div>
 
                                 <div class="txt">满{{item.total_num}}使用</div>
                                 <!--<br>-->
@@ -30,7 +30,7 @@
                         <div v-show="item.getTag" class="bts">使用</div>
                     </div>
                 </div>
-                <div class="bot-text">每人可领{{item.ip_send_num}}张</div>
+                <div class="bot-text">{{item.remarks}}</div>
             </li>
             <!--<li v-show="selected == 2" class="l-l ed">-->
                 <!--<div class="content">-->
@@ -88,11 +88,16 @@
         data(){
             return{
                 selected:'1',
-                listData:[]
+                listData:[],
+                finalPage:false
             }
         },
         methods:{
             getCard(){
+                console.log(this.finalPage)
+                if(this.finalPage){
+                    return;
+                }
                 this.$ajax.post("",qs.stringify({
                     api_type:"wechat",
                     api_version:"1.0",
@@ -107,12 +112,18 @@
                         console.log(data);
                         if(data.data.res == "success"){
                             var arr = data.data.errMsg.data;
+
                             if(!arr){
                                 return;
                             }
                             console.log(arr);
                             for(let i =0;i<arr.length;i++){
                                 this.listData.push(arr[i]);
+                            };
+                            if(this.page==data.data.errMsg.page){
+                                this.finalPage=true;
+                            }else {
+                                this.page++
                             }
 
                         }
@@ -124,9 +135,11 @@
         },
         watch:{
             selected(){
-                this.getCard();
+                console.log("wwwwww");
                 this.listData=[];
-                this.page=0;
+                this.page=1;
+                this.finalPage=false;
+                this.getCard();
             }
         }
     }

@@ -70,9 +70,20 @@
             }
         },
         methods:{
-
+            getCard(){
+                this.$ajax.post("",qs.stringify({
+                    api_type:"common",
+                    api_version:"1.0",
+                    act:"coupon",
+                    isEnd:"webroot"
+                }))
+                    .then((data)=>{
+                        console.log(data)
+                    })
+            }
         },
         mounted(){
+            this.getCard()
         }
     }
 </script>
