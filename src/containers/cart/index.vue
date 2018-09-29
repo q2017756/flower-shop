@@ -152,7 +152,7 @@
                 if (!this.isEdit) {
                     // order
                     console.log('下单')
-                    this.$router.push('pay')
+                    this.$router.push('orderDetails')
                 } else {
                     // remove
                     this.selectRemoveAll = false

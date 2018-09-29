@@ -9,6 +9,7 @@
             :list="list"
             @add="onAdd"
             @edit="onEdit"
+            @select="check"
         />
     </div>
 </template>
@@ -43,6 +44,12 @@
                 console.log(this.CustList[index]);
                 let address = this.CustList[index]
                 this.$router.push({ name:"address", params:address})
+            },
+            check(item,index){
+                if(this.$route.query.isSelect){
+                    Toast("选中");
+                    console.log(item,index)
+                }
             }
         },
         mounted(){

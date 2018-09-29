@@ -91,6 +91,10 @@ export default new Router({
           path: '/search',
           component: resolve => require(['@/containers/search/index'], resolve)
         },
+          {
+              path: '/orderDetails',
+              component: resolve => require(['@/containers/tools/orderDetails'], resolve)
+          },
         {
           path: '/productDetail/:id',
           component: resolve => require(['@/containers/productDetail/index'], resolve)
