@@ -5,24 +5,24 @@
             <!--<mt-button icon="more" slot="right"></mt-button>-->
         </mt-header>
         <ul class="card-ul">
-            <li class="li-c">
+            <li v-for="item in list" class="li-c">
                 <div class="top">
                     <div class="zi">
                         <div class="mnd">
                             <span class="ic">￥</span>
-                            <span class="mn">20</span>
+                            <span class="mn">{{parseInt(item.price)}}</span>
                         </div>
                         <div class="ex">
                             <div class="txt">优惠券</div>
-                            <div > <span class="font-smaller">满100元可用</span></div>
+                            <div > <span class="font-smaller">{{item.coupon_title}}</span></div>
                         </div>
                     </div>
                     <div class="btd">
-                        <span class="bts">立即领取</span>
+                        <span class="bts" @click="get(item)">立即领取</span>
                     </div>
                 </div>
                 <div class="bot">
-                    <span class="font-smaller">满打发手动阀阿道夫阿斯蒂芬阿斯蒂芬阿道夫的阿瑟东安抚发到付阿道夫阿道夫啊阿斯顿啊啊手动阀打发发</span>
+                    <span class="font-smaller">{{item.remarks}}</span>
                 </div>
             </li>
         </ul>
@@ -36,11 +36,13 @@
         name: "getCard",
         data(){
             return{
-
+                list:[]
             }
         },
         methods:{
-
+            get(item){
+                console.log(item)
+            }
         },
         mounted(){
             this.$ajax.post("",qs.stringify({
@@ -50,7 +52,10 @@
                 isEnd:"webroot"
             }))
                 .then((data)=>{
-                    console.log(data)
+                    console.log(data);
+                    if(data.data.res=="succ"){
+                        this.list=data.data.result.data
+                    }
                 })
         }
     }
@@ -70,7 +75,7 @@
         padding: 0 0.5rem;
     }
     .li-c{
-
+        margin-bottom: 0.35rem;
     }
     .top{
         background: white;
