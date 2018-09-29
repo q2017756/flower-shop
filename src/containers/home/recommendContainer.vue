@@ -208,6 +208,12 @@
                         Toast(data.data.msg)
                     }
                 })
+                this.$axios("",{
+                    act:"getTopicList"
+                },(data)=>{
+                    console.log("ssssssss")
+                    console.log(data)
+                })
             },
             handleDetail(id) {
                 this.$router.push(`/productDetail/${id}`)

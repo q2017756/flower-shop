@@ -69,11 +69,88 @@
                 alert('sss')
             },
             onSubmit(){
-                alert("提价")
+                this.$ajax.post("",qs.stringify({
+                    api_type:"common",
+                    api_version:"1.0",
+                    act:"add_order",
+                    isEnd:"webroot",
+                    cost_freight:"0.00",//快递费
+                    final_amount:"0.04",//订单总额
+                    consignee:JSON.stringify({
+                        address:"河南省郑州市中牟县",//(详细地址)
+                        ship_area:"上海市/上海市/徐汇区：26",//（省市区）
+                        ship_addr:"河南省郑州市中牟县",//（全部地址）
+                        ship_mobile:'13564137019',//（收货人手机号）
+                        ship_name:"ff",//（收货人姓名）
+                        province:"上海",//（省）
+                        city:"上海市",//（市）
+                        region:"徐汇区",//（区）
+                        area_id:"26",//（省id）
+                        province_id:"22",//（区id）
+                        city_id:"23",//（市id）
+                        default:"false",//（默认地址）
+                        deliver_type:"common",//（配送类型 快递  门店）
+                        store_name:"",//门店的名称）
+                        store_id:"",//（门店的id）
+                        memo:""//（备注）
+                    }) ,//收获地址
+                    product:JSON.stringify({
+                        "11": [
+                            {
+                                "goods_id":"6",//商品id
+                                "product_id":"5", //货品id
+                                "price":"0.04",//销售价
+                                "gprice":"0.04",//成本价
+                                "name":"12123123fsdfs",//商品名称
+                                "pdt_desc":"\u9ed8\u8ba4\u89c4\u683c",
+                                "spec_desc":"",//规格
+                                "props":"",//规格值
+                                "store":"1099978",//库存
+                                "thumbnail_pic":"http:\/\/qmfx-s39210.s3.fy.shopex.cn\/gpic\/20170515\/7013715a4110dc909eb6273643f8c911.jpg?imageView2\/2\/w\/600\/h\/600\/interlace\/1",
+                                "is_activity":"0",//是否设置为活动商品 1 0
+                                "free_postage":"1",//是否包邮
+                                "dt_id":"1447",//运费模板ID,0代表使用默认模板
+                                "weight":"12.000",//物品重量
+                                "volume":"11.00",//物品体积
+                                "type":"normal",//货品类型,normal=一般商品,presale=预售商品
+                                "profit_price":"0",//利润价格
+                                "nums":"1",//商品数量
+                                "goodsType":"normal",//商品类型，normal=一般商品,presale=预售商品
+                                "farm_id":11//农场ID  商品订单是根据农场进行拆单
+                            }
+                            ]
+                    }) ,//订单商品
+                    goods_final_amount:"0.04",//商品总金额
+                    payment:{"id":3},//支付类别
+                    product_count:"1",//商品总数量
+                    store_info:{
+                        "store_name":"\u65f6\u5c1a\u5708M",
+                        "logo":"http:\/\/qmfx-s39210.s3.fy.shopex.cn\/gpic\/20170512\/edfcf9ea8e441e3fed8bdea98616a9bf.jpg"
+                    },//商户信息
+                    product_sign:"",
+                    order_source:"local",//订单来源
+                    act_id:"0",//活动ID
+                    dentity:"",//
+                    use_score_off:"off",//是否使用积分
+                    delivery_type:"common",//配送类型
+                    store_name:"张付俊",//店铺名称
+                    store_phone:"13564137019",//店铺电话
+                    store_id:"",//店铺ID
+                    show_price:"",
+                    group_act_id:"",//拼团活动ID
+                    team_id:"",
+                    member_id:"2"//订单会员id
+                }))
+                    .then((data)=>{
+                        console.log(data)
+                    })
             },
             goAddress(){
                 Toast("选择地址")
                 this.$router.push({path:"addressList",query:{'isSelect':1}})
+            },
+            order(){
+
             }
         }
     }

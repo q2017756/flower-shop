@@ -48,7 +48,9 @@
             check(item,index){
                 if(this.$route.query.isSelect){
                     Toast("选中");
-                    console.log(item,index)
+                    // console.log(item,index);
+                    let address = this.CustList[index]
+                    console.log(address)
                 }
             }
         },
