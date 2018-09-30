@@ -204,7 +204,13 @@ export default new Router({
         {
           path: '/timeShop',
           component: resolve => require(['@/containers/shoping/timeShop'], resolve)
-        },
+        },{
+              path: '/topList',
+              component: resolve => require(['@/containers/shoping/TopList'], resolve)
+          },{
+              path: '/TopDetails',
+              component: resolve => require(['@/containers/shoping/TopDetails'], resolve)
+          },
       ]
     }
   ]
