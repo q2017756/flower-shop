@@ -139,7 +139,6 @@
             },
             handleAction() {
                 console.log('delete')
-                console.log(this.removeCartList)
                 if (!this.isEdit) {
                     // order
                     const orderOtherData = {
@@ -181,8 +180,20 @@
                     this.$router.push('orderDetails')
                 } else {
                     // remove
-                    this.selectRemoveAll = false
-                    this.removeCartCommodity(this.removeCartList)
+//                    this.selectRemoveAll = false
+//                    this.removeCartCommodity(this.removeCartList)
+                    this.$axios('', {
+                        act: 'carts_del',
+                        open_id: '15601606633',
+                        product_id: this.removeCartList.map(item => item.product_id).join(',')
+                    }, (data) => {
+                        console.log('cart edit:', data)
+                        if (data.data.res === "succ") {
+                            this.getData()
+                        } else {
+                            Toast(data.data.msg)
+                        }
+                    })
                 }
             },
             // 修改商品
@@ -200,7 +211,7 @@
                 }, (data) => {
                     console.log('cart edit:', data)
                     if (data.data.res === "succ") {
-//                        this.getData()
+                        this.getData()
                     } else {
                         Toast(data.data.msg)
                     }

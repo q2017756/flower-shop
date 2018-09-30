@@ -1,22 +1,22 @@
 <template>
     <div class="product-list">
         <app-header title="商品列表"></app-header>
-        <div class="filter-bar">
-            <div class="active">综合</div>
-            <div @click="toggleFarm">
-                农场
-                <img src="../../assets/icon/triangle-bottom.png" alt="">
-            </div>
-            <div>新品</div>
-            <div>
-                价格
-                <img src="../../assets/icon/price-bottom.png" alt="">
-            </div>
-            <div @click="togglePopup">
-                筛选
-                <img src="../../assets/icon/filter.png" alt="">
-            </div>
-        </div>
+        <!--<div class="filter-bar">-->
+            <!--<div class="active">综合</div>-->
+            <!--<div @click="toggleFarm">-->
+                <!--农场-->
+                <!--<img src="../../assets/icon/triangle-bottom.png" alt="">-->
+            <!--</div>-->
+            <!--<div>新品</div>-->
+            <!--<div>-->
+                <!--价格-->
+                <!--<img src="../../assets/icon/price-bottom.png" alt="">-->
+            <!--</div>-->
+            <!--<div @click="togglePopup">-->
+                <!--筛选-->
+                <!--<img src="../../assets/icon/filter.png" alt="">-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div v-if="productList" class="item-container">
             <product-item
@@ -115,6 +115,22 @@
                         this.productList = data.data.result.list
                     } else {
                         Toast(data.data.msg)
+                    }
+                })
+                this.$axios('', {
+                    act: 'goodsTagCatList',
+                    page: 1,
+                    pageLimit: 10,
+                }, (res) => {
+                    console.log('tag:', res);
+                    if (res.data.res == "succ") {
+//                        this.segmentArr = res.data.result
+                        this.sections = Object.keys(res.data.result).map(key => res.data.result[key]);
+                        this.section = this.sections[0].sec_cat
+                        this.section = Object.keys(this.section).map(key => this.section[key]);
+                        console.log(1111,this.section);
+                    } else {
+                        Toast(res.data.msg)
                     }
                 })
             },
