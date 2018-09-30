@@ -123,6 +123,7 @@
                 //     store_id:"",//（门店的id）
                 //     memo:""//（备注）
                 // }
+                data={"11":[{},{}]}
                 this.$ajax.post("",qs.stringify({
                     api_type:"common",
                     api_version:"1.0",

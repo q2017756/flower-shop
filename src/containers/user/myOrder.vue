@@ -30,8 +30,8 @@
                 <div class="bot-d">
                     <span class="money">应付：{{item.total_amount}}</span>
                     <div class="btn-d">
-                        <span @click="cancle_order(item.order_id)" class="qx btn">取消订单</span>
-                        <span @click="pay(item.order_id)" class="fk btn">去付款</span>
+                        <!--<span @click="cancle_order(item.order_id)" class="qx btn">取消订单</span>-->
+                        <span v-show="selected==1" @click="pay(item.order_id)" class="fk btn">去付款</span>
                     </div>
                 </div>
             </li>
@@ -93,9 +93,12 @@
                         }
                     })
             },
-            pay(){
-
+            pay(order){
+                window.location.href="http://static.florinsight.com/payment?order_id="+order;
             },
+        },
+        mounted(){
+            this.getList();
         },
         watch:{
             selected(n,o){
