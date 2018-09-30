@@ -1,7 +1,7 @@
 <template>
   <div class="category-item">
     <img class="category-pic" v-bind:src="category.pic" />
-    <p class="category-title">{{ category.title }}</p>
+    <p class="category-title">{{ category.cat_name }}</p>
   </div>
 </template>
 

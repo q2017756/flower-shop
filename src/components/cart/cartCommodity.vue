@@ -1,32 +1,45 @@
 <template>
-    <div class="cart-commodity">
-        <i v-if="isEdit" class="edit-select" v-bind:class="[selected ? 'cart-select' : '']"
-           v-on:click="handleRemoveSelect"/>
-        <i v-else class="select-icon" v-bind:class="[commodity.selected ? 'cart-select' : '']"
-           v-on:click.stop="_handleSelect"/>
-        <img class="commodity-pic" v-bind:src="commodity.thumbnail_pic"/>
-        <div class="cart-commodity-content" v-on:click="_handlePush">
-            <div v-if="isEdit">
-                <!--暂时不做规格选择-->
-                <!--<div class="cart-commodity-edit-select" v-on:click="handleToFormat(commodity)">-->
-                <div class="cart-commodity-edit-select">
-                    <div class="title2">{{ commodity.name }}</div>
-                    <span>已选择：{{ commodity.spec_value }}</span><i/>
+    <div>
+        <div class="farm-container" v-for="farm in farmList">
+            <p class="farm-name">基地: {{farm.name}}</p>
+            <div  class="cart-commodity"
+                v-for="commodity in group[farm.id]"
+                :key="commodity.product_id">
+                <i v-if="isEdit" class="edit-select"
+                   :class="[selected(commodity) ? 'cart-select' : '']"
+                   @click="handleRemoveSelect(commodity)"/>
+                <i v-else class="select-icon"
+                   :class="[commodity.selected ? 'cart-select' : '']"
+                   @click.stop="_handleSelect(commodity)"/>
+                <img class="commodity-pic" :src="commodity.thumbnail_pic"/>
+                <div class="cart-commodity-content" @click="_handlePush(commodity)">
+                    <div v-if="isEdit">
+                        <!--暂时不做规格选择-->
+                        <!--<div class="cart-commodity-edit-select" v-on:click="handleToFormat(commodity)">-->
+                        <div class="cart-commodity-edit-select">
+                            <div class="title2">{{ commodity.name }}</div>
+                            <span>已选择：{{ commodity.spec_value }}</span><i/>
+                        </div>
+                        <div class="cart-commodity-edit-number">
+                            <p class="price">¥{{ commodity.price }}</p>
+                            <step class="step"
+                                  :commodity="commodity"
+                                  :current="Number(commodity.num)" @
+                                  :handleChange="handleChangeCount"/>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <p class="title-container">
+                            <span class="title">{{ commodity.name }}</span>
+                            <span class="count">x{{ commodity.num }}</span>
+                        </p>
+                        <p class="description">{{ commodity.spec_value }}</p>
+                        <p class="price">¥{{ commodity.price }}</p>
+                    </div>
                 </div>
-                <div class="cart-commodity-edit-number">
-                    <p class="price">¥{{ commodity.price }} {{ commodity.count }}</p>
-                    <step class="step" v-bind:current="Number(commodity.num)" v-bind:handleChange="handleChangeCount"/>
-                </div>
-            </div>
-            <div v-else>
-                <p class="title-container">
-                    <span class="title">{{ commodity.name }}</span>
-                    <span class="count">x{{ commodity.num }}</span>
-                </p>
-                <p class="description">{{ commodity.spec_value }}</p>
-                <p class="price">¥{{ commodity.price }}</p>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -34,9 +47,28 @@
     import step from '@/components/common/step'
 
     export default {
+        data() {
+            return {
+                farmList: [],
+                farmIdList: [],
+            }
+        },
         computed: {
             selected() {
-                return this.removeCartList.indexOf(this.commodity) >= 0
+                return (commodity) => {
+                    return this.removeCartList.indexOf(commodity) >= 0
+                }
+            },
+            group() {
+                let group = {}
+                this.$store.state.cartList.map(item => {
+                    if(!group[item.farm_id]){
+                        group[item.farm_id] = []
+                    }
+                    group[item.farm_id].push(item)
+                })
+                this.$store.state.cartGroup = group
+                return group
             }
         },
         components: {
@@ -44,7 +76,6 @@
         },
         // props: ['commodity', 'handleSelect', 'handlePush', 'isEdit', 'handleRemove', 'handleChange', 'removeCartList', 'handleToFormat'],
         props: {
-            commodity: Object,
             handleSelect: {
                 type: Function,
                 default: () => {
@@ -73,33 +104,46 @@
                 }
             }
         },
-        watch: {
-            commodity: function (val, oldVal) {
-                console.log('+++++++++')
-                console.log(val, oldVal)
+        methods: {
+            _handleSelect(commodity) {
+                this.handleSelect(commodity)
+            },
+            _handlePush(commodity) {
+                if (this.isEdit) return
+                this.handlePush(commodity.goods_id)
+            },
+            handleRemoveSelect(commodity) {
+                this.handleRemove(commodity)
+            },
+            handleChangeCount(currentVal,commodity) {
+                this.handleChange(commodity, currentVal)
             }
         },
-        methods: {
-            _handleSelect() {
-                this.handleSelect(this.commodity)
-            },
-            _handlePush() {
-                if (this.isEdit) return
-                this.handlePush(this.commodity.goods_id)
-            },
-            handleRemoveSelect() {
-                this.handleRemove(this.commodity)
-            },
-            handleChangeCount(currentVal) {
-                this.handleChange(this.commodity, currentVal)
-            }
+        mounted() {
+            this.$store.state.cartList.map(item => {
+                if(this.farmIdList.indexOf(item.farm_id) < 0){
+                    this.farmIdList.push(item.farm_id)
+                    this.farmList.push({
+                        id: item.farm_id,
+                        name: item.farm_name,
+                    })
+                }
+            })
         }
     }
 </script>
 
 <style lang="scss" scoped>
     @import '../../styles/mixin.scss';
-
+    .farm-container {
+        margin-top: px2rem(10);
+        .farm-name {
+            padding: $edge_small $edge_default;
+            border-bottom: 1px solid #eee;
+            background: #fff;
+            font-size: px2rem($size_middle);
+        }
+    }
     .cart-commodity {
         background-color: #fff;
         height: px2rem(92);

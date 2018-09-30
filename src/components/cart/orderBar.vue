@@ -1,7 +1,8 @@
 <template>
   <div class="order-bar">
     <div class="bar-left" v-on:click="handleClick">
-      <i v-bind:class="[(!isEdit && selectedCount === totalCount) || (isEdit && removeCommodityCount === totalCount) ? 'select' : '']" />
+      <i
+          :class="[(!isEdit && selectedCount === totalCount) || (isEdit && removeCommodityCount === totalCount) ? 'select' : '']" />
       <span class="selectedCount">已选({{ isEdit ? removeCommodityCount : selectedCount }})</span>
     </div>
     <div class="bar-right">
