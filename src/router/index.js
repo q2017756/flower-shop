@@ -93,7 +93,8 @@ export default new Router({
         },
           {
               path: '/orderDetails',
-              component: resolve => require(['@/containers/tools/orderDetails'], resolve)
+              component: resolve => require(['@/containers/tools/orderDetails'], resolve),
+              name:"orderDetails"
           },
         {
           path: '/productDetail/:id',

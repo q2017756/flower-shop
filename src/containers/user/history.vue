@@ -8,7 +8,7 @@
             infinite-scroll-disabled="loading"
             infinite-scroll-immediate-check="false"
             infinite-scroll-distance="10">
-            <li v-for="item in list">
+            <li @click="go(item.goods_id)" v-for="item in list">
                 <!--<div class="title clear">-->
                     <!--<div class="check">-->
                         <!--<i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>-->
@@ -33,8 +33,8 @@
                             <div class="bot-p">
                                 <span class="price">￥{{item.gprice}}</span>
                                 <div class="ffl">
-                                    <span class="bt-sam">找相似</span>
-                                  <img id="cart-img" src="../../../static/imgs/cart.png" alt="">
+                                    <!--<span class="bt-sam">找相似</span>-->
+                                  <img @click.stop="cart(item.goods_id)" id="cart-img" src="../../../static/imgs/cart.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -127,6 +127,7 @@
   import qs from "qs"
   import urls from "../../utils/url"
   import { InfiniteScroll } from 'mint-ui';
+  import { Toast } from 'mint-ui';
     export default {
         name: "history",
         data(){
@@ -168,7 +169,26 @@
                       }
 
                   })
-          }
+          },
+            go(id){
+                // alert(id)
+                this.$router.push(`/productDetail/${id}`)
+            },
+            cart(id){
+                // console.log(item)
+                this.$ajax.post("",qs.stringify({
+                    api_type:"common",
+                    api_version:"1.0",
+                    act:"carts_add",
+                    isEnd:"webroot",
+                    product_id:id,
+                    open_id:"15601606633",
+                    product_num:"1"
+                }))
+                    .then((data)=>{
+                        Toast(data.data.msg)
+                    })
+            }
         },
         mounted(){
             console.log(this.$ajax)

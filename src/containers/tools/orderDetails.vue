@@ -4,18 +4,21 @@
             <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
             <!--<mt-button icon="more" slot="right"></mt-button>-->
         </mt-header>
-        <div @click="goAddress" class="address-div">
+        <div v-show="showAds" @click="goAddress" class="address-div">
             <div class="flex user-msg">
                 <div class="text">
-                    收货人：王小二
+                    收货人：{{address.ship_name}}
                 </div>
                 <div class="text">
-                    18211655490
+                    {{address.ship_mobile}}
                 </div>
             </div>
             <div class="flex address">
-                收货地址：是打发斯蒂芬阿斯蒂芬阿斯蒂芬阿斯蒂芬水电费水电费阿斯蒂芬啊
+                收货地址：{{address.province+address.city+address.region+address.address}}
             </div>
+        </div>
+        <div @click="goAddress" class="sele-ads" v-show="!showAds">
+            <van-cell title="选择收货地址" is-link value="" />
         </div>
         <div class="goods-div">
             <div class="goods flex">
@@ -39,6 +42,7 @@
                 <van-cell title="优惠" is-link arrow-direction="down" value="内容" />
             </van-cell-group>
         </div>
+        <button @click="weixin_pay">zhifu </button>
         <van-submit-bar
             :price="3050"
             button-text="提交订单"
@@ -56,7 +60,8 @@
         name: "orderDetails",
         data(){
             return{
-
+                address:{},
+                showAds:true
             }
         },
         components:{
@@ -64,11 +69,60 @@
             [CellGroup.name]:CellGroup,
             [SubmitBar.name]:SubmitBar
         },
+        mounted(){
+          // console.log(this.$route.query)
+            var address = this.$route.params
+            console.log(address)
+            if(address.province){
+                this.address=address;
+                this.showAds = true;
+            }else{
+                this.showAds = false;
+            }
+        },
         methods:{
             test(){
                 alert('sss')
             },
             onSubmit(){
+                // 处理地址数据
+                var ads=this.address;
+                let addressData={
+                    address:ads.address,//(详细地址)
+                    ship_area:ads.province+"/"+ads.city+"/"+ads.region,//（省市区）
+                    ship_addr:ads.province+ads.city+ads.region+ads.address,//（全部地址）
+                    ship_mobile:ads.ship_mobile,//（收货人手机号）
+                    ship_name:ads.ship_name,//（收货人姓名）
+                    province:ads.province,
+                    city:ads.city,
+                    region:ads.region,
+                    default:ads.default,
+                    area_id:ads.region_id,//（区id）
+                    province_id:ads.province_id,//（省id）
+                    city_id:ads.city_id,//（市id）
+                    deliver_type:"common",//（配送类型 快递  门店）
+                    store_name:"",//门店的名称）
+                    store_id:"",//（门店的id）
+                    memo:""//（备注）
+                }
+                // {
+                //     address:"河南省郑州市中牟县",//(详细地址)
+                //         ship_area:"上海市/上海市/徐汇区：26",//（省市区）
+                //     ship_addr:"河南省郑州市中牟县",//（全部地址）
+                //     ship_mobile:'13564137019',//（收货人手机号）
+                //     ship_name:"ff",//（收货人姓名）
+                //     province:"上海",//（省）
+                //     city:"上海市",//（市）
+                //     region:"徐汇区",//（区）
+                //     area_id:"26",//（区id）
+                //     province_id:"22",//（省id）
+                //     city_id:"23",//（市id）
+                // default:"false",//（默认地址）
+                //     deliver_type:"common",//（配送类型 快递  门店）
+                //     store_name:"",//门店的名称）
+                //     store_id:"",//（门店的id）
+                //     memo:""//（备注）
+                // }
                 this.$ajax.post("",qs.stringify({
                     api_type:"common",
                     api_version:"1.0",
@@ -76,24 +130,7 @@
                     isEnd:"webroot",
                     cost_freight:"0.00",//快递费
                     final_amount:"0.04",//订单总额
-                    consignee:JSON.stringify({
-                        address:"河南省郑州市中牟县",//(详细地址)
-                        ship_area:"上海市/上海市/徐汇区：26",//（省市区）
-                        ship_addr:"河南省郑州市中牟县",//（全部地址）
-                        ship_mobile:'13564137019',//（收货人手机号）
-                        ship_name:"ff",//（收货人姓名）
-                        province:"上海",//（省）
-                        city:"上海市",//（市）
-                        region:"徐汇区",//（区）
-                        area_id:"26",//（省id）
-                        province_id:"22",//（区id）
-                        city_id:"23",//（市id）
-                        default:"false",//（默认地址）
-                        deliver_type:"common",//（配送类型 快递  门店）
-                        store_name:"",//门店的名称）
-                        store_id:"",//（门店的id）
-                        memo:""//（备注）
-                    }) ,//收获地址
+                    consignee:JSON.stringify(addressData) ,//收获地址
                     product:JSON.stringify({
                         "11": [
                             {
@@ -142,12 +179,20 @@
                     member_id:"2"//订单会员id
                 }))
                     .then((data)=>{
-                        console.log(data)
+                        console.log(data);
+                        if(data.data.res=="succ"){
+                            console.log(data.data.info.order_id)
+                            this.weixin_pay(data.data.info.order_id)
+                        }
                     })
             },
             goAddress(){
                 Toast("选择地址")
                 this.$router.push({path:"addressList",query:{'isSelect':1}})
+            },
+            weixin_pay(order){
+                // alert(JSON.stringify(order))
+                window.location.href="http://static.florinsight.com/payment?order_id="+order;
             },
             order(){
 
@@ -214,5 +259,9 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+    }
+    .sele-ads{
+        background: white;
+        padding: 0.25rem;
     }
 </style>
