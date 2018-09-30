@@ -1,6 +1,6 @@
 <template>
   <div class="section-item">
-    <p v-bind:class="['section-name', isSelected ? 'selected' : '']">{{ section.name }}</p>
+    <p v-bind:class="['section-name', isSelected ? 'selected' : '']">{{ section.cat_name }}</p>
   </div>
 </template>
 

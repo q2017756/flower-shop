@@ -51,14 +51,8 @@ export default {
         state.cartList = commodities
     },
     [TYPES.SELECTCARTCOMMODITY](state, commodity) {
-        console.log(1)
-        console.log('cartList',state.cartList)
         const index = state.cartList.indexOf(commodity)
-        console.log('index',index)
         if (index === -1) return
-        console.log(2)
-        console.log(11111,{...commodity, selected: !commodity.selected})
-
         Vue.set(state.cartList, index, {...commodity, selected: !commodity.selected})
     },
     [TYPES.SELECTALLCARTCOMMODITY](state) {
