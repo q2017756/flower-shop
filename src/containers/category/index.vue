@@ -15,6 +15,7 @@
     import categoryItemContainer from './categoryItemContainer'
     import sectionContainer from './sectionContainer'
     import {fecthCategory} from '@/utils/fetchData'
+    import {Toast} from 'mint-ui'
 
     export default {
         data() {
@@ -48,7 +49,9 @@
                     if (res.data.res == "succ") {
 //                        this.segmentArr = res.data.result
                         this.sections = Object.keys(res.data.result).map(key => res.data.result[key]);
-                        console.log(123, this.sections);
+                        this.section = this.sections[0].sec_cat
+                        this.section = Object.keys(this.section).map(key => this.section[key]);
+                        console.log(1111,this.section);
                     } else {
                         Toast(res.data.msg)
                     }
@@ -59,15 +62,8 @@
                 this.$router.push('/search')
             },
             handleChangeSection(section) {
-                console.log(section)
-                this.section.section = section
-                // 请求分类
-                // fecthCategory()
-                //   .then(r => {
-                //     console.log(r)
-                //     this.section.section = section
-                //     this.section.categories = r[section.categoryId]
-                //   })
+//                console.log('handleChangeSection',section.sec_cat)
+                this.section = section.sec_cat
             },
             handlePushToCommodity(section, commodity) {
                 console.log(section)
