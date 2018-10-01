@@ -65,7 +65,15 @@
       <div class="text-center">
         <span class="title-line">农场故事</span>
       </div>
-      <img class="farm-img" src="../../assets/img/farm-story-small.png"  @click="handleStory" alt="">
+      <div class="flex-xyc">
+          <div v-for="item in storyList" class="list">
+              <router-link v-bind:to="{path:'/farmStory',query:{id:item.store_id}}">
+              <img  :src="item.image" alt="">
+              </router-link>
+              <div>{{item.title}}</div>
+          </div>
+
+      </div>
       <div class="more-farm" @click="handleStoryList">查看更多农场故事</div>
     </div>
     <bottom-footer />
@@ -74,17 +82,19 @@
 </template>
 <script>
   import {Toast} from 'mint-ui'
+  import qs from "qs"
   import { fetchHome } from '@/utils/fetchData'
   import appHeader from '@/components/common/appHeader'
   import productorItem from '@/components/home/productorItem'
   import farmItem from '@/components/home/farmItem'
   import bottomFooter from '@/components/common/bottomFooter'
+  import RouterLink from "vant/es/mixins/router-link";
 
   export default {
     data() {
       return {
           farmList: [],
-
+          storyList:[],
           data: {
           manufacturer: [
             {
@@ -110,6 +120,7 @@
     props: {
     },
     components: {
+        RouterLink,
       appHeader,
       productorItem,
       farmItem,
@@ -144,10 +155,24 @@
       },
         handleList() {
             this.$router.push('/farmlist')
+        },
+        // 农场故事
+        getStory(){
+            this.$ajax.post("",qs.stringify({
+                act:"getFarmStores"
+            }))
+                .then(data=>{
+                    console.log("11111111111111")
+                    console.log(data);
+                    if(data.data.res=="succ"){
+                        this.storyList=data.data.result.list
+                    }
+                })
         }
     },
     mounted () {
-        this.getData()
+        this.getData();
+        this.getStory();
       // fetchHome()
       //   .then(r => {
       //     console.log(r)
@@ -221,6 +246,30 @@
       }
     }
   }
+
+
+    .flex-xyc{
+        /*display: flex;*/
+        display: flex;
+        width: 100%;
+        /*white-space: nowrap;*/
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 5.2rem;
+        background: white;
+        .list{
+            width: 6.4rem;
+            margin-left: 0.4rem;
+            .list:last-child{
+                margin-right: 0.2rem;
+            }
+            img{
+                width: 6.4rem;
+                height: 4.6rem;
+            }
+            /*flex-shrink: 3;*/
+        }
+    }
 
 </style>
 

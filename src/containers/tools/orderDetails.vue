@@ -20,31 +20,32 @@
         <div @click="goAddress" class="sele-ads" v-show="!showAds">
             <van-cell title="选择收货地址" is-link value="" />
         </div>
-        <div class="goods-div">
-            <div class="goods flex">
+        <div v-for="item in renderData" class="goods-div">
+            <div style="border-bottom: 1px solid #cccccc;padding: 0.2rem 0;font-size: 16px">{{item.farm_name}}</div>
+            <div v-for="its in item.good_list" style="padding-top: 0.2rem" class="goods flex">
                 <div class="img">
-                    <img src="" alt="">
+                    <img :src="its.thumbnail_pic" alt="">
                 </div>
                 <div class="msg">
-                    <div class="goodsname">大是大非阿斯蒂芬阿道夫啊阿斯蒂芬阿道夫啊阿斯蒂芬阿道夫啊</div>
+                    <div class="goodsname">{{its.name}}</div>
                     <div class="int">默认</div>
                     <div class="p-n">
-                        <span class="pr">￥250.00</span>
-                        <span class="num">×1</span>
+                        <span class="pr">￥{{its.price}}</span>
+                        <span class="num">×{{its.num}}</span>
                     </div>
                 </div>
             </div>
         </div>
         <div>
-            <van-cell-group>
-                <van-cell @click="test()" title="优惠券" is-link />
-                <van-cell title="配送方式" is-link value="内容" />
-                <van-cell title="优惠" is-link arrow-direction="down" value="内容" />
-            </van-cell-group>
+            <!--<van-cell-group>-->
+                <!--<van-cell @click="test()" title="优惠券" is-link />-->
+                <!--<van-cell title="配送方式" is-link value="内容" />-->
+                <!--<van-cell title="优惠" is-link arrow-direction="down" value="内容" />-->
+            <!--</van-cell-group>-->
         </div>
-        <button @click="weixin_pay">zhifu </button>
+        <!--<button @click="weixin_pay">zhifu </button>-->
         <van-submit-bar
-            :price="3050"
+            :price="totalPrice*100"
             button-text="提交订单"
             @submit="onSubmit"
         />
@@ -61,7 +62,10 @@
         data(){
             return{
                 address:{},
-                showAds:true
+                showAds:true,
+                goods:{},
+                totalPrice:0,
+                renderData:[]
             }
         },
         components:{
@@ -71,8 +75,26 @@
         },
         mounted(){
           // console.log(this.$route.query)
-            var address = this.$route.params
-            console.log(address)
+            var address = this.$route.params;
+            // console.log('.........................')
+            // console.log(this.$store.state.orderProd)
+            this.goods = this.$store.state.orderProd;
+            // var renderData=[];
+            // console.log(this.goods["11"])
+            for (var key in this.goods){
+                console.log(key);
+               this.renderData.push({
+                    farm_name:this.goods[key][0].farm_name,
+                    good_list:this.goods[key]
+                });
+                for (let j = 0;j<this.goods[key].length;j++){
+                    console.log()
+                    this.totalPrice+=this.goods[key][j].price*this.goods[key][j].num
+                }
+            };
+            console.log(this.renderData)
+            var goodsData = 1
+            // console.log(address)
             if(address.province){
                 this.address=address;
                 this.showAds = true;
@@ -82,7 +104,7 @@
         },
         methods:{
             test(){
-                alert('sss')
+                // alert('sss')
             },
             onSubmit(){
                 // 处理地址数据
@@ -123,7 +145,33 @@
                 //     store_id:"",//（门店的id）
                 //     memo:""//（备注）
                 // }
-                data={"11":[{},{}]}
+
+                // {
+                //     "11": [
+                //     {
+                //         "goods_id":"6",//商品id
+                //         "product_id":"5", //货品id
+                //         "price":"0.04",//销售价
+                //         "gprice":"0.04",//成本价
+                //         "name":"12123123fsdfs",//商品名称
+                //         "pdt_desc":"\u9ed8\u8ba4\u89c4\u683c",
+                //         "spec_desc":"",//规格
+                //         "props":"",//规格值
+                //         "store":"1099978",//库存
+                //         "thumbnail_pic":"http:\/\/qmfx-s39210.s3.fy.shopex.cn\/gpic\/20170515\/7013715a4110dc909eb6273643f8c911.jpg?imageView2\/2\/w\/600\/h\/600\/interlace\/1",
+                //         "is_activity":"0",//是否设置为活动商品 1 0
+                //         "free_postage":"1",//是否包邮
+                //         "dt_id":"1447",//运费模板ID,0代表使用默认模板
+                //         "weight":"12.000",//物品重量
+                //         "volume":"11.00",//物品体积
+                //         "type":"normal",//货品类型,normal=一般商品,presale=预售商品
+                //         "profit_price":"0",//利润价格
+                //         "nums":"1",//商品数量
+                //         "goodsType":"normal",//商品类型，normal=一般商品,presale=预售商品
+                //         "farm_id":11//农场ID  商品订单是根据农场进行拆单
+                //     }
+                // ]
+                // }
                 this.$ajax.post("",qs.stringify({
                     api_type:"common",
                     api_version:"1.0",
@@ -132,32 +180,7 @@
                     cost_freight:"0.00",//快递费
                     final_amount:"0.04",//订单总额
                     consignee:JSON.stringify(addressData) ,//收获地址
-                    product:JSON.stringify({
-                        "11": [
-                            {
-                                "goods_id":"6",//商品id
-                                "product_id":"5", //货品id
-                                "price":"0.04",//销售价
-                                "gprice":"0.04",//成本价
-                                "name":"12123123fsdfs",//商品名称
-                                "pdt_desc":"\u9ed8\u8ba4\u89c4\u683c",
-                                "spec_desc":"",//规格
-                                "props":"",//规格值
-                                "store":"1099978",//库存
-                                "thumbnail_pic":"http:\/\/qmfx-s39210.s3.fy.shopex.cn\/gpic\/20170515\/7013715a4110dc909eb6273643f8c911.jpg?imageView2\/2\/w\/600\/h\/600\/interlace\/1",
-                                "is_activity":"0",//是否设置为活动商品 1 0
-                                "free_postage":"1",//是否包邮
-                                "dt_id":"1447",//运费模板ID,0代表使用默认模板
-                                "weight":"12.000",//物品重量
-                                "volume":"11.00",//物品体积
-                                "type":"normal",//货品类型,normal=一般商品,presale=预售商品
-                                "profit_price":"0",//利润价格
-                                "nums":"1",//商品数量
-                                "goodsType":"normal",//商品类型，normal=一般商品,presale=预售商品
-                                "farm_id":11//农场ID  商品订单是根据农场进行拆单
-                            }
-                            ]
-                    }) ,//订单商品
+                    product:JSON.stringify(this.$store.state.orderProd) ,//订单商品
                     goods_final_amount:"0.04",//商品总金额
                     payment:{"id":3},//支付类别
                     product_count:"1",//商品总数量
@@ -188,7 +211,7 @@
                     })
             },
             goAddress(){
-                Toast("选择地址")
+                // Toast("选择地址")
                 this.$router.push({path:"addressList",query:{'isSelect':1}})
             },
             weixin_pay(order){

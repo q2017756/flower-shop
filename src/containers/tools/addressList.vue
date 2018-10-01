@@ -47,7 +47,7 @@
             },
             check(item,index){
                 if(this.$route.query.isSelect){
-                    Toast("选中");
+                    // Toast("选中");
                     // console.log(item,index);
                     let address = this.CustList[index];
                     this.$router.push({name:"orderDetails",params:address})

@@ -96,7 +96,8 @@
                 // 购物车列表
                 this.$axios('', {
                     act: 'carts_list',
-                    open_id: '15601606633'
+                    open_id: '15237193589',
+                    // open_id: '15601606633'
                 }, (data) => {
                     console.log('cart:', data)
                     if (data.data.res === "succ") {
