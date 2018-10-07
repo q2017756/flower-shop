@@ -25,7 +25,7 @@
                     <div class="img-d">
                         <img :src="sonItem.thumbnail_pic" alt="">
                     </div>
-                    <p class="tp">{{sonItem.name}}</p>
+                    <p class="tp body">{{sonItem.name}}</p>
                 </div>
                 <div class="bot-d">
                     <span class="money">应付：{{item.total_amount}}</span>
@@ -66,13 +66,17 @@
         },
         methods:{
             getList(){
+                console.log('s11')
+                // this.loading = true;
                 this.$ajax.post("openapi.php?act=memberOrders",qs.stringify({
                     page:this.page,
                     state:this.selected
                 }))
                     .then((data)=>{
                         console.log(data);
+                        this.loading = false;
                         if(data.data.res == "succ"){
+
                             this.listData=data.data.result.data
                         }
                     })
@@ -178,4 +182,12 @@
   .tp{
     padding-left: 0.2rem;
   }
+  body,.body{
+      height: auto!important;
+  }
 </style>
+<!--<style>-->
+    <!--body{-->
+        <!--height: auto!important;-->
+    <!--}-->
+<!--</style>-->

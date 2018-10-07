@@ -51,6 +51,7 @@
     },
     methods: {
         colFarm(){
+            console.log(this.id)
             this.$ajax.post("openapi.php?act=doFavFarm",qs.stringify({
                 farm_id:this.id
             }))
@@ -76,7 +77,7 @@
       mounted(){
         this.name=this.$route.query.name;
         this.start=this.$route.query.start;
-        this.id=this.$route.query.farmId;
+        this.id=this.$route.query.farm_id;
         console.log('ssss')
         // 请求上品
           this.$ajax.post("openapi.php?act=getFarmGoods",qs.stringify({

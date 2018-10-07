@@ -13,6 +13,7 @@
 <script>
   import appHeader from '@/components/common/appHeader'
   import { Toast } from 'mint-ui';
+  import qs from "qs"
   export default {
     data() {
       return {
@@ -43,14 +44,19 @@
                 Toast("请输入联系地址")
                 return
             }
-            this.$ajax.post("openapi.php?act=addFarm",{
+            this.$ajax.post("openapi.php?act=addFarm",qs.stringify({
                 farm_name:this.shop,
                 contact_name:this.who,
                 mobile:this.tel,
                 address:this.addr
-            })
+            }))
                 .then((data)=>{
-                    console.log(data)
+                    console.log(data);
+                    if(data.data.res=="succ"){
+                        Toast(data.data.msg)
+                    }else {
+                        Toast(data.data.msg)
+                    }
                 })
         }
     },

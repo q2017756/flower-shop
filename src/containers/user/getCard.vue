@@ -41,7 +41,22 @@
         },
         methods:{
             get(item){
-                console.log(item)
+                console.log(item);
+                this.$ajax.post("",qs.stringify({
+                    api_type:"common",
+                    api_version:"1.0",
+                    act:"getCoupon",
+                    isEnd:"webroot",
+                    coupon_id:item.coupon_id
+                }))
+                    .then((data)=>{
+                        console.log(data);
+                        if(data.data.res=="succ"){
+                            Toast(data.data.msg)
+                        }else{
+                            Toast(data.data.msg)
+                        }
+                    })
             }
         },
         mounted(){

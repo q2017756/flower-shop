@@ -35,7 +35,7 @@
                     <div>优惠券</div>
                 </div>
                 <div @click="goPage('/history')" class="gz-l">
-                    <div>{{history}}</div>
+                    <div>4</div>
                     <div>足迹</div>
                 </div>
             </div>
@@ -69,40 +69,40 @@
                 </div>
             </div>
             <ul @click="goPage('/myOrder')" class="l-u">
-                <li class="l-l">
+                <li v-for="item in listData" class="l-l">
                     <div class="img-d-g">
-                        <img src="../../../static/imgs/flower.jpg" alt="">
+                        <img :src="item.goods_info[0].thumbnail_pic" alt="">
                     </div>
                     <div class="msg">
                         <div class="abs">
-                            <div>订单号：65522466</div>
-                            <div>总价：￥123</div>
+                            <div>订单号：{{item.order_id}}</div>
+                            <div>总价：￥{{item.total_amount}}</div>
                         </div>
                     </div>
                     <div class="btn">
                         <span class="status">运输中</span>
-                        <div class="btn-p-b">
-                            <span>查询订单</span>
-                        </div>
+                        <!--<div class="btn-p-b">-->
+                            <!--<span>查询订单</span>-->
+                        <!--</div>-->
                     </div>
                 </li>
-                <li class="l-l">
-                    <div class="img-d-g">
-                        <img src="../../../static/imgs/flower.jpg" alt="">
-                    </div>
-                    <div class="msg">
-                        <div class="abs">
-                            <div>订单号：65522466</div>
-                            <div>总价：￥123</div>
-                        </div>
-                    </div>
-                    <div class="btn">
-                        <span class="status">运输中</span>
-                        <div class="btn-p-b">
-                            <span>查询订单</span>
-                        </div>
-                    </div>
-                </li>
+                <!--<li class="l-l">-->
+                    <!--<div class="img-d-g">-->
+                        <!--<img src="../../../static/imgs/flower.jpg" alt="">-->
+                    <!--</div>-->
+                    <!--<div class="msg">-->
+                        <!--<div class="abs">-->
+                            <!--<div>订单号：65522466</div>-->
+                            <!--<div>总价：￥123</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="btn">-->
+                        <!--<span class="status">运输中</span>-->
+                        <!--<div class="btn-p-b">-->
+                            <!--<span>查询订单</span>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
             </ul>
         </div>
         <div class="tools">
@@ -148,7 +148,8 @@
               score:0,
               history:0,
               goodC:0,
-              farmCount:0
+              farmCount:0,
+              listData:[]
           }
       },
       components: {
@@ -158,6 +159,7 @@
 
       },
         mounted(){
+            this.getList();
           this.$ajax.post('openapi.php?act=memberFrontpage')
               .then((data)=>{
                   console.log(data);
@@ -179,8 +181,27 @@
       methods:{
           goPage(route){
             this.$router.push(route)
-          }
-      }
+          },
+          getList(){
+              this.$ajax.post("openapi.php?act=memberOrders",qs.stringify({
+                  page:1,
+                  state:1
+              }))
+                  .then((data)=>{
+                      console.log(data);
+                      if(data.data.res == "succ"){
+                          if(data.data.result.data.length<2){
+                              this.listData=data.data.result.data;
+                          }else {
+                              this.listData=data.data.result.data.slice(0,3);
+                          }
+                      }
+                  })
+                  .catch((data)=>{
+                      console.log(data)
+                  })
+          },
+      },
     }
 </script>
 

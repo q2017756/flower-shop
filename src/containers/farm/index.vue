@@ -66,10 +66,10 @@
         <span class="title-line">农场故事</span>
       </div>
       <div class="flex-xyc">
-          <div v-for="item in storyList" class="list">
-              <router-link v-bind:to="{path:'/farmStory',query:{id:item.store_id}}">
+          <div v-for="item in storyList" @click="sDetail(item)" class="list">
+              <!--<router-link v-bind:to="{path:'/farmStory',query:{id:item.store_id}}">-->
               <img  :src="item.image" alt="">
-              </router-link>
+              <!--</router-link>-->
               <div>{{item.title}}</div>
           </div>
 
@@ -138,6 +138,9 @@
                     Toast("服务器异常")
                 })
         },
+        sDetail(item){
+          this.$router.push({path:'/farmStory',query:{id:item.store_id}})
+        },
       handleDetail(id) {
         this.$router.push('/farmDetail')
       },
@@ -166,6 +169,7 @@
                     console.log(data);
                     if(data.data.res=="succ"){
                         this.storyList=data.data.result.list
+                        console.log(data)
                     }
                 })
         }
