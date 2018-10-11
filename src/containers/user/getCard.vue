@@ -47,7 +47,7 @@
                 api_type:"common",
                 api_version:"1.0",
                 act:"coupon_list",
-                isEnd:"webroot"
+                isEnd:"webroot",
             }))
                 .then((data)=>{
                     console.log(data)
