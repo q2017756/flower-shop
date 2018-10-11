@@ -10,7 +10,7 @@
         <mt-tab-item id="3">已过期</mt-tab-item>
       </mt-navbar>
         <ul class="l-u">
-            <li v-for="item in listData" class="l-l">
+            <li v-for="item in listData" v-bind:class="{ed:selected!=1}" class="l-l">
                 <div class="content">
                     <div class="money">
                         <span class="num">{{parseInt(item.price)}}</span>
@@ -27,7 +27,7 @@
                                 <!--<br>-->
                             </div>
                         </div>
-                        <div v-show="item.getTag" class="bts">使用</div>
+                        <div v-show="selected==1" class="bts">使用</div>
                     </div>
                 </div>
                 <div class="bot-text">{{item.remarks}}</div>

@@ -1,7 +1,7 @@
 <template>
     <!--<router-link  v-bind:to="toPath">-->
-    <div class="farm-item" @click="go(farmInfo.goods_id)">
-        <img class="farm-img" :src="farmInfo.big_pic"/>
+    <div class="farm-item">
+        <img  @click="go(farmInfo.goods_id)" class="farm-img" :src="farmInfo.big_pic"/>
         <div CLASS="text-container">
             <p class="name">{{farmInfo.name}}</p>
             <div v-if="!addrShow" class="price-container">
@@ -16,7 +16,7 @@
         </span>
                 <!--<span v-if="!cartShow" class="comment">{{farmInfo.score ? farmInfo.score : 100}}%好评</span>-->
                 <div >
-                    <img class="farm-cart" src="../../assets/icon/tabbar-cart.png"  alt="">
+                    <img @click="addCart(farmInfo)" class="farm-cart" src="../../assets/icon/tabbar-cart.png"  alt="">
                 </div>
             </div>
         </div>
@@ -25,6 +25,8 @@
 </template>
 
 <script>
+    import qs from "qs"
+    import {Toast} from "mint-ui"
     export default {
         props: {
             farmInfo: {
@@ -53,6 +55,21 @@
             go(id){
                 // alert(id)
                 this.$router.push(`/productDetail/${id}`)
+            },
+            addCart(item){
+                console.log(item)
+               this.$ajax.post("",qs.stringify({
+                   api_type:"common",
+                   api_version:"1.0",
+                   act:"carts_add",
+                   isEnd:"webroot",
+                   product_id:item.goods_id,
+                   open_id:"15601606633",
+                   product_num:"1"
+               }))
+                   .then((data)=>{
+                      Toast(data.data.msg)
+                   })
             }
 
         },

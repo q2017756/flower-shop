@@ -25,13 +25,13 @@
                     <div class="img-d">
                         <img :src="sonItem.thumbnail_pic" alt="">
                     </div>
-                    <p class="tp">{{sonItem.name}}</p>
+                    <p class="tp body">{{sonItem.name}}</p>
                 </div>
                 <div class="bot-d">
                     <span class="money">应付：{{item.total_amount}}</span>
                     <div class="btn-d">
-                        <span @click="cancle_order(item.order_id)" class="qx btn">取消订单</span>
-                        <span @click="pay(item.order_id)" class="fk btn">去付款</span>
+                        <!--<span @click="cancle_order(item.order_id)" class="qx btn">取消订单</span>-->
+                        <span v-show="selected==1" @click="pay(item.order_id)" class="fk btn">去付款</span>
                     </div>
                 </div>
             </li>
@@ -66,13 +66,17 @@
         },
         methods:{
             getList(){
+                console.log('s11')
+                // this.loading = true;
                 this.$ajax.post("openapi.php?act=memberOrders",qs.stringify({
                     page:this.page,
                     state:this.selected
                 }))
                     .then((data)=>{
                         console.log(data);
+                        this.loading = false;
                         if(data.data.res == "succ"){
+
                             this.listData=data.data.result.data
                         }
                     })
@@ -93,9 +97,12 @@
                         }
                     })
             },
-            pay(){
-
+            pay(order){
+                window.location.href="http://static.florinsight.com/payment?order_id="+order;
             },
+        },
+        mounted(){
+            this.getList();
         },
         watch:{
             selected(n,o){
@@ -175,4 +182,12 @@
   .tp{
     padding-left: 0.2rem;
   }
+  body,.body{
+      height: auto!important;
+  }
 </style>
+<!--<style>-->
+    <!--body{-->
+        <!--height: auto!important;-->
+    <!--}-->
+<!--</style>-->

@@ -54,10 +54,11 @@
                 this.$router.push('/message')
             },
             handleChange(title) {
+                console.log(title);
                 localStorage.setItem('productList',JSON.stringify({
                     catId: '',
                     tagId: '',
-                    keywords: title.tag_name
+                    keywords: title.cat_name
                 }))
                 this.$router.push('/productList')
             }

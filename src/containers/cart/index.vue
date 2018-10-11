@@ -14,9 +14,6 @@
             </div>
             <div v-if="cartCommodities.length > 0" class="cart-commodity">
                 <cart-commodity
-                    v-for="commodity in cartCommodities"
-                    v-bind:key="commodity.product_id"
-                    v-bind:commodity="commodity"
                     v-bind:handlePush="pushToProductDetail"
                     v-bind:handleSelect="handleSelect"
                     v-bind:isEdit="isEdit"
@@ -65,13 +62,7 @@
         },
         computed: {
             ...mapState({
-                // cartCommodities: 'cartList',
-                // cartCommodities: state => {
-                //   console.log('--------')
-                //   console.log(state.cartList)
-                //   return state.cartList
-                // },
-                // removeCartList: 'removeCartList',
+
                 removeCartList: state => {
                     console.log('========')
                     console.log(state.removeCartList)
@@ -105,12 +96,13 @@
                 // 购物车列表
                 this.$axios('', {
                     act: 'carts_list',
-                    open_id: '15601606633'
+                    open_id: '15237193589',
+                    // open_id: '15601606633'
                 }, (data) => {
                     console.log('cart:', data)
                     if (data.data.res === "succ") {
-                        this.cartCommodities = data.data.result.rules_gids[0].list
-                        this.$store.state.cartList = data.data.result.rules_gids[0].list
+                        this.cartCommodities = data.data.result.no_rules_gids[0].list
+                        this.$store.state.cartList = data.data.result.no_rules_gids[0].list
                     } else {
                         Toast(data.data.msg)
                     }
@@ -148,21 +140,83 @@
             },
             handleAction() {
                 console.log('delete')
-                console.log(this.removeCartList)
                 if (!this.isEdit) {
                     // order
+                    const orderOtherData = {
+                        "pdt_desc":"\u9ed8\u8ba4\u89c4\u683c",
+                        "is_activity":"0",//是否设置为活动商品 1 0
+                        "dt_id":"1447",//运费模板ID,0代表使用默认模板
+                        "weight":"12.000",//物品重量
+                        "volume":"11.00",//物品体积
+                        "type":"normal",//货品类型,normal=一般商品,presale=预售商品
+                        "profit_price":"0",//利润价格
+                        "nums":"1",//商品数量
+                        "goodsType":"normal",//商品类型，normal=一般商品,presale=预售商品
+                    }
                     console.log('下单')
-                    this.$router.push('pay')
+                    console.log('selected data: ',this.$store.state.cartList.filter(item => item.selected === true));
+                    let group = {}
+                    this.$store.state.cartList.filter(item => item.selected === true).map(item => {
+                        if(!group[item.farm_id]){
+                            group[item.farm_id] = []
+                        }
+                        group[item.farm_id].push(item)
+                    })
+                    console.log(111,group);
+                    for (const i in group) {
+                        let totalNum = 0
+                        group[i].map(item => {
+                            totalNum += Number(item.num)
+                        })
+                        if(totalNum < 10) {
+                            Toast(`${group[i][0].farm_name}商品不足10个，无法下单`)
+                            return false
+                        }else {
+                            group[i].map(item => {
+                                item = Object.assign(item,{'spec_desc': item.spec_value,'props': item.spec_value},orderOtherData)
+                            })
+                        }
+                    }
+                    this.$store.state.orderProd = group
+                    this.$router.push('orderDetails')
                 } else {
                     // remove
-                    this.selectRemoveAll = false
-                    this.removeCartCommodity(this.removeCartList)
+//                    this.selectRemoveAll = false
+//                    this.removeCartCommodity(this.removeCartList)
+                    this.$axios('', {
+                        act: 'carts_del',
+                        open_id: '15601606633',
+                        product_id: this.removeCartList.map(item => item.product_id).join(',')
+                    }, (data) => {
+                        console.log('cart edit:', data)
+                        if (data.data.res === "succ") {
+                            this.getData()
+                        } else {
+                            Toast(data.data.msg)
+                        }
+                    })
                 }
             },
+            // 修改商品
             handleChangeCount(commodity, currentValue) {
                 console.log(commodity, currentValue)
-                this.pushToCartFormat(commodity)
-                this.changeRemoveCartCommodity({count: currentValue})
+//                this.pushToCartFormat(commodity)
+//                this.changeRemoveCartCommodity({count: currentValue})
+                this.$axios('', {
+                    act: 'carts_edit',
+                    open_id: '15601606633',
+                    update_cart: JSON.stringify({
+                        product_id: commodity.product_id,
+                        product_num: currentValue,
+                    })
+                }, (data) => {
+                    console.log('cart edit:', data)
+                    if (data.data.res === "succ") {
+                        this.getData()
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
             },
             handleToFormat(commodity) {
                 this.pushToCartFormat(commodity)

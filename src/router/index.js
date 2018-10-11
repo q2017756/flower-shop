@@ -91,6 +91,11 @@ export default new Router({
           path: '/search',
           component: resolve => require(['@/containers/search/index'], resolve)
         },
+          {
+              path: '/orderDetails',
+              component: resolve => require(['@/containers/tools/orderDetails'], resolve),
+              name:"orderDetails"
+          },
         {
           path: '/productDetail/:id',
           component: resolve => require(['@/containers/productDetail/index'], resolve)
@@ -200,7 +205,13 @@ export default new Router({
         {
           path: '/timeShop',
           component: resolve => require(['@/containers/shoping/timeShop'], resolve)
-        },
+        },{
+              path: '/topList',
+              component: resolve => require(['@/containers/shoping/TopList'], resolve)
+          },{
+              path: '/TopDetails',
+              component: resolve => require(['@/containers/shoping/TopDetails'], resolve)
+          },
       ]
     }
   ]

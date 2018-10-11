@@ -36,8 +36,8 @@
             </div>
         </div>
 
-        <best-topic :topic="data.bestTopic"/>
-
+        <best-topic :topic="topData"/>
+        <div @click="goTop" style="text-align: center;background: white;margin: -0.14rem 0 0.14rem 0;padding: 0.2rem 0;border-top: 1px solid #cccccc">查看更多专题精选>>></div>
         <div class="home-activity">
             <div class="welfare" @click="handleCoupon">
                 <p class="font-default">福利社</p>
@@ -208,6 +208,20 @@
                         Toast(data.data.msg)
                     }
                 })
+                this.$axios("",{
+                    act:"getTopicList",
+                    page:1,
+                    pageLimit:"1"
+                },(data)=>{
+                    console.log("ssssssss")
+                    console.log(data);
+                    if(data.data.res == "succ"){
+                        this.topData=data.data.result.data.list[0];
+                    }
+                })
+            },
+            goTop(){
+              this.$router.push("/TopList")
             },
             handleDetail(id) {
                 this.$router.push(`/productDetail/${id}`)

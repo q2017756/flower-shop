@@ -5,14 +5,14 @@
         <!--<mt-button icon="more" slot="right"></mt-button>-->
       </mt-header>
         <ul>
-            <li v-for="item in list">
+            <li @click="go(item.goods_id)" v-for="item in list">
                 <div class="g-l clear">
-                    <div class="check check-l">
+                    <div style="display: none" class="check check-l">
                         <i class="iconfont icon-xuanzekuangmoren" v-show="!qx"></i>
                         <i class="iconfont icon-xuanzekuangxuanzhong" v-show="qx" style="color:#25b5fe"></i>
                     </div>
                     <div class="g-m">
-                        <div class="img-d">
+                        <div  class="img-d">
                             <img :src="item.pic_url" alt="">
                         </div>
                         <div class="g-t">
@@ -22,7 +22,7 @@
                                 <span class="price">￥{{item.price}}</span>
                                 <div>
                                     <!--<span class="bt-sam">找相似</span>-->
-                                    <span class="cart-p"><img src="../../../static/imgs/cart.png" alt=""></span>
+                                    <span class="cart-p" @click.stop="cart(item.goods_id)"><img src="../../../static/imgs/cart.png" alt=""></span>
                                 </div>
                             </div>
                         </div>
@@ -58,11 +58,14 @@
 </template>
 
 <script>
+    import { Toast } from 'mint-ui';
+    // import urls from "../../utils/url"
+    import qs from "qs"
     export default {
         name: "goodCollection",
       data(){
           return{
-            qx:'',
+            qx:false,
               list:[],
           }
       },
@@ -74,6 +77,25 @@
                         if(data.data.res == "succ"){
                             this.list = data.data.result.favorites.data;
                         }
+                    })
+            },
+            go(id){
+                // alert(id)
+                this.$router.push(`/productDetail/${id}`)
+            },
+            cart(id){
+                // console.log(item)
+                this.$ajax.post("",qs.stringify({
+                    api_type:"common",
+                    api_version:"1.0",
+                    act:"carts_add",
+                    isEnd:"webroot",
+                    product_id:id,
+                    open_id:"15601606633",
+                    product_num:"1"
+                }))
+                    .then((data)=>{
+                        Toast(data.data.msg)
                     })
             }
         },
@@ -118,7 +140,8 @@
         line-height: 2rem;
     }
     .t-text,.g-m{
-        width: 8.8rem;
+        /*width: 8.8rem;*/
+        width: 9.4rem;
         float: right;
         display: flex;
         justify-content:space-between;

@@ -3,8 +3,8 @@
     <div class="title">
       <span class="title-line">专题精选</span>
     </div>
-    <router-link class="bt-item" v-bind:to="toPath">
-      <img class="bt-pic" v-bind:src="topic.pic" />
+    <router-link class="bt-item" :to="{path:'/TopDetails',query:{id:topic.topic_id}}">
+      <img class="bt-pic" v-bind:src="topic.images.url" />
       <div class="bt-title-container">
         <span class="bt-title">{{ topic.title }}</span>
         <span class="bt-price">{{ topic.lowestPrice }}元起</span>
