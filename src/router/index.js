@@ -175,6 +175,14 @@ export default new Router({
               component: resolve => require(['@/containers/tools/addressList'], resolve)
           },
           {
+              path: '/success',
+              component: resolve => require(['@/containers/tools/paySuccess'], resolve)
+          },
+          {
+              path: '/fail',
+              component: resolve => require(['@/containers/tools/payFail'], resolve)
+          },
+          {
               path: '/aboutus',
               component: resolve => require(['@/containers/tools/aboutUs'], resolve)
           },
