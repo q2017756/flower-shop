@@ -262,7 +262,7 @@
                 this.$axios('', {
                     act: 'carts_add',
                     product_id: pid,
-                    open_id: '15601606633',
+                    open_id: localStorage.getItem('openId'),
                     product_num: this.count
                 }, (data) => {
                     console.log('add:', data)
