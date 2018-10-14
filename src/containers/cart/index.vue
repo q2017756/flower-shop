@@ -104,6 +104,8 @@
                             this.cartCommodities = data.data.result.no_rules_gids[0].list
                             this.$store.state.cartList = data.data.result.no_rules_gids[0].list
                         }else {
+                            this.cartCommodities = []
+                            this.$store.state.cartList = []
                             Toast('购物车为空')
                         }
                     } else {
@@ -189,11 +191,12 @@
                     this.$axios('', {
                         act: 'carts_del',
                         open_id: localStorage.getItem('openId'),
-                        product_id: this.removeCartList.map(item => item.product_id).join(',')
+                        product_ids: this.removeCartList.map(item => item.product_id).join(',')
                     }, (data) => {
                         console.log('cart edit:', data)
                         if (data.data.res === "succ") {
                             this.getData()
+                            this.changeCartEdit(!this.isEdit)
                         } else {
                             Toast(data.data.msg)
                         }

@@ -64,7 +64,7 @@
                    act:"carts_add",
                    isEnd:"webroot",
                    product_id:item.goods_id,
-                   open_id:"15601606633",
+                   open_id:localStorage.getItem('openId'),
                    product_num:"1"
                }))
                    .then((data)=>{

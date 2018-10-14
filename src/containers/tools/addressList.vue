@@ -61,7 +61,7 @@
                 api_version:"1.0",
                 act:"address_list",
                 isEnd:"webroot",
-                open_id:"15601606633"
+                open_id:localStorage.getItem('openId')
             }))
                 .then((data)=>{
                     console.log(data);

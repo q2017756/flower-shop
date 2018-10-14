@@ -3,10 +3,22 @@
 </template>
 
 <script>
+    import {Toast} from 'mint-ui'
     export default {
         name: 'app',
         mounted() {
             this.$store.dispatch('getCartCommodity')
+            this.$axios('', {
+                act: 'getMemberInfo',
+            }, (data) => {
+                console.log('member:', data)
+                if (data.data.res === "succ") {
+                    localStorage.setItem('openId',data.data.result)
+                    this.$router.push("/home")
+                } else {
+                    Toast(data.data.msg)
+                }
+            })
         }
     }
 

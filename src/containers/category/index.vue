@@ -20,18 +20,8 @@
     export default {
         data() {
             return {
-                sections: [
-                    {name: '618', categoryId: '1000001', pic: '/static/img/rose.png'},
-                    {name: '新品', categoryId: '1000002', pic: '/static/img/best.png'},
-                    {name: '玫瑰', categoryId: '1000003', pic: '/static/img/rose.png'},
-                    {name: '洋桔梗', categoryId: '1000004', pic: '/static/img/best.png'},
-                    {name: '康乃馨', categoryId: '1000005', pic: '/static/img/rose.png'},
-                ],
-                section: {
-                    pic: '/static/img/rose.png',
-                    name: '618',
-                    section: {}
-                }
+                sections: [],
+                section: {}
             }
         },
         components: {
@@ -49,8 +39,8 @@
                     if (res.data.res == "succ") {
 //                        this.segmentArr = res.data.result
                         this.sections = Object.keys(res.data.result).map(key => res.data.result[key]);
-                        this.section = this.sections[0].sec_cat
-                        this.section = Object.keys(this.section).map(key => this.section[key]);
+                        this.section = this.sections[0].cat_id
+//                        this.section = Object.keys(this.section).map(key => this.section[key]);
                         console.log(1111,this.section);
                     } else {
                         Toast(res.data.msg)
@@ -63,7 +53,7 @@
             },
             handleChangeSection(section) {
 //                console.log('handleChangeSection',section.sec_cat)
-                this.section = section.sec_cat
+                this.section = section
             },
             handlePushToCommodity(section, commodity) {
                 console.log(section)

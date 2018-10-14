@@ -103,7 +103,7 @@
                     api_version:"1.0",
                     act:"coupon_list",
                     isEnd:"webroot",
-                    open_id:"15601606633",
+                    open_id:localStorage.getItem('openId'),
                     status:this.selected,
                     page:1,
                     pageSize:10
