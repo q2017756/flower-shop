@@ -2,12 +2,14 @@
     <div class="pd-page">
         <app-header :titleShow="false">
             <div slot="center" class="header-btns">
-                <span>商品</span>
-                <span>详情</span>
-                <span>推荐</span>
-                <span>评价</span>
+                <span>商品详情</span>
+                <!--<span>商品</span>-->
+                <!--<span>详情</span>-->
+                <!--<span>推荐</span>-->
+                <!--<span>评价</span>-->
             </div>
-            <img slot="btn" src="../../assets/icon/share.png" class="share-btn" @click="handleShare">
+            <!--<img slot="btn" src="../../assets/icon/share.png" class="share-btn" @click="handleShare">-->
+            <img slot="btn" src="../../assets/icon/tabbar-cart.png" class="share-btn" @click="handleShare">
         </app-header>
 
         <div class="pd-content">
@@ -87,7 +89,7 @@
                     />
                     <div class="format-btns">
                         <button class="back" v-on:click="handleBack">返回</button>
-                        <button class="buyNow" v-on:click="handleAddToCart">加入购物车</button>
+                        <button class="buyNow" v-on:click="handleAddCart">加入购物车</button>
                         <button class="addToCart" v-on:click="handleNext">立即购买</button>
                     </div>
                 </div>
@@ -262,7 +264,7 @@
                 this.$axios('', {
                     act: 'carts_add',
                     product_id: pid,
-                    open_id: '15601606633',
+                    open_id: localStorage.getItem('openId'),
                     product_num: this.count
                 }, (data) => {
                     console.log('add:', data)
@@ -273,21 +275,6 @@
                     }
                 })
             },
-            handleAddToCart() {
-                console.log('add to cart...')
-                if (this.selects.length === this.commodity.formats.length) {
-                    this.addToCart({
-                        id: this.commodity.id,
-                        title: this.commodity.title,
-                        price: this.commodity.price,
-                        pic: this.commodity.pic,
-                        selectd: true,
-                        count: this.count,
-                        formats: this.commodity.formats,
-                        selectString: this.selects.join(';')
-                    })
-                }
-            },
 
             handleBack() {
                 this.popupVisible = false
@@ -296,7 +283,7 @@
                 this.$router.push('/comment')
             },
             handleShare() {
-                Toast('分享')
+                this.$router.push('/cart')
             },
             handleCall() {
                 Toast('客服')

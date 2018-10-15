@@ -97,6 +97,7 @@
                 hotGoodsList: [],
                 historyList: [],
                 imgsDetail:[],
+                topData: {},
                 imgs: ['/static/img/best.png', '/static/img/farm.png', '/static/img/farm-header.png', '/static/img/farm-invite.png', '/static/img/home-member.png',],
                 data: {
                     "hotItems": [

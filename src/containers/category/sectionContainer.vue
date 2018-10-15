@@ -1,38 +1,43 @@
 <template>
-  <div class="section-container">
-    <div v-for="(section, index) in sections" v-on:click="handleSelect(index)" >
-      <section-item v-bind:section="section" v-bind:key="section.categoryId + section.name" v-bind:isSelected="selectedIndex === index" />
+    <div class="section-container">
+        <div v-for="(section, index) in sections" v-on:click="handleSelect(index)">
+            <section-item v-bind:section="section" v-bind:key="section.categoryId + section.name"
+                          v-bind:isSelected="selectedIndex === index"/>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-  import sectionItem from '@/components/category/sectionItem'
-  export default {
-    props: ['sections', 'onChange'],
-    data () {
-      return {
-        selectedIndex: 0
-      }
-    },
-    components: {
-      sectionItem
-    },
-    methods: {
-      handleSelect (index) {
-        this.selectedIndex = index
-        this.onChange(this.sections[index])
-      }
-    },
-    mounted () {
-      this.handleSelect(0)
+    import sectionItem from '@/components/category/sectionItem'
+
+    export default {
+        props: ['sections', 'onChange'],
+        data() {
+            return {
+                selectedIndex: 0
+            }
+        },
+        components: {
+            sectionItem
+        },
+        methods: {
+            handleSelect(index) {
+                this.selectedIndex = index
+                if (this.sections.length > 0) {
+                    this.onChange(this.sections[this.selectedIndex].cat_id)
+                }
+            }
+        },
+        mounted() {
+            this.handleSelect(0)
+        }
     }
-  }
 </script>
 
 <style lang="scss" scoped>
-  @import "../../styles/common";
-  .section-container {
-    border-right: px2rem(5) solid #f4f4f4;
-  }
+    @import "../../styles/common";
+
+    .section-container {
+        border-right: px2rem(5) solid #f4f4f4;
+    }
 </style>

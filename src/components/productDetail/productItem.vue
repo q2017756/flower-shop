@@ -1,5 +1,5 @@
 <template>
-    <div class="product-item" @click="handleDetail">
+    <div class="product-item" @click="handleDetail" :class="isCate ? 'cate' : ''">
         <div class="img-container">
             <img :src="img" alt="">
         </div>
@@ -18,6 +18,10 @@
         props: {
             name: '',
             img: '',
+            isCate: {
+                type: Boolean,
+                default: false
+            }
         },
         components: {},
         methods: {
@@ -36,6 +40,10 @@
         padding: $edge_small $edge_default;
         background: #fff;
         margin-bottom: $edge_small;
+        &.cate {
+            padding: $edge_small 0;
+            border-bottom: 1px solid #eee;
+        }
         .img-container {
             @include flex_default;
             justify-content: center;

@@ -96,13 +96,18 @@
                 // 购物车列表
                 this.$axios('', {
                     act: 'carts_list',
-                    open_id: '15237193589',
-                    // open_id: '15601606633'
+                    open_id: localStorage.getItem('openId'),
                 }, (data) => {
                     console.log('cart:', data)
                     if (data.data.res === "succ") {
-                        this.cartCommodities = data.data.result.no_rules_gids[0].list
-                        this.$store.state.cartList = data.data.result.no_rules_gids[0].list
+                        if(data.data.result.no_rules_gids) {
+                            this.cartCommodities = data.data.result.no_rules_gids[0].list
+                            this.$store.state.cartList = data.data.result.no_rules_gids[0].list
+                        }else {
+                            this.cartCommodities = []
+                            this.$store.state.cartList = []
+                            Toast('购物车为空')
+                        }
                     } else {
                         Toast(data.data.msg)
                     }
@@ -185,12 +190,13 @@
 //                    this.removeCartCommodity(this.removeCartList)
                     this.$axios('', {
                         act: 'carts_del',
-                        open_id: '15601606633',
-                        product_id: this.removeCartList.map(item => item.product_id).join(',')
+                        open_id: localStorage.getItem('openId'),
+                        product_ids: this.removeCartList.map(item => item.product_id).join(',')
                     }, (data) => {
                         console.log('cart edit:', data)
                         if (data.data.res === "succ") {
                             this.getData()
+                            this.changeCartEdit(!this.isEdit)
                         } else {
                             Toast(data.data.msg)
                         }
@@ -204,7 +210,7 @@
 //                this.changeRemoveCartCommodity({count: currentValue})
                 this.$axios('', {
                     act: 'carts_edit',
-                    open_id: '15601606633',
+                    open_id: localStorage.getItem('openId'),
                     update_cart: JSON.stringify({
                         product_id: commodity.product_id,
                         product_num: currentValue,

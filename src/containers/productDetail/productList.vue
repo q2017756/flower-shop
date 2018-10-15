@@ -36,7 +36,7 @@
                             <span class="old-price">￥{{item.gprice}}</span>
                         </div>
                     </div>
-                    <img src="../../assets/icon/tabbar-cart.png" alt="">
+                    <img src="../../assets/icon/tabbar-cart.png" @click.stop="addCart(item)" alt="">
                 </div>
             </product-item>
         </div>
@@ -147,7 +147,35 @@
             },
             toggleFarm() {
                 this.farmVisible = !this.farmVisible
-            }
+            },
+            addCart(item) {
+                console.log(123);
+                this.$axios('', {
+                    act: 'getGoodsInfos',
+                    goods_id: item.goods_id
+                }, (data) => {
+                    console.log('guige:', data)
+//                    加入购物车
+                    if (data.data.res === "succ") {
+                        this.$axios('', {
+                            act: 'carts_add',
+                            product_id: data.data.result.product[0].pid,
+                            open_id: localStorage.getItem('openId'),
+                            product_num: 1
+                        }, (data2) => {
+                            console.log('add:', data2)
+                            if (data2.data.res === "succ") {
+                                Toast('添加购物车成功')
+                            } else {
+                                Toast(data2.data.msg)
+                            }
+                        })
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
+
+            },
         },
         mounted() {
             this.getData()
@@ -196,6 +224,7 @@
             align-self: flex-end;
             width: px2rem(20);
             height: px2rem(20);
+            padding: px2rem(10) px2rem(10) 0 px2rem(10);
         }
         .price {
             margin-right: px2rem(5);

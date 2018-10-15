@@ -180,7 +180,7 @@
                     api_version:"1.0",
                     act:"address_add",
                     isEnd:"webroot",
-                    open_id:"15237193589",
+                    open_id:localStorage.getItem('openId'),
                     ship_mobile:this.reTel,
                     province: this.province,
                     city:this.city,
