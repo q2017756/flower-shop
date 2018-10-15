@@ -25,8 +25,10 @@
         <img class="invite-img" src="../../assets/img/farm-invite.png" alt="">
         <div class="btn-container">
           <div class="invite-btn" @click="handleCall">
-            <img src="../../assets/icon/contact.png" alt="">
-            <span>在线联系</span>
+              <a href="tel:18211544892">
+                <img src="../../assets/icon/contact.png" alt="">
+                <span>在线联系</span>
+              </a>
           </div>
           <div class="invite-btn" @click="handleEditFarm">
             <img src="../../assets/icon/write.png" alt="">
@@ -154,7 +156,7 @@
         this.$router.push('/editFarmInfo')
       },
       handleCall() {
-        Toast('打电话')
+        // Toast('打电话')
       },
         handleList() {
             this.$router.push('/farmlist')
