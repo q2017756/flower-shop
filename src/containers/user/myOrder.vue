@@ -84,6 +84,9 @@
                         console.log(data)
                     })
             },
+            goDetails(item){
+                this.$router.push({path:"/morderDetails",query:{orderId:item.order_id}})
+            },
             cancle_order(id){
                 this.$ajax.post("/openapi.php?act=closeOrder",{
                     order_id:id

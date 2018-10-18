@@ -96,6 +96,11 @@ export default new Router({
               component: resolve => require(['@/containers/tools/orderDetails'], resolve),
               name:"orderDetails"
           },
+          {
+              path: '/morderDetails',
+              component: resolve => require(['@/containers/user/morderDetails'], resolve),
+              name:"orderDetails"
+          },
         {
           path: '/productDetail/:id',
           component: resolve => require(['@/containers/productDetail/index'], resolve)
