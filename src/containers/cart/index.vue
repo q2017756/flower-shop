@@ -100,10 +100,10 @@
                 }, (data) => {
                     console.log('cart:', data)
                     if (data.data.res === "succ") {
-                        if(data.data.result.no_rules_gids) {
+                        if (data.data.result.no_rules_gids) {
                             this.cartCommodities = data.data.result.no_rules_gids[0].list
                             this.$store.state.cartList = data.data.result.no_rules_gids[0].list
-                        }else {
+                        } else {
                             this.cartCommodities = []
                             this.$store.state.cartList = []
                             Toast('购物车为空')
@@ -148,46 +148,50 @@
                 if (!this.isEdit) {
                     // order
                     const orderOtherData = {
-                        "pdt_desc":"\u9ed8\u8ba4\u89c4\u683c",
-                        "is_activity":"0",//是否设置为活动商品 1 0
-                        "dt_id":"1447",//运费模板ID,0代表使用默认模板
-                        "weight":"12.000",//物品重量
-                        "volume":"11.00",//物品体积
-                        "type":"normal",//货品类型,normal=一般商品,presale=预售商品
-                        "profit_price":"0",//利润价格
-                        "nums":"1",//商品数量
-                        "goodsType":"normal",//商品类型，normal=一般商品,presale=预售商品
+                        "pdt_desc": "\u9ed8\u8ba4\u89c4\u683c",
+                        "is_activity": "0",//是否设置为活动商品 1 0
+                        "dt_id": "1447",//运费模板ID,0代表使用默认模板
+                        "weight": "12.000",//物品重量
+                        "volume": "11.00",//物品体积
+                        "type": "normal",//货品类型,normal=一般商品,presale=预售商品
+                        "profit_price": "0",//利润价格
+                        "goodsType": "normal",//商品类型，normal=一般商品,presale=预售商品
                     }
                     console.log('下单')
-                    console.log('selected data: ',this.$store.state.cartList.filter(item => item.selected === true));
+                    console.log('selected data: ', this.$store.state.cartList.filter(item => item.selected === true))
+                    if(this.$store.state.cartList.filter(item => item.selected === true).length < 1) {
+                        Toast('请选择')
+                        return false
+                    }
                     let group = {}
                     this.$store.state.cartList.filter(item => item.selected === true).map(item => {
-                        if(!group[item.farm_id]){
+                        if (!group[item.farm_id]) {
                             group[item.farm_id] = []
                         }
                         group[item.farm_id].push(item)
                     })
-                    console.log(111,group);
+                    console.log(111, group)
                     for (const i in group) {
                         let totalNum = 0
                         group[i].map(item => {
                             totalNum += Number(item.num)
                         })
-                        if(totalNum < 10) {
+                        if (totalNum < 10) {
                             Toast(`${group[i][0].farm_name}商品不足10个，无法下单`)
                             return false
-                        }else {
+                        } else {
                             group[i].map(item => {
-                                item = Object.assign(item,{'spec_desc': item.spec_value,'props': item.spec_value},orderOtherData)
+                                item.nums = item.num
+                                item = Object.assign(item, {
+                                    'spec_desc': item.spec_value,
+                                    'props': item.spec_value
+                                }, orderOtherData)
                             })
                         }
                     }
                     this.$store.state.orderProd = group
                     this.$router.push('orderDetails')
                 } else {
-                    // remove
-//                    this.selectRemoveAll = false
-//                    this.removeCartCommodity(this.removeCartList)
                     this.$axios('', {
                         act: 'carts_del',
                         open_id: localStorage.getItem('openId'),
