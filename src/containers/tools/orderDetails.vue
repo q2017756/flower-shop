@@ -89,7 +89,7 @@
                 });
                 for (let j = 0;j<this.goods[key].length;j++){
                     console.log()
-                    this.totalPrice+=this.goods[key][j].price*this.goods[key][j].num
+                    this.totalPrice+=this.goods[key][j].price*this.goods[key][j].nums
                 }
             };
             console.log(this.renderData)
