@@ -31,7 +31,7 @@
                     <div class="int">默认</div>
                     <div class="p-n">
                         <span class="pr">￥{{its.price}}</span>
-                        <span class="num">×{{its.num}}</span>
+                        <span class="num">×{{its.nums}}</span>
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                 });
                 for (let j = 0;j<this.goods[key].length;j++){
                     console.log()
-                    this.totalPrice+=this.goods[key][j].price*this.goods[key][j].num
+                    this.totalPrice+=this.goods[key][j].price*this.goods[key][j].nums
                 }
             };
             console.log(this.renderData)
