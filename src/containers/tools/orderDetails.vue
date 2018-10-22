@@ -207,6 +207,8 @@
                         if(data.data.res=="succ"){
                             console.log(data.data.info.order_id)
                             this.weixin_pay(data.data.info.order_id)
+                        }else{
+                            Toast(data.data.msg?data.data.msg:"下单失败")
                         }
                     })
             },
