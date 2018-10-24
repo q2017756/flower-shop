@@ -106,8 +106,14 @@
                 <span>农场</span>
             </div>
             <div class="icon-item" @click="handleCollection">
-                <img src="../../assets/icon/star.png" alt="">
-                <span>收藏</span>
+                <template v-if="format.is_favorites==0">
+                    <img src="../../assets/icon/star.png" alt="">
+                    <span>收藏</span>
+                </template>
+                <template v-else>
+                    <img src="../../assets/icon/star-red.png" alt="">
+                    <span>已收藏</span>
+                </template>
             </div>
             <button v-on:click="handleAddCart" class="cart">加入购物车</button>
             <button v-on:click="handleBuyNow" class="buy">购买</button>
@@ -303,7 +309,8 @@
                     .then((data)=>{
                         console.log(data);
                         if(data.data.res == "succ"){
-                            Toast("收藏成功")
+                            Toast(data.data.msg)
+                            this.format.is_favorites = !this.format.is_favorites
                         }
                     })
             },
