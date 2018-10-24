@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js"
+    "build": "node build/build.js && node deploy.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -20,6 +20,7 @@
     "vuex": "^2.3.1"
   },
   "devDependencies": {
+    "gh-pages": "^2.0.1",
     "autoprefixer": "^6.7.2",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
