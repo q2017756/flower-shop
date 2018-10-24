@@ -19,7 +19,7 @@ axios.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 axios.interceptors.response.use(function (response){
-    console.log(response)
+    // console.log(response)
     if(response.data.msg == 'unauthorized'){
         location.href= '/main'
         return false
