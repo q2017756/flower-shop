@@ -27,7 +27,8 @@
                     <h3 class="title">{{ detail.name }}</h3>
                     <div class="tag-wrapper">
                         <span class="font-smaller-b">？级</span>
-                        <span class="font-smaller-b">库存{{format.goods_store> 999 ? '999+' : format.goods_store}}件</span>
+                        <span
+                            class="font-smaller-b">库存{{format.goods_store > 999 ? '999+' : format.goods_store}}件</span>
                         <span class="font-smaller-b">？？农场</span>
                         <span class="font-smaller-b">好评率:？？%</span>
                     </div>
@@ -192,7 +193,6 @@
                         Toast(data.data.msg)
                     }
                 })
-
                 // 商品规格
                 this.$axios('', {
                     act: 'getGoodsInfos',
@@ -219,17 +219,6 @@
                 })
 
             },
-            handlePickFormat() {
-                const id = this.$route.params.id
-                this.showCommodityDetail({
-                    id: id,
-                    title: this.productDetail.name,
-                    price: this.productDetail.price,
-                    pic: this.productDetail.pics[0],
-                    formats: this.productDetail.format
-                })
-                this.$router.push(`/format/${id}`)
-            },
             handleSelectFormat(option, index) {
                 if (this.selects[index] === option) {
                     this.selects.splice(index, 1)
@@ -255,17 +244,6 @@
             },
 
             handleAddCart() {
-                // const format = this.selectFormat.format
-                // this.addToCart({
-                //     id: this.detail.goods_id,
-                //     title: this.detail.name,
-                //     price: this.detail.price,
-                //     pic: this.detail.thumbnail_pic,
-                //     selectd: true,
-                //     count: this.count,
-                //     formats: format,
-                //     selectString: this.selectFormat.format.join(';')
-                // })
                 const pid = JSON.stringify(this.selectFormat) === "{}" ? this.format.product[0].pid : this.format.product.filter(item => item.text === this.selectFormat.format[0])[0].pid
                 this.$axios('', {
                     act: 'carts_add',
@@ -281,7 +259,6 @@
                     }
                 })
             },
-
             handleBack() {
                 this.popupVisible = false
             },
@@ -299,14 +276,14 @@
             },
             handleCollection() {
                 // Toast('收藏')
-                this.$ajax.post("",qs.stringify({
+                this.$ajax.post("", qs.stringify({
                     api_type: "common",
                     api_version: "1.0",
-                    act:"doFavorite",
-                    isEnd:"webroot",
-                    goods_id:this.$route.params.id
+                    act: "doFavorite",
+                    isEnd: "webroot",
+                    goods_id: this.$route.params.id
                 }))
-                    .then((data)=>{
+                    .then((data) => {
                         console.log(data);
                         if(data.data.res == "succ"){
                             Toast(data.data.msg)
@@ -321,23 +298,69 @@
                 this.popupVisible = true
             },
             handleNext() {
-                Toast('无规格，无法进行下一步')
+                if (JSON.stringify(this.selectFormat) === '{}') {
+                    Toast('请选择数量与规格')
+                } else {
+                    if (this.selectFormat.count < 10) {
+                        Toast('数量必须大于10个')
+                    } else {
+                        Toast('下单成功')
+                        const orderOtherData = {
+                            "pdt_desc": "\u9ed8\u8ba4\u89c4\u683c",
+                            "is_activity": "0",//是否设置为活动商品 1 0
+                            "dt_id": "1447",//运费模板ID,0代表使用默认模板
+                            "weight": "12.000",//物品重量
+                            "volume": "11.00",//物品体积
+                            "type": "normal",//货品类型,normal=一般商品,presale=预售商品
+                            "profit_price": "0",//利润价格
+                            "goodsType": "normal",//商品类型，normal=一般商品,presale=预售商品
+                        }
+                        const goodsInfo = {
+                            "goods_id": this.$route.params.id,//商品id
+                            "product_id": this.format.classifylist[0].list.filter(item => item.text == this.selectFormat.format[0])[0].id, //货品id
+                            "price": this.detail.price,//销售价
+                            "gprice": this.detail.gprice,//成本价
+                            "name": this.detail.name,//商品名称
+                            "spec_desc": this.selectFormat.format[0],//规格
+                            "spec_value": this.selectFormat.format[0],//规格
+                            "props": this.selectFormat.format[0],//规格值
+                            "store": this.format.goods_store,//库存
+                            "thumbnail_pic": this.detail.thumbnail_pic,
+                            "free_postage": "1",//是否包邮
+                            "nums": this.selectFormat.count,//商品数量
+                            "num": this.selectFormat.count,//商品数量
+                            "farm_id": this.detail.farm_id,//商品数量
+                            "farm_name": this.detail.farm_name,//商品数量
+                        }
+
+
+                        const group = {}
+                        group[this.detail.farm_id] = []
+                        group[this.detail.farm_id].push({
+                            ...orderOtherData,
+                            ...goodsInfo
+                        })
+                        this.$store.state.orderProd = group
+                        this.$router.push('/orderDetails')
+
+                    }
+                }
+
 //        this.$router.push('/confirmOrder')
             },
         },
         mounted() {
             this.getData();
-            this.getData();
             // 添加浏览记录
-            this.$ajax.post("",qs.stringify({
-                api_type:"common",
-                api_version:"1.0",
-                act:"AddHistory",
-                isEnd:"webroot",
-                memberid:"1",
-                goodsid:this.$route.params.id
+            this.$ajax.post("", qs.stringify({
+                api_type: "common",
+                api_version: "1.0",
+                act: "AddHistory",
+                isEnd: "webroot",
+                memberid: "1",
+                goodsid: this.$route.params.id
             }))
-                .then((data)=>{
+                .then((data) => {
                     console.log(data)
                 })
         }

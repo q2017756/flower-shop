@@ -1,7 +1,7 @@
 <template>
     <div class="home-content">
         <carousel-container :imgs="imgs" :imgsDetail="imgsDetail"/>
-        <home-list title="王牌切花" :list="wangpaiList" @handleDetail="handleDetail"></home-list>
+        <home-list title="王牌切花" :list="wangpaiList" id="146672" @handleDetail="handleDetail"></home-list>
 
         <div class="home-member">
             <img class="item-big" @click="handleMember" src="../../assets/img/home-member.png"/>
@@ -23,7 +23,7 @@
             <hotRecommend :hots="data.hotItems"/>
         </div>
 
-        <home-list title="新品首发" :list="newGoodsList" @handleDetail="handleDetail"></home-list>
+        <home-list title="新品首发" :list="newGoodsList" id="146666" @handleDetail="handleDetail"></home-list>
 
         <div class="productor-container">
             <div class="productor-header">

@@ -106,8 +106,8 @@
                     page: 1,
                     // 暂时未做分页
                     pageLimit: 99999,
-                    tag_id: param.catId,
-                    cat_id: param.tagId,
+                    tag_id: param.tagId,
+                    cat_id: param.catId,
                     search_keywords: param.keywords,
                 }, (data) => {
                     console.log('list:', data)

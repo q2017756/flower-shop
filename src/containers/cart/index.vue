@@ -170,7 +170,6 @@
                         }
                         group[item.farm_id].push(item)
                     })
-                    console.log(111, group)
                     for (const i in group) {
                         let totalNum = 0
                         group[i].map(item => {
@@ -189,6 +188,8 @@
                             })
                         }
                     }
+                    console.log(111, group)
+
                     this.$store.state.orderProd = group
                     this.$router.push('orderDetails')
                 } else {
