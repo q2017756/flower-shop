@@ -37,11 +37,11 @@
             </div>
         </div>
         <div>
-            <!--<van-cell-group>-->
-                <!--<van-cell @click="test()" title="优惠券" is-link />-->
-                <!--<van-cell title="配送方式" is-link value="内容" />-->
-                <!--<van-cell title="优惠" is-link arrow-direction="down" value="内容" />-->
-            <!--</van-cell-group>-->
+            <van-cell-group>
+                <van-cell @click="test()" title="优惠券" is-link />
+                <van-cell title="配送方式" is-link value="内容" />
+                <van-cell title="优惠" is-link arrow-direction="down" value="内容" />
+            </van-cell-group>
         </div>
         <!--<button @click="weixin_pay">zhifu </button>-->
         <van-submit-bar
