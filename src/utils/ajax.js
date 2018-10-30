@@ -54,7 +54,7 @@ Vue.prototype.$axios = (url,data,cb,type) => {
             })
             .catch((error)=>{
                 console.log(error);
-                Toast("服务器异常")
+                Toast("服务器异常get")
             })
     }else {
         $ajax.post(url,qs.stringify({
@@ -68,7 +68,7 @@ Vue.prototype.$axios = (url,data,cb,type) => {
             })
             .catch((error)=>{
                 console.log(error);
-                Toast("服务器异常")
+                Toast("服务器异常post")
             })
     }
 }

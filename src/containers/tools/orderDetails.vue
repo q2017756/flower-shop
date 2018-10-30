@@ -36,16 +36,37 @@
                 </div>
             </div>
         </div>
-        <div>
+        <div style="margin-bottom: 0.1rem">
             <van-cell-group>
-                <van-cell @click="test()" title="优惠券" is-link />
-                <van-cell title="配送方式" is-link value="内容" />
-                <van-cell title="优惠" is-link arrow-direction="down" value="内容" />
+                <van-cell is-link @click="test()">
+                    <template slot="title">
+                        优惠券：{{canUseC}}张可用
+                    </template>
+                </van-cell>
             </van-cell-group>
+        </div>
+        <div class="moneys">
+            <div class="item">
+                <div>商品金额</div>
+                <div>￥ {{spje}}</div>
+            </div>
+            <div class="item">
+                <div>运费</div>
+                <div>￥ {{yf}}</div>
+            </div>
+            <div class="item">
+                <div>优惠券</div>
+                <div>-￥ {{yhq}}</div>
+            </div>
+            <div class="item">
+                <div>满减</div>
+                <div>-￥ {{mj}}</div>
+            </div>
+
         </div>
         <!--<button @click="weixin_pay">zhifu </button>-->
         <van-submit-bar
-            :price="totalPrice*100"
+            :price="hj*100"
             button-text="提交订单"
             @submit="onSubmit"
         />
@@ -65,7 +86,15 @@
                 showAds:true,
                 goods:{},
                 totalPrice:0,
-                renderData:[]
+                renderData:[],
+                canUseC: 3,
+                spje: '3323.32',
+                yhq: '0',
+                yf: '323.2',
+                mj: '3323.32',
+                hj: '0',
+                address_id: '',
+                goodsInfo:[]
             }
         },
         components:{
@@ -74,25 +103,34 @@
             [SubmitBar.name]:SubmitBar
         },
         mounted(){
+            var _this = this;
           // console.log(this.$route.query)
             var address = this.$route.params;
+            this.address_id = address.id;
+
             // console.log('.........................')
             // console.log(this.$store.state.orderProd)
             this.goods = this.$store.state.orderProd;
             // var renderData=[];
-            // console.log(this.goods["11"])
             for (var key in this.goods){
-                console.log(key);
+                // console.log(key);
                this.renderData.push({
                     farm_name:this.goods[key][0].farm_name,
                     good_list:this.goods[key]
                 });
                 for (let j = 0;j<this.goods[key].length;j++){
-                    console.log()
+                    // console.log()
                     this.totalPrice+=this.goods[key][j].price*this.goods[key][j].nums
                 }
+                for(let item of _this.goods[key]){
+                    _this.goodsInfo.push({
+                        product_id: item.product_id,
+                        product_num: item.nums,
+                    })
+                }
             };
-            console.log(this.renderData)
+            this.getOrderInfo()
+            // console.log(this.renderData)
             var goodsData = 1
             // console.log(address)
             if(address.province){
@@ -108,70 +146,6 @@
             },
             onSubmit(){
                 // 处理地址数据
-                var ads=this.address;
-                let addressData={
-                    address:ads.address,//(详细地址)
-                    ship_area:ads.province+"/"+ads.city+"/"+ads.region,//（省市区）
-                    ship_addr:ads.province+ads.city+ads.region+ads.address,//（全部地址）
-                    ship_mobile:ads.ship_mobile,//（收货人手机号）
-                    ship_name:ads.ship_name,//（收货人姓名）
-                    province:ads.province,
-                    city:ads.city,
-                    region:ads.region,
-                    default:ads.default,
-                    area_id:ads.region_id,//（区id）
-                    province_id:ads.province_id,//（省id）
-                    city_id:ads.city_id,//（市id）
-                    deliver_type:"common",//（配送类型 快递  门店）
-                    store_name:"",//门店的名称）
-                    store_id:"",//（门店的id）
-                    memo:""//（备注）
-                }
-                // {
-                //     address:"河南省郑州市中牟县",//(详细地址)
-                //         ship_area:"上海市/上海市/徐汇区：26",//（省市区）
-                //     ship_addr:"河南省郑州市中牟县",//（全部地址）
-                //     ship_mobile:'13564137019',//（收货人手机号）
-                //     ship_name:"ff",//（收货人姓名）
-                //     province:"上海",//（省）
-                //     city:"上海市",//（市）
-                //     region:"徐汇区",//（区）
-                //     area_id:"26",//（区id）
-                //     province_id:"22",//（省id）
-                //     city_id:"23",//（市id）
-                // default:"false",//（默认地址）
-                //     deliver_type:"common",//（配送类型 快递  门店）
-                //     store_name:"",//门店的名称）
-                //     store_id:"",//（门店的id）
-                //     memo:""//（备注）
-                // }
-
-                // {
-                //     "11": [
-                //     {
-                //         "goods_id":"6",//商品id
-                //         "product_id":"5", //货品id
-                //         "price":"0.04",//销售价
-                //         "gprice":"0.04",//成本价
-                //         "name":"12123123fsdfs",//商品名称
-                //         "pdt_desc":"\u9ed8\u8ba4\u89c4\u683c",
-                //         "spec_desc":"",//规格
-                //         "props":"",//规格值
-                //         "store":"1099978",//库存
-                //         "thumbnail_pic":"http:\/\/qmfx-s39210.s3.fy.shopex.cn\/gpic\/20170515\/7013715a4110dc909eb6273643f8c911.jpg?imageView2\/2\/w\/600\/h\/600\/interlace\/1",
-                //         "is_activity":"0",//是否设置为活动商品 1 0
-                //         "free_postage":"1",//是否包邮
-                //         "dt_id":"1447",//运费模板ID,0代表使用默认模板
-                //         "weight":"12.000",//物品重量
-                //         "volume":"11.00",//物品体积
-                //         "type":"normal",//货品类型,normal=一般商品,presale=预售商品
-                //         "profit_price":"0",//利润价格
-                //         "nums":"1",//商品数量
-                //         "goodsType":"normal",//商品类型，normal=一般商品,presale=预售商品
-                //         "farm_id":11//农场ID  商品订单是根据农场进行拆单
-                //     }
-                // ]
-                // }
                 this.$ajax.post("",qs.stringify({
                     api_type:"common",
                     api_version:"1.0",
@@ -179,7 +153,6 @@
                     isEnd:"webroot",
                     cost_freight:"0.00",//快递费
                     final_amount:"0.04",//订单总额
-                    consignee:JSON.stringify(addressData) ,//收获地址
                     product:JSON.stringify(this.$store.state.orderProd) ,//订单商品
                     goods_final_amount:"0.04",//商品总金额
                     payment:{"id":3},//支付类别
@@ -203,9 +176,9 @@
                     member_id:"2"//订单会员id
                 }))
                     .then((data)=>{
-                        console.log(data);
+                        // console.log(data);
                         if(data.data.res=="succ"){
-                            console.log(data.data.info.order_id)
+                            // console.log(data.data.info.order_id)
                             this.weixin_pay(data.data.info.order_id)
                         }else{
                             Toast(data.data.msg?data.data.msg:"下单失败")
@@ -216,8 +189,33 @@
                 // Toast("选择地址")
                 this.$router.push({path:"addressList",query:{'isSelect':1}})
             },
+            getOrderInfo() {
+                var _this = this
+                this.$axios('',{
+                    act:"order_checkout",
+                    address_id:'',
+                    coupon_id:'',
+                    // goods:JSON.stringify(this.goodsInfo),
+                    goods:[
+                        {
+                            product_id: 33,
+                            product_num: 10,
+                        },{
+                            product_id: 35,
+                            product_num: 5,
+                        },
+                    ]
+                },data=>{
+                    let v=data.data.result
+                    _this.hj = v.orders.final_amount
+                    _this.spje = v.orders.goods_final_amount
+                    _this.yf = v.orders.cost_freight
+                    _this.yhq = v.coupon_price
+                    _this.mj = v.minusAmount
+                    _this.canUseC = v.couponNum
+                })
+            },
             weixin_pay(order){
-                // alert(JSON.stringify(order))
                 window.location.href="http://static.florinsight.com/payment?order_id="+order;
             },
             order(){
@@ -236,6 +234,19 @@
     #order-details{
         font-size: px2rem($size_default);
         padding: 45px 0;
+
+        .moneys {
+            padding: 0 0.5rem 50px;
+            background: white;
+
+            .item {
+                display: flex;
+                justify-content: space-between;
+                height: 1.4rem;
+                align-items: center;
+                border-bottom: 1px solid #efefef;
+            }
+        }
     }
     .flex{
         display: flex;

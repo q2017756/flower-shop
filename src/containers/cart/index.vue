@@ -7,12 +7,12 @@
                 <span v-on:click="handleEdit" class="cart-edit">{{ isEdit ? '完成' : '编辑' }}</span>
             </header>
 
-            <div v-if="cartCommodities.length === 0" class="cart-nothing">
+            <div v-if="cartCommodities.length <= 0" class="cart-nothing">
                 <div class="nothing-login">
                     <div class="nothing-cart-img"></div>
                 </div>
             </div>
-            <div v-if="cartCommodities.length > 0" class="cart-commodity">
+            <div v-else class="cart-commodity">
                 <cart-commodity
                     v-bind:handlePush="pushToProductDetail"
                     v-bind:handleSelect="handleSelect"
@@ -64,8 +64,6 @@
             ...mapState({
 
                 removeCartList: state => {
-                    console.log('========')
-                    console.log(state.removeCartList)
                     return state.removeCartList
                 },
                 isEdit: 'cartIsEdit',
@@ -100,9 +98,9 @@
                 }, (data) => {
                     console.log('cart:', data)
                     if (data.data.res === "succ") {
-                        if (data.data.result.no_rules_gids) {
-                            this.cartCommodities = data.data.result.no_rules_gids[0].list
-                            this.$store.state.cartList = data.data.result.no_rules_gids[0].list
+                        if (data.data.result.list) {
+                            this.cartCommodities = data.data.result.list
+                            this.$store.state.cartList = data.data.result.list
                         } else {
                             this.cartCommodities = []
                             this.$store.state.cartList = []

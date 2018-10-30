@@ -11,7 +11,10 @@
                 <i v-else class="select-icon"
                    :class="[commodity.selected ? 'cart-select' : '']"
                    @click.stop="_handleSelect(commodity)"/>
-                <img class="commodity-pic" :src="commodity.thumbnail_pic"/>
+                <div class="commodity-pic">
+                    <img class="img" :src="commodity.thumbnail_pic"/>
+                    <div class="tag" v-if="commodity.is_mj">满减</div>
+                </div>
                 <div class="cart-commodity-content" @click="_handlePush(commodity)">
                     <div v-if="isEdit">
                         <!--暂时不做规格选择-->
@@ -138,7 +141,7 @@
     .farm-container {
         margin-top: px2rem(10);
         .farm-name {
-            padding: $edge_small $edge_default;
+            padding: $edge_default;
             border-bottom: 1px solid #eee;
             background: #fff;
             font-size: px2rem($size_middle);
@@ -167,6 +170,20 @@
         width: px2rem(70);
         height: px2rem(70);
         margin-right: px2rem(10);
+        position: relative;
+        .img{
+            width: 100%;
+            height: 100%;
+        }
+        .tag{
+            background: #b4282d;
+            color: white;
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: px2rem(8);
+            padding: 0 px2rem(4);
+        }
     }
 
     .cart-commodity-content {
