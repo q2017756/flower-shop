@@ -181,7 +181,7 @@
             position: absolute;
             left: 0;
             top: 0;
-            font-size: px2rem(8);
+            font-size: px2rem(12);
             padding: 0 px2rem(4);
         }
     }
