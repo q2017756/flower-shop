@@ -21,7 +21,7 @@
             <van-cell title="选择收货地址" is-link value="" />
         </div>
         <div v-for="item in renderData" class="goods-div">
-            <div style="border-bottom: 1px solid #cccccc;padding: 0.2rem 0;font-size: 16px">{{item.farm_name}}</div>
+            <div style="border-bottom: 1px solid #efefef;padding: 0.2rem 0;font-size: 16px">{{item.farm_name}}</div>
             <div v-for="its in item.good_list" style="padding-top: 0.2rem" class="goods flex">
                 <div class="img">
                     <img :src="its.thumbnail_pic" alt="">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-        <div style="margin-bottom: 0.1rem">
+        <div style="margin: 0.1rem 0">
             <van-cell-group>
                 <van-cell is-link @click="test()">
                     <template slot="title">
@@ -88,10 +88,10 @@
                 totalPrice:0,
                 renderData:[],
                 canUseC: 3,
-                spje: '3323.32',
+                spje: '0',
                 yhq: '0',
-                yf: '323.2',
-                mj: '3323.32',
+                yf: '0',
+                mj: '0',
                 hj: '0',
                 address_id: '',
                 goodsInfo:[]
@@ -187,24 +187,15 @@
             },
             goAddress(){
                 // Toast("选择地址")
-                this.$router.push({path:"addressList",query:{'isSelect':1}})
+                this.$router.push({path:"addressList",query:{'isSelect':this.address_id||''}})
             },
             getOrderInfo() {
                 var _this = this
                 this.$axios('',{
                     act:"order_checkout",
-                    address_id:'',
+                    address_id:this.address_id,
                     coupon_id:'',
-                    // goods:JSON.stringify(this.goodsInfo),
-                    goods:[
-                        {
-                            product_id: 33,
-                            product_num: 10,
-                        },{
-                            product_id: 35,
-                            product_num: 5,
-                        },
-                    ]
+                    goods:JSON.stringify(this.goodsInfo)
                 },data=>{
                     let v=data.data.result
                     _this.hj = v.orders.final_amount
@@ -299,6 +290,5 @@
     }
     .sele-ads{
         background: white;
-        padding: 0.25rem;
     }
 </style>
