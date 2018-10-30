@@ -53,31 +53,30 @@
         },
         methods:{
             logOut(){
-                this.$ajax.post("openapi.php?act=logout")
-                    .then((data)=>{
-                        console.log(data);
-                        if(data.data.res=="succ"){
-                            Toast("退出成功");
-                            this.$router.push("login")
-                        }else{
-                            Toast(data.data.msg)
-                        }
-                    })
+                this.$axios('', {
+                    act: 'logout',
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        Toast("退出成功");
+                        this.$router.push("login")
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
             },
             editName(){
                 MessageBox.prompt('请输入要修改的姓名').then(({ value, action }) => {
                     if(action){
-                        this.$ajax.post("/openapi.php?act=saveName",{
+                        this.$axios('', {
+                            act: 'saveName',
                             name:value
+                        }, (data) => {
+                            if (data.data.res === "succ") {
+                                Toast(data.data.msg)
+                            } else {
+                                Toast(data.data.msg)
+                            }
                         })
-                            .then((data)=>{
-                                console.log(data);
-                                if(data.data.res=="succ"){
-                                    Toast(data.data.msg)
-                                }else {
-                                    Toast(data.data.msg?data.data.msg:"保存失败")
-                                }
-                            })
                     }
                 });
             },
@@ -89,10 +88,15 @@
             }
         },
         mounted(){
-            this.$ajax.post("openapi.php?act=editMember")
-                .then((data)=>{
-                    console.log(data)
-                })
+            this.$axios('', {
+                act: 'editMember',
+            }, (data) => {
+                if (data.data.res === "succ") {
+                    Toast(data.data.msg)
+                } else {
+                    Toast(data.data.msg)
+                }
+            })
         }
     }
 </script>

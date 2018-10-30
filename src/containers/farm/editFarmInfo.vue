@@ -44,20 +44,20 @@
                 Toast("请输入联系地址")
                 return
             }
-            this.$ajax.post("openapi.php?act=addFarm",qs.stringify({
+            this.$axios('', {
+                act: 'addFarm',
                 farm_name:this.shop,
                 contact_name:this.who,
                 mobile:this.tel,
                 address:this.addr
-            }))
-                .then((data)=>{
-                    console.log(data);
-                    if(data.data.res=="succ"){
-                        Toast(data.data.msg)
-                    }else {
-                        Toast(data.data.msg)
-                    }
-                })
+            }, (data) => {
+                if(data.data.res=="succ"){
+                    Toast(data.data.msg)
+                    this.$router.push('/farm')
+                }else {
+                    Toast(data.data.msg)
+                }
+            })
         }
     },
   }

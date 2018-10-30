@@ -10,7 +10,7 @@
     props: ['productor'],
     computed: {
       toPath () {
-        return `/farmDetail`
+        return `/productDetail/${this.productor.goods_id}`
       }
     }
   }

@@ -70,37 +70,35 @@
                         farmArr.push(this.list[i].farm_id)
                     }
                 };
-                this.$ajax.post("openapi.php?act=unFavFarm",{
+                this.$axios('', {
+                    act: 'unFavFarm',
                     farm_id:farmArr.join(',')
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        Toast(data.data.msg);
+                        this.getList();
+                    } else {
+                        Toast(data.data.msg)
+                    }
                 })
-                    .then((data)=>{
-                        console.log(data);
-                        if(data.data.res === "succ"){
-                            Toast(data.data.msg);
-                            this.getList();
-                        }
-                    })
             },
             // 获取收藏农场
             getList(){
-                this.$ajax.get("openapi.php?act=myFavFarms")
-                    .then((data)=>{
-                        console.log(data);
-                        if(data.data.res=="succ"){
-                            this.list=data.data.result.list;
-                            let length = data.data.result.list.length;
-                            let barr=[]
-                            for(let i=0;i<length;i++){
-                                barr.push(0)
-                            };
-                            this.barr=barr;
-                        }else {
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data)=>{
-                        console.log(data)
-                    })
+                this.$axios('', {
+                    act: 'myFavFarms',
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        this.list=data.data.result.list;
+                        let length = data.data.result.list.length;
+                        let barr=[]
+                        for(let i=0;i<length;i++){
+                            barr.push(0)
+                        };
+                        this.barr=barr;
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
             }
         },
         mounted(){

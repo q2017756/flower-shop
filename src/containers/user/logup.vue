@@ -44,22 +44,17 @@
                     Toast("请输入合法的手机号！");
                     return;
                 }
-                this.$ajax.post("openapi.php?act=getVerifyCode",qs.stringify({
+                this.$axios('', {
+                    act: 'getVerifyCode',
                     phone: this.phone,
                     no_check:'true'
-                }))
-                    .then((data)=>{
-                        console.log(data);
-                        if(data.data.res=="succ"){
-                            this.setTime();
-                        }else {
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data)=>{
-                        console.log(data);
-                        Toast("服务器异常")
-                    })
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        this.setTime();
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
             },
             setTime(){
               this.renum=true;
@@ -92,22 +87,18 @@
                     Toast("请输入验证码！")
                     return;
                 }
-                this.$ajax.post("openapi.php?act=doRegister",qs.stringify({
+                this.$axios('', {
+                    act: 'doRegister',
                     phone:this.phone,
                     password: this.password,
                     yq_code:this.captcha
-                }))
-                    .then((data)=>{
-                        console.log(data);
-                        if(data.data.res="succ"){
-                            Toast(data.data.msg)
-                        }else{
-                            Toast(data.data.msg)
-                        }
-                    })
-                    .catch((data)=>{
-                        console.log(data)
-                    })
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        Toast(data.data.msg)
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
             },
             rePas(){
                 let myreg=/^[1][3,4,5,6,7,8][0-9]{9}$/;
@@ -128,17 +119,17 @@
                     Toast("请输入验证码！")
                     return;
                 }
-                this.$ajax.post("openapi.php?act=toEditPwd",{
+                this.$axios('', {
+                    act: 'toEditPwd',
                     new_pwd:this.password,
                     reset_code:this.captcha
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        Toast(data.data.msg)
+                    } else {
+                        Toast(data.data.msg)
+                    }
                 })
-                    .then((data)=>{
-                        if(data.data.res="succ"){
-                            Toast(data.data.msg)
-                        }else{
-                            Toast(data.data.msg)
-                        }
-                    })
             }
         },
         mounted(){

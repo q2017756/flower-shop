@@ -3,7 +3,7 @@
         <app-header title="精品推荐"></app-header>
         <div class="item">
             <div class="box">
-                <img :src="data.images.url">
+                <img v-if="data.images" :src="data.images.url">
             </div>
             <div class="title">{{data.title}}</div>
             <div class="desc">{{data.content}}</div>

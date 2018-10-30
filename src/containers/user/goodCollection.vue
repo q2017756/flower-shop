@@ -71,13 +71,15 @@
       },
         methods:{
             getGood(){
-                this.$ajax.post("openapi.php?act=myFavorites")
-                    .then((data)=>{
-                        console.log(data);
-                        if(data.data.res == "succ"){
-                            this.list = data.data.result.favorites.data;
-                        }
-                    })
+                this.$axios('', {
+                    act: 'myFavorites',
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        this.list = data.data.result.favorites.data;
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
             },
             go(id){
                 // alert(id)

@@ -1,5 +1,5 @@
 <template>
-  <router-link class="farm-item" :to="{ path: '/farmDetail', query: { farm_id: farmInfo.farm_id }}">
+  <div class="farm-item" @click="toPath">
     <img class="farm-img" :src="farmInfo.img_url"/>
     <div CLASS="text-container">
       <p class="name">{{farmInfo.farm_name}}</p>
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script>
@@ -45,13 +45,24 @@
       addrShow: {
         type: Boolean,
         default: false
-      }
+      },
+        type:{
+            type: String,
+            default: 'farm'
+        }
     },
     computed: {
-      toPath() {
-        return `/farmDetail`
+
+    },
+      methods: {
+        toPath() {
+            if(this.type === 'farm') {
+                this.$router.push({ path: '/farmDetail', query: { farm_id: this.farmInfo.farm_id }})
+            }else {
+                this.$router.push(`/productDetail/${this.farmInfo.goods_id}`)
+            }
+        }
       }
-    }
   }
 </script>
 
