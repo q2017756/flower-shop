@@ -32,33 +32,28 @@
         },
         methods:{
             login(){
-                this.$ajax.post("openapi.php?act=login",qs.stringify({
+                this.$axios('', {
+                    act: 'login',
                     phone:this.phone,
                     pwd: this.password
-                }))
-                    .then((data)=>{
-                        console.log('login',data);
-                        if(data.data.res === "succ"){
-                            this.$axios('', {
-                                act: 'getMemberInfo',
-                                memberid: data.data.result.member_id,
-                            }, (data2) => {
-                                console.log('member:', data2)
-                                if (data2.data.res === "succ") {
-                                    localStorage.setItem('openId',data2.data.result)
-                                    this.$router.push("/home")
-                                } else {
-                                    Toast(data.data.msg)
-                                }
-                            })
-                        }else{
-                            Toast(data.data.msg);
-                        }
-
-                    })
-                    .catch((data)=>{
-                        console.log(data)
-                    })
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        this.$axios('', {
+                            act: 'getMemberInfo',
+                            memberid: data.data.result.member_id,
+                        }, (data2) => {
+                            console.log('member:', data2)
+                            if (data2.data.res === "succ") {
+                                localStorage.setItem('openId',data2.data.result)
+                                this.$router.push("/home")
+                            } else {
+                                Toast(data.data.msg)
+                            }
+                        })
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
             },
             goRe(state){
                 this.$router.push({path:"/logup",query:{state:state}})

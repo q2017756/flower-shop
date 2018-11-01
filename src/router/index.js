@@ -143,7 +143,7 @@ export default new Router({
           component: resolve => require(['@/containers/user/userMsg'], resolve)
         },
         {
-          path: '/myOrder',
+          path: '/myOrder/:id',
           component: resolve => require(['@/containers/user/myOrder'], resolve)
         },
           {
@@ -158,7 +158,7 @@ export default new Router({
               path: '/login',
               component: resolve => require(['@/containers/user/login'], resolve)
           },
-    
+
           {
               path: '/logup',
               component: resolve => require(['@/containers/user/logup'], resolve)

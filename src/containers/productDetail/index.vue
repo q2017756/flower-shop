@@ -251,13 +251,13 @@
                     open_id: localStorage.getItem('openId'),
                     product_num: this.count
                 }, (data) => {
-                    console.log('add:', data)
                     if (data.data.res === "succ") {
                         Toast('添加购物车成功')
                     } else {
                         Toast(data.data.msg)
                     }
                 })
+
             },
             handleBack() {
                 this.popupVisible = false

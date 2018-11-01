@@ -59,7 +59,7 @@
             <div class="text-center">
                 <span class="title-line">猜你喜欢</span>
             </div>
-            <farm-item v-for="item,index in historyList" :farmInfo="item" :key="index"></farm-item>
+            <farm-item v-for="item,index in historyList" type="goods" :farmInfo="item" :key="index"></farm-item>
         </div>
 
         <bottom-footer/>
@@ -144,7 +144,6 @@
                     pageLimit:10,
                     tag_id: 146672
                 }, (data) => {
-                    console.log('list1:',data);
                     if(data.data.res=="succ"){
                         this.wangpaiList = data.data.result.list.slice(0,6)
                     }else{
@@ -157,7 +156,6 @@
                     pageLimit:10,
                     tag_id: 146666
                 }, (data) => {
-                    console.log('list2:',data);
                     if(data.data.res=="succ"){
                         this.newGoodsList = data.data.result.list.slice(0,6)
                     }else{
@@ -170,7 +168,7 @@
                     pageLimit:10,
                     tag_id: 146664
                 }, (data) => {
-                    console.log('list3:',data);
+                    console.log(1234,data.data.result);
                     if(data.data.res=="succ"){
                         this.hotGoodsList = data.data.result.list.slice(0,6)
                     }else{
@@ -184,7 +182,6 @@
                     pageLimit:10,
                     memberid:1
                 }, (data) => {
-                    console.log('history:',data);
                     if(data.data.res=="succ"){
                         this.historyList = data.data.result.list
                         this.historyList.map(item => {
@@ -198,7 +195,6 @@
                 this.$axios('', {
                     act:'getSlideshow',
                 }, (data) => {
-                    console.log('history:',data);
                     if(data.data.res=="succ"){
                         this.imgsDetail = data.data.result
                         this.imgs = []
@@ -214,8 +210,6 @@
                     page:1,
                     pageLimit:"1"
                 },(data)=>{
-                    console.log("ssssssss")
-                    console.log(data);
                     if(data.data.res == "succ"){
                         this.topData=data.data.result.data.list[0];
                     }
@@ -245,11 +239,7 @@
         },
         // 在该方法中进行网络请求等操作
         mounted() {
-            // fetchHome()
-            //   .then(r => {
-            //     console.log(r)
-            //     this.data = r
-            //   })
+
             this.getData()
         }
     }

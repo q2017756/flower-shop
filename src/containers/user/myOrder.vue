@@ -68,37 +68,32 @@
             getList(){
                 console.log('s11')
                 // this.loading = true;
-                this.$ajax.post("openapi.php?act=memberOrders",qs.stringify({
+                this.$axios('', {
+                    act: 'memberOrders',
                     page:this.page,
                     state:this.selected
-                }))
-                    .then((data)=>{
-                        console.log(data);
-                        this.loading = false;
-                        if(data.data.res == "succ"){
-
-                            this.listData=data.data.result.data
-                        }
-                    })
-                    .catch((data)=>{
-                        console.log(data)
-                    })
+                }, (data) => {
+                    if (data.data.res === "succ") {
+                        this.listData=data.data.result.data
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
             },
             goDetails(item){
                 this.$router.push({path:"/morderDetails",query:{orderId:item.order_id}})
             },
             cancle_order(id){
-                this.$ajax.post("/openapi.php?act=closeOrder",{
-                    order_id:id
-                })
-                    .then((data)=>{
-                        console.log(data);
-                        if(data.data.res == "succ"){
+                this.$axios('', {
+                    act: 'closeOrder',
+                }, (data) => {
+                    if (data.data.res === "succ") {
 
-                        }else{
-                            Toast(data.data.msg)
-                        }
-                    })
+                    } else {
+                        Toast(data.data.msg)
+                    }
+                })
+
             },
             pay(order){
                 window.location.href="http://static.florinsight.com/payment?order_id="+order;
@@ -106,6 +101,7 @@
         },
         mounted(){
             this.getList();
+            this.selected = this.$route.params.id
         },
         watch:{
             selected(n,o){

@@ -110,18 +110,19 @@
 
             },
             getOrderDetail(){
-                this.$ajax.post("/openapi.php?act=orderdetail",qs.stringify({
+                this.$axios('', {
+                    act: 'orderdetail',
                     order_id:this.order_id
-                })).then((data)=>{
-                    console.log(data);
-                    if(data.data.res=="succ"){
+                }, (data) => {
+                    if (data.data.res === "succ") {
                         this.goodsData=data.data.result.order.items;
                         this.farm=data.data.result.site_info;
                         this.receiver=data.data.result.order.receiver;
                         if(data.data.result.delivery){
                             this.getWL(data.data.result.delivery.logi_no)
                         }
-
+                    } else {
+                        Toast(data.data.msg)
                     }
                 })
             },

@@ -36,14 +36,16 @@
         mounted(){
             console.log("sdfsdfas")
             // 接口对接错误
-            this.$ajax.post("openapi.php?act=getFarmList")
-                .then((data)=>{
-                    console.log(data);
-                    if(data.data.res=="succ"){
-                        this.farmList=data.data.result.list
-                    }
+            this.$axios('', {
+                act: 'getFarmList',
+            }, (data) => {
+                if (data.data.res === "succ") {
+                    this.farmList=data.data.result.list
+                } else {
+                    Toast(data.data.msg)
+                }
+            })
 
-                })
         }
     }
 </script>

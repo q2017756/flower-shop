@@ -4,7 +4,7 @@
       <span class="title-line">专题精选</span>
     </div>
     <router-link class="bt-item" :to="{path:'/TopDetails',query:{id:topic.topic_id}}">
-      <img class="bt-pic" v-bind:src="topic.images.url" />
+      <img v-if="topic.images" class="bt-pic" v-bind:src="topic.images.url" />
       <div class="bt-title-container">
         <span class="bt-title">{{ topic.title }}</span>
         <span class="bt-price">{{ topic.lowestPrice }}元起</span>
@@ -23,7 +23,13 @@
         console.log(this.topic.topicId)
         return `/farm`
       }
-    }
+    },
+      methods: {
+        test() {
+            console.log(111,this.topic);
+        }
+      }
+
   }
 </script>
 

@@ -130,15 +130,15 @@
     },
     methods: {
         getData() {
-            this.$ajax.post("openapi.php?act=getFarmList")
-                .then((data)=>{
-                    console.log(data)
+            this.$axios('', {
+                act: 'getFarmList',
+            }, (data) => {
+                if (data.data.res === "succ") {
                     this.farmList = data.data.result.list.slice(0,4)
-                })
-                .catch((data)=>{
-                    console.log(data);
-                    Toast("服务器异常")
-                })
+                } else {
+                    Toast(data.data.msg)
+                }
+            })
         },
         sDetail(item){
           this.$router.push({path:'/farmStory',query:{id:item.store_id}})
