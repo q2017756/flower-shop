@@ -135,7 +135,7 @@
                 this.$axios('',{
                     act: "add_order",
                     address_id: this.address_id,
-                    coupon_id: 'mmdk',
+                    coupon_id: '',
                     goods:JSON.stringify(this.goodsInfo)
                 },data=>{
                     if(data.data.res=="succ"){
@@ -153,7 +153,7 @@
                 this.$axios('',{
                     act:"order_checkout",
                     address_id:this.address_id,
-                    coupon_id:'mmdk',
+                    coupon_id:'',
                     goods:JSON.stringify(this.goodsInfo)
                 },data=>{
                     let v=data.data.result
