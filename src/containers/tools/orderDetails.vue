@@ -157,7 +157,7 @@
                     goods:JSON.stringify(this.goodsInfo)
                 },data=>{
                     let v=data.data.result
-                    _this.hj = v.orders.final_amount
+                    _this.hj = v.real_pay_amount
                     _this.spje = v.orders.goods_final_amount
                     _this.yf = v.orders.cost_freight
                     _this.yhq = v.coupon_price
