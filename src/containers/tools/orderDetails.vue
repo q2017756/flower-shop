@@ -75,7 +75,6 @@
 
 <script>
     import {Toast} from "mint-ui"
-    import qs from "qs"
     import { Cell, CellGroup } from 'vant';
     import { SubmitBar } from 'vant';
     export default {
@@ -85,7 +84,6 @@
                 address:{},
                 showAds:true,
                 goods:{},
-                totalPrice:0,
                 renderData:[],
                 canUseC: 3,
                 spje: '0',
@@ -94,7 +92,8 @@
                 mj: '0',
                 hj: '0',
                 address_id: '',
-                goodsInfo:[]
+                goodsInfo:[],
+                submitOrder: ''
             }
         },
         components:{
@@ -102,26 +101,16 @@
             [CellGroup.name]:CellGroup,
             [SubmitBar.name]:SubmitBar
         },
-        mounted(){
+        created() {
             var _this = this;
-          // console.log(this.$route.query)
             var address = this.$route.params;
             this.address_id = address.id;
-
-            // console.log('.........................')
-            // console.log(this.$store.state.orderProd)
             this.goods = this.$store.state.orderProd;
-            // var renderData=[];
             for (var key in this.goods){
-                // console.log(key);
-               this.renderData.push({
+                this.renderData.push({
                     farm_name:this.goods[key][0].farm_name,
                     good_list:this.goods[key]
                 });
-                for (let j = 0;j<this.goods[key].length;j++){
-                    // console.log()
-                    this.totalPrice+=this.goods[key][j].price*this.goods[key][j].nums
-                }
                 for(let item of _this.goods[key]){
                     _this.goodsInfo.push({
                         product_id: item.product_id,
@@ -130,9 +119,7 @@
                 }
             };
             this.getOrderInfo()
-            // console.log(this.renderData)
-            var goodsData = 1
-            // console.log(address)
+
             if(address.province){
                 this.address=address;
                 this.showAds = true;
@@ -142,59 +129,31 @@
         },
         methods:{
             test(){
-                // alert('sss')
+                this.$router.push({name:"checkcard",params:{'cp_id': this.submitOrder || ''}})
             },
             onSubmit(){
-                // 处理地址数据
-                this.$ajax.post("",qs.stringify({
-                    api_type:"common",
-                    api_version:"1.0",
-                    act:"add_order",
-                    isEnd:"webroot",
-                    cost_freight:"0.00",//快递费
-                    final_amount:"0.04",//订单总额
-                    product:JSON.stringify(this.$store.state.orderProd) ,//订单商品
-                    goods_final_amount:"0.04",//商品总金额
-                    payment:{"id":3},//支付类别
-                    product_count:"1",//商品总数量
-                    store_info:{
-                        "store_name":"\u65f6\u5c1a\u5708M",
-                        "logo":"http:\/\/qmfx-s39210.s3.fy.shopex.cn\/gpic\/20170512\/edfcf9ea8e441e3fed8bdea98616a9bf.jpg"
-                    },//商户信息
-                    product_sign:"",
-                    order_source:"local",//订单来源
-                    act_id:"0",//活动ID
-                    dentity:"",//
-                    use_score_off:"off",//是否使用积分
-                    delivery_type:"common",//配送类型
-                    store_name:"张付俊",//店铺名称
-                    store_phone:"13564137019",//店铺电话
-                    store_id:"",//店铺ID
-                    show_price:"",
-                    group_act_id:"",//拼团活动ID
-                    team_id:"",
-                    member_id:"2"//订单会员id
-                }))
-                    .then((data)=>{
-                        // console.log(data);
-                        if(data.data.res=="succ"){
-                            // console.log(data.data.info.order_id)
-                            this.weixin_pay(data.data.info.order_id)
-                        }else{
-                            Toast(data.data.msg?data.data.msg:"下单失败")
-                        }
-                    })
+                this.$axios('',{
+                    act: "add_order",
+                    address_id: this.address_id,
+                    coupon_id: 'mmdk',
+                    goods:JSON.stringify(this.goodsInfo)
+                },data=>{
+                    if(data.data.res=="succ"){
+                        this.weixin_pay(data.data.info.order_id)
+                    }else{
+                        Toast(data.data.msg?data.data.msg:"下单失败")
+                    }
+                })
             },
             goAddress(){
-                // Toast("选择地址")
-                this.$router.push({path:"addressList",query:{'isSelect':this.address_id||''}})
+                this.$router.push({ path: "addressList", query:{'isSelect': this.address_id || ''}})
             },
             getOrderInfo() {
-                var _this = this
+                let _this = this
                 this.$axios('',{
                     act:"order_checkout",
                     address_id:this.address_id,
-                    coupon_id:'',
+                    coupon_id:'mmdk',
                     goods:JSON.stringify(this.goodsInfo)
                 },data=>{
                     let v=data.data.result
@@ -204,6 +163,7 @@
                     _this.yhq = v.coupon_price
                     _this.mj = v.minusAmount
                     _this.canUseC = v.couponNum
+                    _this.submitOrder = v.submitOrder
                 })
             },
             weixin_pay(order){
@@ -227,7 +187,7 @@
         padding: 45px 0;
 
         .moneys {
-            padding: 0 0.5rem 50px;
+            padding: 0 0.5rem 2px;
             background: white;
 
             .item {
@@ -236,6 +196,9 @@
                 height: 1.4rem;
                 align-items: center;
                 border-bottom: 1px solid #efefef;
+                &:last-of-type {
+                    border-bottom: none;
+                }
             }
         }
     }

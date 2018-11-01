@@ -2,13 +2,7 @@
     <div id="checkcard">
         <mt-header fixed class="header" title="优惠券">
             <mt-button @click="$router.go(-1)"  slot="left" icon="back"></mt-button>
-            <!--<mt-button icon="more" slot="right"></mt-button>-->
         </mt-header>
-        <!--<mt-navbar class="navbar" v-model="selected">-->
-            <!--<mt-tab-item id="1">未使用</mt-tab-item>-->
-            <!--<mt-tab-item id="2">已使用</mt-tab-item>-->
-            <!--<mt-tab-item id="3">已过期</mt-tab-item>-->
-        <!--</mt-navbar>-->
         <ul class="l-u">
             <li  class="l-l">
                 <div class="content">
@@ -24,7 +18,6 @@
                                 <div class="card-c">有效期至2018年9月1日</div>
 
                                 <div class="txt">最高满减20元</div>
-                                <!--<br>-->
                             </div>
                         </div>
                         <div class="bts">使用</div>
@@ -61,29 +54,26 @@
 
 <script>
     import { Header } from 'mint-ui';
-    import qs from "qs"
     export default {
         name: "cardIndex",
         data(){
             return{
-                selected:'1'
+                cp_list: '',
             }
+        },
+        created() {
+            this.getList()
+
         },
         methods:{
-            getCard(){
-                this.$ajax.post("",qs.stringify({
-                    api_type:"common",
-                    api_version:"1.0",
-                    act:"coupon",
-                    isEnd:"webroot"
-                }))
-                    .then((data)=>{
-                        console.log(data)
-                    })
+            getList() {
+                this.$axios('',{
+                    act: "coupon",
+                    submitOrder: this.$route.params.cp_id
+                },data => {
+                    console.log(data)
+                })
             }
-        },
-        mounted(){
-            this.getCard()
         }
     }
 </script>
